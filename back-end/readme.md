@@ -5,7 +5,7 @@
 
 
 2. Annotaion Processor 활성화   
-![Annotation 설정](./img/annotation_processor.png)
+![Annotation 설정](./img/annotation_processor.PNG)
 
 3. Database 생성
    ```sql
