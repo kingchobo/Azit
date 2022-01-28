@@ -29,7 +29,7 @@ export default {
   },
   methods:{
     async getProductList(){
-      this.productList = await this.api('https://15f8ee3f-349a-4cf2-86ef-1f8c61ec2767.mock.pstmn.io/productlist','get',{})
+      this.productList = await this.api('http://localhost:8080/sample','post',{"trash" : "test"})
       console.log(this.productList);
     },
     async api(url,method,data){
