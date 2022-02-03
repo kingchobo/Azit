@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .btn {
   width: 100px;
   padding: 10px;

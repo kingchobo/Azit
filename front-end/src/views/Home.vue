@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    
+    
   </div>
   <va-button @click="onOpenDetail">상세페이지 보기</va-button>
   <DiaryDetail 
@@ -13,13 +13,12 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios'
-import HelloWorld from '@/components/HelloWorld.vue'
 import DiaryDetail from '@/components/DiaryDetail.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
+
     DiaryDetail
   },
   data () {

@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .left-btns .write-diary{
   float: left;
