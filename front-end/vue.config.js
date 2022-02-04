@@ -8,6 +8,7 @@ module.exports = {
     proxy: {
       '/api/v1': {
         target: 'http://localhost:8080/'
+        // target: 'http://i6b104.p.ssafy.io:8080/'
       }
     },
     historyApiFallback: true,
@@ -20,5 +21,6 @@ module.exports = {
   //   'element-plus'
   // ],
   lintOnSave: false,
-  outputDir: '../backend/src/main/resources/dist'
+  outputDir: '../back-end/Azit/src/main/resources/dist'
+  // outputDir: '../backend/src/main/resources/dist'
 }

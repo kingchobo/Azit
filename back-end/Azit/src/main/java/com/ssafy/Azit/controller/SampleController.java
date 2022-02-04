@@ -11,6 +11,11 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class SampleController {
 
+    @RequestMapping("/api")
+    public String hello() {
+        return "hello";
+    }
+
     @Autowired
     private SampleRepository sampleRepository;
 

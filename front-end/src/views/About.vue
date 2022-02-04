@@ -18,10 +18,23 @@
 import axios from "axios";
 
 export default {
+<<<<<<< Updated upstream
     data() {
         return {
             value: 3,
         };
+=======
+  data () {
+    return {
+      value: 3,
+    }
+  },
+  methods:{
+    async getProductList(){
+      this.productList = await this.api('http://localhost:8080/sample','post',{"trash" : "test"})
+      // this.productList = await this.api('http://i6b104.p.ssafy.io:8080/sample','post',{"trash" : "test"})
+      console.log(this.productList);
+>>>>>>> Stashed changes
     },
     methods: {
         async getProductList() {
