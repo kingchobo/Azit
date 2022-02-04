@@ -1,7 +1,6 @@
 <template>
   <div>
     <button
-      type="button"
       class="btn">
       {{ btnText }}
     </button>
@@ -19,10 +18,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .btn {
   width: 100px;
   padding: 10px;
+  border-radius: 5px;
   border: 2px solid #5959be;
   color: #3b3ba0;
   font-weight: 700;

@@ -1,31 +1,36 @@
-<template>
-  <div class="left-btns">
-    <!-- Left Buttons -->
-    <!-- router 임의 설정, 나중에 바꿔서 해당 router로 push -->
-    <Buttons
-      class="write-diary"
-      btn-text="일기작성" />
-    <Buttons 
-      class="write-with-diary"
-      btn-text="함께쓰기" 
-      @click=" this.$router.push({ name: 'Home' })" />
-  </div>
-  <div class="right-el">
-    <!-- Right Buttons -->
-    <Buttons 
-      class="right-btn"
-      btn-text="필터" />
+<template> 
 
-    <!-- Search -->
-    <div class="search">
-      <input
-        type="text" 
-        placeholder="내용을 입력해주세요." />
-      <div class="material-icons">
-        search
+
+    <div class="go-diary-container">
+      <div class="left-btns">
+        <!-- Left Buttons -->
+        <!-- router 임의 설정, 나중에 바꿔서 해당 router로 push -->
+        <Buttons
+          btn-text="일기작성" />
+        <Buttons
+          class="write-with-diary"
+          btn-text="함께쓰기" 
+          @click=" this.$router.push({ name: 'Home' })" />
+      </div>
+    
+      <div class="right-btns">
+        <!-- Search -->
+        <div class="search">
+          <input
+            type="text" 
+            placeholder="내용을 입력해주세요." />
+          <div class="material-icons">
+            search
+          </div>
+        </div>
+      
+        <!-- Right Buttons -->
+        <Buttons 
+          class="search-filter"
+          btn-text="필터" />
       </div>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -37,23 +42,30 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
-.left-btns .write-diary{
-  float: left;
-  margin-right: 20px;
-}
-.left-btns .write-with-diary{
-  float: left;
+.go-diary-container{
+  display: flex;
+  justify-content: space-between;
 }
 
-.right-btn {
-  float: right;
+.left-btns {
+  display: inline-flex;
+}
+
+.write-with-diary{
+  margin-left: 20px;
+}
+
+.right-btns {
+  display: flex;
+}
+
+.search-filter {
   margin-left: 20px;
 }
 
 .search {
-  float: right;
   position: relative;
   height: 34px;
   vertical-align: middle;
@@ -76,7 +88,7 @@ export default {
 .search input:focus {
   width: 200px;
   border-color: #000080;
-}
+} 
 
 .search .material-icons {
   height: 24px;
@@ -91,5 +103,6 @@ export default {
 .search.focused .material-icons {
   opacity: 0;
 }
+
 
 </style>

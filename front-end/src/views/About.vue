@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+<div class="about">
     <h1>This is an about page</h1>
   </div>
     <va-rating v-model="value" />
@@ -16,7 +16,8 @@
   </va-button-dropdown>
   <div>
   <button type="button" @click="getProductList">조회</button>
-  </div>
+  </div> 
+
 </template>
 <script>
 import axios from "axios";
@@ -43,4 +44,5 @@ export default {
     }
   }
 }
+
 </script>

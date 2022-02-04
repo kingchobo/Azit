@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .video-content {
   display: block;
   width: 25vw;

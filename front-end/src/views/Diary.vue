@@ -1,18 +1,15 @@
 <template>
   <div id="diary">
-    <div class="container">
-      <div class="row">
-        <div>
-          <FirstRow />
-        </div>
+    <div class="diary-container">
+      <div>
+        <FirstRow />
       </div>
-      <div class="row">
-        <div> 
-          <DiaryList />
-        </div>
+      <div> 
+        <DiaryList />
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -27,5 +24,9 @@ export default {
 </script>
 
 <style>
+
+.diary-container{
+  margin: 3rem;
+}
 
 </style>
