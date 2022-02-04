@@ -34,7 +34,6 @@ export default {
         url: 'http://localhost:8080/v1/diary/{diaryid}'
       }).catch( res => {
         console.log(res)
-        // 이걸 어떻게....
         // 받아와서 store에 저장 -> store에서 가져와서 디테일 페이지
       })
     },

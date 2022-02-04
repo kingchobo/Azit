@@ -8,7 +8,7 @@
     >
     <div class="modal">
         <div class="modal-header">
-            <va-button class="modal-btn" icon="clear" @click="closeDetail"></va-button>
+            <va-button class="modal-btn" color=#6565ca icon="clear" @click="closeDetail"></va-button>
         </div>
 
         <div class="modal-content">
@@ -20,16 +20,27 @@
                 </div>
                 <div v-else>
                     <DiaryDetailContent @moveContent="moveContent"/>
-                </div> -->
-                <div>분석결과</div>
-                <div class="container">
+                </div> --> 
+                
+                <div class="detail-container">
                     <DiaryDetailContent class="front" @moveContent="moveContent"/> 
                     <DiaryDetailEmotion class="back"/> 
                 </div>
-                <va-button :rounded="false" outline class="mr-4" @click="moveEmotion">다음</va-button>
-                <va-button :rounded="false">완료</va-button>
+                <div class="detail-btns">
+                    <button class="detail-next-btn" @click="moveEmotion">다음</button>
+                    <Buttons class="mx-3" btn-text="완료"/>
+                </div>
+
             </div>
         </div>
+        <link
+        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,700&display=swap"
+        rel="stylesheet"
+        >
+        <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet"
+        >
     </div>
 
     </va-modal>
@@ -40,6 +51,7 @@
 import { computed, reactive } from 'vue'
 import DiaryDetailContent from '@/components/DiaryDetailContent.vue'
 import DiaryDetailEmotion from '@/components/DiaryDetailEmotion.vue'
+import Buttons from './Buttons.vue'
 
 export default {
     name: 'DiaryDetail',
@@ -51,7 +63,8 @@ export default {
     },
     components: {
         DiaryDetailContent,
-        DiaryDetailEmotion
+        DiaryDetailEmotion,
+        Buttons
     },
     setup(props, {emit}) {
         const state = reactive({
@@ -68,7 +81,7 @@ export default {
         }
 
         const moveEmotion = function() {
-            let card = document.querySelector('.container')
+            let card = document.querySelector('.detail-container')
             if (card.style.transform == "rotateY(180deg)") {
                 card.style.transform = "rotateY(0deg)"
             } else {
@@ -81,7 +94,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .modal {
     width: 90vw;
     height: 85vh;
@@ -98,7 +111,8 @@ export default {
 .modal-content {
     display: flex;
     justify-content: center;
-    margin-top: 2vw;
+    margin-top: 1vw;
+    
 }
 
 .video {
@@ -143,7 +157,7 @@ export default {
     /* transform: rotateY(0deg);
 } */
 
-.container {
+.detail-container {
     perspective: 100rem;
     transition: transform 1s;
     transform-style: preserve-3d;
@@ -159,4 +173,31 @@ export default {
     transform: rotateY(-180deg); 
 } 
 
+.detail-btns {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.detail-next-btn {
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #5959be;
+  color: #3b3ba0;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: .4s;
+  margin: 20px 0;
+  background-color: #fff;
+  color: #6565ca;
+  display: block;
+  box-sizing: border-box;
+}
+
+.detail-next-btn:hover {
+  color: #fff;
+  background-color: #6565ca;
+}
 </style>

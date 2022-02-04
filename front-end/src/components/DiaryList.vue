@@ -1,49 +1,26 @@
 <template>
   <div>
-    <div class="row row-cols-3 row-cols-lg-5 g-4 g-lg-4">
-      <!-- v-for="(diary, index) in diarys" :key="index" v-bind ="diary" 추가 하기-->
-
-      <div class="col"> 
-        <div class="p-3 border bg-light">
-          Row column
-        </div>
-      </div>
-      <div class="col">
-        <div class="p-3 border bg-light">
-          Row column
-        </div>
-      </div>
-      <div class="col">
-        <div class="p-3 border bg-light">
-          Row column
-        </div>
-      </div>
-      <div class="col">
-        <div class="p-3 border bg-light">
-          Row column
-        </div>
-      </div>
-      <div class="col">
-        <div class="p-3 border bg-light">
-          Row column
-        </div>
-      </div> 
-      <div class="col">
-        <div class="p-3 border bg-light">
-          Row column
-        </div>
+    <div class="row">
+      <div class="flex md4 lg3">
+        <!-- v-for="(diary, index) in diarys" :key="index" v-bind ="diary" 추가 하기-->
+        <DiaryListItem/>
       </div>
     </div>
     <DiaryListRow />
+    
   </div>
 </template>
 
 <script>
+import DiaryListItem from '@/components/DiaryListItem.vue'
 
 export default {
+  components: {
+    DiaryListItem
+  },
+
   data(){
     return{
-
     };
   },
   methods:{
@@ -51,7 +28,6 @@ export default {
       this.$router.push({ name : 'Record'})
     }
   }
-  
 };
 
 </script>

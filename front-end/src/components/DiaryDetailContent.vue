@@ -1,7 +1,7 @@
 <template>
-  
-  <div class="video-content"></div>
-  
+  <div class="video-content">
+    dd
+  </div>
 </template>
 
 <script>
@@ -19,12 +19,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .video-content {
   display: block;
   width: 25vw;
   height: 50vh;
-  background: lightgray;
+  background: rgb(255, 251, 251);
+  font-size: 10px;
 }
 
 
