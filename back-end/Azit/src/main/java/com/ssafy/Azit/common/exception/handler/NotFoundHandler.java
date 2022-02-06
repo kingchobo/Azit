@@ -1,4 +1,4 @@
-package com.ssafy.common.exception.handler;
+package com.ssafy.Azit.common.exception.handler;
 
 import java.io.File;
 import java.io.FileInputStream;

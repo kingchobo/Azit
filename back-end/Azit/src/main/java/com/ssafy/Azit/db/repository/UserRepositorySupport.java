@@ -1,4 +1,4 @@
-package com.ssafy.db.repository;
+package com.ssafy.Azit.db.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.db.entity.QUser;

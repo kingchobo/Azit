@@ -1,4 +1,4 @@
-package com.ssafy.common.auth;
+package com.ssafy.Azit.common.auth;
 
 import java.util.Optional;
 

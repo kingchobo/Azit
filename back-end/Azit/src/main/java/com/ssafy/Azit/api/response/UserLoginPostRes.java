@@ -1,4 +1,4 @@
-package com.ssafy.api.response;
+package com.ssafy.Azit.api.response;
 
 import com.ssafy.common.model.response.BaseResponseBody;
 

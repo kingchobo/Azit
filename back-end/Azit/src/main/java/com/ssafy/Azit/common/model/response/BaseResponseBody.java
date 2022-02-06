@@ -1,4 +1,4 @@
-package com.ssafy.common.model.response;
+package com.ssafy.Azit.common.model.response;
 
 import org.springframework.http.HttpStatus;
 

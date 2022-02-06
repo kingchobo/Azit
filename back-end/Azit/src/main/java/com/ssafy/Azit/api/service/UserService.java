@@ -1,4 +1,4 @@
-package com.ssafy.api.service;
+package com.ssafy.Azit.api.service;
 
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.db.entity.User;

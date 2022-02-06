@@ -1,4 +1,4 @@
-package com.ssafy.common.auth;
+package com.ssafy.Azit.common.auth;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -26,10 +26,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.ssafy.api.service.UserService;
-import com.ssafy.common.util.JwtTokenUtil;
-import com.ssafy.common.util.ResponseBodyWriteUtil;
-import com.ssafy.db.entity.User;
+import com.ssafy.Azit.api.service.UserService;
+import com.ssafy.Azit.common.util.JwtTokenUtil;
+import com.ssafy.Azit.common.util.ResponseBodyWriteUtil;
+import com.ssafy.Azit.db.entity.User;
 
 /**
  * 요청 헤더에 jwt 토큰이 있는 경우, 토큰 검증 및 인증 처리 로직 정의.

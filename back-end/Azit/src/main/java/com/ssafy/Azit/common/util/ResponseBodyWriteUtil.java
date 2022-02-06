@@ -1,4 +1,4 @@
-package com.ssafy.common.util;
+package com.ssafy.Azit.common.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
