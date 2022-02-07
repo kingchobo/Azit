@@ -8,7 +8,7 @@
     </template>
     <template #center>
       <va-navbar-item class="nav-link" color="danger">
-              <router-link class="nav-link" to="/">Home</router-link>
+              <router-link class="nav-link" to="/#section1">Home</router-link>
       </va-navbar-item>
       <va-navbar-item>
               <router-link class="nav-link" to="/diary">일기장</router-link>
@@ -56,3 +56,25 @@
 
 }
 </style>
+
+<script>
+// @ is an alias to /src
+
+export default {
+  name: 'Navbars',
+  components: {
+    
+  },
+  methods : {
+      clickrefresh(){
+       this.$router.go();
+       console.log(window.location.pathname)
+       console.log("새로고침")
+       
+    }
+  },
+  beforeUnmount() {
+    this.$router.go();
+  }
+}
+</script>

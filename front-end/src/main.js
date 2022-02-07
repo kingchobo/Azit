@@ -11,3 +11,4 @@ import VueFullpage from 'fullpage-vue'
 const app = createApp(App).use(store).use(router).use(VueFullpage)
 app.use(VuesticPlugin)
 app.mount("#app")
+
