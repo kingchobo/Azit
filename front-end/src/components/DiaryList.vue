@@ -1,17 +1,27 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row">ㅇㅇㅇ
       <div class="flex md4 lg3">
-        <!-- v-for="(diary, index) in diarys" :key="index" v-bind ="diary" 추가 하기-->
-        <DiaryListItem/>
+        <diary-list-item/>
       </div>
+
+      <!-- <div class="flex md4 lg3" v-if="diarys.length"> 
+        <diary-list-item
+        v-for="(diary, index) in diarys"
+        :key="index"
+        v-bind="diary">
+        </diary-list-item>
+      </div>
+      <div v-else> 
+        게시글이 없습니다.
+      </div> -->
     </div>
-    <DiaryListRow />
   </div>
 </template>
 
 <script>
 import DiaryListItem from '@/components/DiaryListItem.vue'
+
 
 export default {
   components: {
