@@ -14,21 +14,10 @@
         <div class="modal-content">
             <section class="mx-3 my-5 video"></section>
             <div class="mx-3 my-5">
-                <!-- <div v-if="this.contentVisible">
-                    <va-button :rounded="false" outline class="mr-4" @click="moveContent">이전</va-button>
-                    <va-button :rounded="false" class="mr-4">완료</va-button>
-                </div>
-                <div v-else>
-                    <DiaryDetailContent @moveContent="moveContent"/>
-                </div> --> 
                 
                 <div class="detail-container">
-                    <DiaryDetailContent class="front" @moveContent="moveContent"/> 
+                    <DiaryDetailContent class="front" @moveContent="moveContent"/>
                     <DiaryDetailEmotion class="back"/> 
-                </div>
-                <div class="detail-btns">
-                    <button class="detail-next-btn" @click="moveEmotion">다음</button>
-                    <Buttons class="mx-3" btn-text="완료"/>
                 </div>
 
             </div>
@@ -119,7 +108,7 @@ export default {
   display: block;
   width: 45vw;
   height: 55vh;
-  background: lightgray;
+  background: rgb(223, 214, 214);
 }
 /* 
 .container { 
@@ -162,6 +151,7 @@ export default {
     transition: transform 1s;
     transform-style: preserve-3d;
     cursor: pointer;
+    background: #ffffff;
 }
 
 .front { 
@@ -170,6 +160,7 @@ export default {
 } 
 
 .back { 
+    
     transform: rotateY(-180deg); 
 } 
 
