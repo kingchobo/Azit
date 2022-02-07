@@ -55,7 +55,9 @@
   </div>
 </template>
 
+
 <script>
+
 export default {
     name: 'DiaryDetailEmotion'
     
