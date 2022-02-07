@@ -26,8 +26,11 @@
                     <DiaryDetailContent class="front" @moveContent="moveContent"/> 
                     <DiaryDetailEmotion class="back"/> 
                 </div>
-                <va-button :rounded="false" outline class="mr-4" @click="moveEmotion">다음</va-button>
-                <va-button :rounded="false">완료</va-button>
+                <div class="detail-btns">
+                    <WhiteButtons @click="moveEmotion" white-btn-text="다음"/>
+                    <Buttons class="mx-3" btn-text="완료"/>
+                </div>
+
             </div>
         </div>
     </div>
@@ -41,6 +44,7 @@ import { computed, reactive } from 'vue'
 import DiaryDetailContent from '@/components/DiaryDetailContent.vue'
 import DiaryDetailEmotion from '@/components/DiaryDetailEmotion.vue'
 import Buttons from './Buttons.vue'
+import WhiteButtons from './WhiteButtons.vue'
 
 export default {
     name: 'DiaryDetail',
@@ -53,7 +57,8 @@ export default {
     components: {
         DiaryDetailContent,
         DiaryDetailEmotion,
-        Buttons
+        Buttons,
+        WhiteButtons
     },
     setup(props, {emit}) {
         const state = reactive({
@@ -166,26 +171,4 @@ export default {
     justify-content: flex-end;
 }
 
-.detail-next-btn {
-  width: 100px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 2px solid #5959be;
-  color: #3b3ba0;
-  font-weight: 700;
-  font-size: 15px;
-  text-align: center;
-  cursor: pointer;
-  transition: .4s;
-  margin: 20px 0;
-  background-color: #fff;
-  color: #6565ca;
-  display: block;
-  box-sizing: border-box;
-}
-
-.detail-next-btn:hover {
-  color: #fff;
-  background-color: #6565ca;
-}
 </style>
