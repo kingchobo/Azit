@@ -7,8 +7,11 @@ import 'vuestic-ui/dist/vuestic-ui.css'
 // import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 import router from './router'
 import store from './store'
+import 'animate.css'
+import 'fullpage-vue/src/fullpage.css'
+import VueFullpage from 'fullpage-vue'
 
-const app = createApp(App).use(store).use(router)
-// app.use(BootstrapVue3)
+const app = createApp(App).use(store).use(router).use(VueFullpage)
 app.use(VuesticPlugin)
 app.mount("#app")
+

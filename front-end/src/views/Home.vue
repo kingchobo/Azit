@@ -1,7 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <main id="fullpage">
+      <section class="section">
+        <div id="app"></div>
+          <section-1 />
+      </section>
+      <section class="section">
+          <section-2 />
+      </section>
+      <section class="section">
+        <section-3 />
+
+      </section>
+      <footer class="section fp-auto-height">
+        <footer-1/>
+        <h2>footer</h2>
+
+      </footer>
+    </main>
   </div>
   <va-button @click="onOpenDetail">상세페이지 보기</va-button>
   <DiaryDetail 
@@ -11,36 +27,24 @@
 </template>
 
 <script>
+import Footer1 from '../components/home/footer1.vue'
 // @ is an alias to /src
-import axios from 'axios'
-import HelloWorld from '@/components/HelloWorld.vue'
-import DiaryDetail from '@/components/DiaryDetail.vue'
+import Section1 from '../components/home/section1.vue'
+import Section2 from '../components/home/section2.vue'
+import Section3 from '../components/home/section3.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
-    DiaryDetail
+    Section1,
+    Section2,
+    Section3,
+    Footer1
   },
-  data () {
-    return {
-      openDetail: false,
-    }
-  },
-  methods: {
-    onOpenDetail () {
-      this.openDetail = !this.openDetail
-      axios({
-        method: 'get',
-        url: 'http://localhost:8080/v1/diary/{diaryid}'
-      }).catch( res => {
-        console.log(res)
-        // 받아와서 store에 저장 -> store에서 가져와서 디테일 페이지
-      })
-    },
-    check(){
-      console.log('확인')
-    }
-  }
+  // mounted() {
+  //   this.$router.go();
+  // }
 }
 </script>
+
+

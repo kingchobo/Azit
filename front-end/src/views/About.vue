@@ -42,6 +42,12 @@ export default {
         console.log(e);
       })).data;
     }
+  },
+    beforeUnmount() {
+    console.log(window.location.pathname ) //debug
+    if(window.location.pathname == "/"){
+         this.$router.go();
+    }
   }
 }
 

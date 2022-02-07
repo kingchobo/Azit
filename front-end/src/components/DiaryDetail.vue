@@ -20,27 +20,16 @@
                 </div>
                 <div v-else>
                     <DiaryDetailContent @moveContent="moveContent"/>
-                </div> --> 
+                </div> -->
                 <div>분석결과</div>
-                <div class="detail-container">
+                <div class="container">
                     <DiaryDetailContent class="front" @moveContent="moveContent"/> 
                     <DiaryDetailEmotion class="back"/> 
                 </div>
-                <div class="detail-btns">
-                    <button class="detail-next-btn" @click="moveEmotion">다음</button>
-                    <Buttons class="mx-3" btn-text="완료"/>
-                </div>
-
+                <va-button :rounded="false" outline class="mr-4" @click="moveEmotion">다음</va-button>
+                <va-button :rounded="false">완료</va-button>
             </div>
         </div>
-        <link
-        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,700&display=swap"
-        rel="stylesheet"
-        >
-        <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"
-        >
     </div>
 
     </va-modal>
