@@ -32,8 +32,8 @@
 import { computed, reactive } from 'vue'
 import DiaryDetailContent from '@/components/DiaryDetailContent.vue'
 import DiaryDetailEmotion from '@/components/DiaryDetailEmotion.vue'
-import Buttons from './Buttons.vue'
-import WhiteButtons from './WhiteButtons.vue'
+// import Buttons from './Buttons.vue'
+// import WhiteButtons from './WhiteButtons.vue'
 
 export default {
     name: 'DiaryDetail',
@@ -46,8 +46,8 @@ export default {
     components: {
         DiaryDetailContent,
         DiaryDetailEmotion,
-        Buttons,
-        WhiteButtons
+        // Buttons,
+        // WhiteButtons
     },
     setup(props, {emit}) {
         const state = reactive({

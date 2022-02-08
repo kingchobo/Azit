@@ -1,8 +1,12 @@
 <template>
   <div>
-    <div class="row">ㅇㅇㅇ
+    <div class="row">
       <div class="flex md4 lg3">
-        <diary-list-item/>
+        <diary-list-item
+         v-for="diary in diarys"
+         :key="diary.title"
+         :diary="diary"
+        />
       </div>
 
       <!-- <div class="flex md4 lg3" v-if="diarys.length"> 
@@ -21,7 +25,7 @@
 
 <script>
 import DiaryListItem from '@/components/DiaryListItem.vue'
-
+import axios from 'axios'
 
 export default {
   components: {
@@ -30,13 +34,22 @@ export default {
 
   data(){
     return{
+      diarys: []
     };
   },
   methods:{
     newdiary(){
       this.$router.push({ name : 'Record'})
     }
+  },
+  created() {
+    axios.get('https://d373f615-141e-4add-8fb7-910b49246039.mock.pstmn.io/diarylist')
+    .then(response => {
+      this.diarys = response.data
+      console.log(response.data)
+    })
   }
+
 };
 
 </script>
