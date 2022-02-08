@@ -65,7 +65,7 @@
         </div>
         <div class='group-btns'>
           <WhiteButtons class="mx-2" white-btn-text="취소" @click="CloseSearchModal"/>
-          <Buttons class="mx-2" btn-text="참여하기"/>
+          <Buttons class="mx-2" btn-text="참여하기" @click="joingroup"/>
         </div>
       </va-modal>
     </div>
@@ -76,7 +76,8 @@
 import Buttons from './Buttons.vue'
 import WhiteButtons from './WhiteButtons.vue'
 import Recording from './Recording.vue'
-
+import axios from "axios";
+axios.defaults.baseURL = '/api/v1'
 export default {
   components: {
     Buttons,
@@ -88,6 +89,7 @@ export default {
       openRecording: false,
       showWithModal: false,
       showSearchModal: false,
+      userid:''
     }
   },
   methods: {
@@ -101,6 +103,19 @@ export default {
     CloseSearchModal () {
       this.showSearchModal = !this.showSearchModal
       console.log(this.showSearchModal)
+    },
+    async joingroup(){
+      this.productList = await this.api('/sample','post',{"userid" : this.userid})
+      console.log(this.productList);
+    },
+    async api(url,method,data){
+      return(await axios({
+        method :method,
+        url : url,
+        data : data
+      }).catch( e =>{
+        console.log(e);
+      })).data;
     }
   }
 }

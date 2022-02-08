@@ -19,6 +19,11 @@ export default {
   components: {
     FirstRow,
     DiaryList
+  },
+      beforeUnmount() {
+    if(window.location.pathname == "/"){
+         this.$router.go();
+    }
   }
 }
 </script>
