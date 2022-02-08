@@ -15,16 +15,23 @@
 <script>
 import FirstRow from '@/components/FirstRow.vue'
 import DiaryList from '@/components/DiaryList.vue'
+
 export default {
   components: {
     FirstRow,
-    DiaryList
+    DiaryList,
+
   },
-      beforeUnmount() {
+  data () {
+    return {
+      
+    }
+  },
+  beforeUnmount() {
     if(window.location.pathname == "/"){
          this.$router.go();
     }
-  }
+  },
 }
 </script>
 

@@ -1,21 +1,24 @@
-package com.ssafy.Azit.db.entity;
+package com.ssafy.Azit.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
-/**
- * 모델 간 공통 사항 정의.
- */
+@Entity
 @Getter
 @Setter
-@MappedSuperclass
-public class BaseEntity {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Group {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id = null;
+    private Long groupId;
+
 }
