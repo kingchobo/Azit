@@ -23,7 +23,7 @@
 import { computed, reactive } from "vue";
 
 export default {
-  name: "Recording",
+  name: "GroupRecording",
   props: {
     open: {
       type: Boolean,
