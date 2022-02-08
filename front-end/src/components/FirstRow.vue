@@ -151,7 +151,7 @@ export default {
   top: 20px;
 }
 
-.search input {
+.search-input {
   width: 200px;
   height: inherit;
   padding: 4px 10px;
@@ -164,7 +164,7 @@ export default {
   font-size: 12px;
 }
 
-.search input:focus {
+.search-input:focus {
   width: 200px;
   border-color: #000080;
 } 
