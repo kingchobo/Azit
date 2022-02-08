@@ -46,8 +46,8 @@ export default {
     components: {
         DiaryDetailContent,
         DiaryDetailEmotion,
-        Buttons,
-        WhiteButtons
+        // Buttons,
+        // WhiteButtons
     },
     setup(props, {emit}) {
         const state = reactive({
