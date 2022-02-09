@@ -2,11 +2,11 @@
   <div class="video-content">
     <div class="main-container">
      <div>
-       <tr>{{title}}</tr>
+       <tr>{{this.diaryContentDetail.title}}</tr>
        <!-- <tr>{{title}}</tr>
        <tr>{{user}}</tr>
        <tr>{{title}}</tr> -->
-      
+      {{this.diaryContentDetail.content}}
      </div>
     </div>
      <div>
@@ -22,12 +22,15 @@
 <script>
 import Buttons from './Buttons.vue'
 export default {
-    name: "DiaryDetailContent",
+    name: "DiaryDetailText",
+    props: {
+      diaryContentDetail: {
+        type: Object
+      }
+    },
     components: {
-        
         Buttons
     },
-
     setup(props, {emit}) {
       const moveContent = function() {
         emit('moveContent')

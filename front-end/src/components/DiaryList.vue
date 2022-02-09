@@ -43,10 +43,11 @@ export default {
     }
   },
   created() {
+    //url "/api/diary/{userid}" 
     axios.get('https://d373f615-141e-4add-8fb7-910b49246039.mock.pstmn.io/diarylist')
     .then(response => {
       this.diarys = response.data
-      console.log(response.data)
+      // console.log(response.data)
     })
   }
 
