@@ -24,6 +24,8 @@
     :open="openDetail"
     @closeDetail="this.openDetail = !this.openDetail"
   />
+
+
 </template>
 
 <script>
@@ -39,11 +41,13 @@ export default {
     Section1,
     Section2,
     Section3,
-    Footer1
+    Footer1,
+    
   },
-  // mounted() {
-  //   this.$router.go();
-  // }
+
+
+  
+
 }
 </script>
 

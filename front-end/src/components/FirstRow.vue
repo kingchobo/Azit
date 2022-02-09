@@ -19,9 +19,9 @@
         <!-- Search -->
         <div class="search">
           <input
-            type="text" 
+            type="text" v-model="searchTitle"
             placeholder="내용을 입력해주세요." />
-          <div class="material-icons">
+          <div @click="searchDiary" class="material-icons">
             search
           </div>
         </div>
@@ -56,10 +56,11 @@
       >
         <b>방에 참여 하시겠습니까?</b>
         <div class="search">
-          <input
-            type="text" 
+          <input 
+            type="text" v-model="joinGroupId"
             placeholder="내용을 입력해주세요." />
-          <div class="material-icons">
+            <button></button>
+          <div @click="joinGroup" class="material-icons">
             search
           </div>
         </div>
@@ -77,7 +78,7 @@ import Buttons from './Buttons.vue'
 import WhiteButtons from './WhiteButtons.vue'
 import Recording from './Recording.vue'
 import axios from "axios";
-axios.defaults.baseURL = '/api/v1'
+
 export default {
   components: {
     Buttons,
@@ -89,7 +90,11 @@ export default {
       openRecording: false,
       showWithModal: false,
       showSearchModal: false,
-      userid:''
+      userid:'',
+      searchTitle : '',
+      joinGroupId : '',
+      searchData : []
+
     }
   },
   methods: {
@@ -104,9 +109,15 @@ export default {
       this.showSearchModal = !this.showSearchModal
       console.log(this.showSearchModal)
     },
-    async joingroup(){
-      this.productList = await this.api('/sample','post',{"userid" : this.userid})
-      console.log(this.productList);
+    async joinGroup(){
+      this.joinGroupId = await this.api('https://15f8ee3f-349a-4cf2-86ef-1f8c61ec2767.mock.pstmn.io/api/diary/'+this.joinGroupId,'get',{})//url
+      console.log(this.joinGroupId);
+    },
+    async searchDiary(){
+      this.searchData = await this.api('https://15f8ee3f-349a-4cf2-86ef-1f8c61ec2767.mock.pstmn.io/api/diary/'+this.searchTitle,'get',{}) //url
+      console.log(this.searchTitle);
+      console.log(this.searchData);
+
     },
     async api(url,method,data){
       return(await axios({

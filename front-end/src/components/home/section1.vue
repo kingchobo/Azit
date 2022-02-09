@@ -4,18 +4,36 @@
         <h1>당신의 오늘 하루는 어떠셨나요</h1>
         <Buttons
               class="write-diary"
-              btn-text="일기작성" />    
+              btn-text="일기작성" 
+              @click="onOpenRecording"/>    
       </va-alert>
-   
+
+    <Recording
+      :open="openRecording"
+      @closeRecording="this.openRecording = !this.openRecording"
+    />
  </div> 
 </template>
 
 <script>
 import Buttons from '@/components/Buttons.vue'
+import Recording from '@/components/Recording.vue'
+
 export default {
   components: {
-    Buttons
+    Buttons,
+    Recording
   },
+  data() {
+    return {
+      openRecording: false,
+    }
+  },
+  methods:{
+  onOpenRecording () {
+      this.openRecording = !this.openRecording
+    },
+}
 }
 </script>
 

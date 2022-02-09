@@ -1,14 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <div class="flex md4 lg3">
         <diary-list-item
          v-for="diary in diarys"
          :key="diary.title"
          :diary="diary"
         />
       </div>
-
       <!-- <div class="flex md4 lg3" v-if="diarys.length"> 
         <diary-list-item
         v-for="(diary, index) in diarys"
@@ -19,7 +17,6 @@
       <div v-else> 
         게시글이 없습니다.
       </div> -->
-    </div>
   </div>
 </template>
 
