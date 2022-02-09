@@ -28,12 +28,12 @@
         <va-progress-bar :model-value="5" color="#000058" />
       </div>
 
-      <div>
+      <!-- <div>
         <div class="detail-btns">
           <button class="detail-next-btn" @click="moveEmotion">다음</button>
           <Buttons class="mx-3" btn-text="완료"/>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>
@@ -76,8 +76,8 @@ export default {
 .emotion-content {
   display: block;
   width: 25vw;
-  height: 80vh;
-  background: rgb(255, 255, 255);
+  height: 50vh;
+  background: rgb(228, 228, 228);
 }
 .emotion-content-text{
   

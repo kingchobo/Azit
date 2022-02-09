@@ -1,4 +1,8 @@
 <template>
+<head>
+ <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
   <div class="home">
       <main id="fullpage">
       <section class="section">

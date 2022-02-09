@@ -1,6 +1,23 @@
 <template>
-<div >
-      <h1>함께 오늘을 만들어봐요</h1>
+<va-parallax
+    target=".base-layout__content"
+    :src="'https://i.postimg.cc/T245bxnV/back2.jpg'"
+    :height="950"
+    class="s1">
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+  <h1>함께 오늘을 만들어봐요 </h1>
+</va-parallax>
+  
+<div class="section2">
+      
  </div> 
 </template>
 
@@ -9,12 +26,22 @@
 export default {
   components: {
     // Buttons
+  },data () {
+    return {
+      imageSrc: '~@/assets/back1.jpg',
+    }
   },
 }
 </script>
 
 <style>
-
+/* .section2{
+  background-image: url('~@/assets/back2.jpg');
+  z-index: 100;
+} */
+.s1{
+  z-index: -1;
+}
 .left-btns .write-diary{
   float: left;
   margin-right: 20px;

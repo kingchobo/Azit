@@ -1,11 +1,14 @@
 <template>
-<div>
-      <va-alert center class="mb-4">
+
+    <va-alert center class="mb-4">
         <h1>당신의 오늘 하루는 어떠셨나요</h1>
         <Buttons
               class="write-diary"
               btn-text="일기작성" />    
       </va-alert>
+
+<div class="home" >
+      
    
  </div> 
 </template>
@@ -20,6 +23,7 @@ export default {
 </script>
 
 <style>
+
 
 .left-btns .write-diary{
   float: left;

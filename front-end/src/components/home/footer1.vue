@@ -1,5 +1,5 @@
 <template>
-<div >
+<div>
 <h1>아지트</h1>
         
  </div> 

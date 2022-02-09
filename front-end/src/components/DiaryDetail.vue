@@ -13,17 +13,27 @@
 
         <div class="modal-content">
             <section class="mx-3 my-5 video"></section>
-            <div class="mx-3 my-5">
-                
-                <div class="detail-container">
-                    <DiaryDetailContent class="front" @moveContent="moveContent"/>
-                    <DiaryDetailEmotion class="back"/> 
-                </div>
+            <section class="mx-3 my-5 contain">
+                <va-tabs v-model="state.value" >
+                    <template #tabs>
+                    <va-tab
+                        v-for="tab in ['Contents', 'Emotions']"
+                        :key="tab">
+                        {{ tab }}
+                    </va-tab>
+                    <div> {{state.value}}</div>
+                    </template>
+                </va-tabs>    
+                    <div v-if="state.value ===1">
 
-            </div>
+                        <DiaryDetailContent class="front" />
+                    </div>
+                    <div v-else-if="state.value ===2">
+                         <DiaryDetailEmotion class="back"/> 
+                    </div>       
+            </section>
         </div>
     </div>
-
     </va-modal>
 
 </template>
@@ -36,11 +46,15 @@ import Buttons from './Buttons.vue'
 import WhiteButtons from './WhiteButtons.vue'
 
 export default {
+    
     name: 'DiaryDetail',
+    
+    
     props: {
         open: {
             type: Boolean,
-            default: false
+            default: false,
+            tab : true,
         },
     },
     components: {
@@ -50,11 +64,15 @@ export default {
         WhiteButtons
     },
     setup(props, {emit}) {
+        
+        
         const state = reactive({
             detailVisible: computed(() => props.open),
-            contentVisible: false
+            contentVisible: false,
+            value: 0
+
         })
-        
+     
         const closeDetail = function() {
             emit('closeDetail')
         }
@@ -71,8 +89,11 @@ export default {
                 card.style.transform = "rotateY(180deg)"
             }
         }
+        
     return { state, closeDetail, moveContent, moveEmotion }
-    }
+    
+    },
+    
 
 }
 </script>
@@ -104,13 +125,16 @@ export default {
   height: 55vh;
   background: rgb(223, 214, 214);
 }
-/* 
-.container { 
-    cursor: pointer; 
-    perspective: 100rem; 
-} 
+.contain {
+  display: block;
+  width: 30vw;
+  height: 55vh;
+  background: rgb(228, 228, 228);
+}
+ 
 
-.card{   */
+
+/* .card{    */
     /*webkit을 사용해야지 사파리에서도 정상적으로 동작함*/ 
     /* -webkit-backface-visibility: hidden; 
     -webkit-transform: translate3d(0,0,0); 
@@ -155,7 +179,7 @@ export default {
 
 .back { 
     
-    transform: rotateY(-180deg); 
+    transform: rotateY(0deg); 
 } 
 
 .detail-btns {

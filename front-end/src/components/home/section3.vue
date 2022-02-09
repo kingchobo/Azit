@@ -1,6 +1,9 @@
 <template>
-<div >
-      <h1>시간을 기록하고 추억을 담아보세요</h1>
+<va-parallax class="s2"
+    target=".base-layout__content"
+    :src="'https://i.postimg.cc/T245bxnV/back2.jpg'"
+    :height="950">
+      <div class="ss">시간을 기록하고 추억을 담아ddddddd보세요</div>
       <h5>하루 하루 추억을 담기 위해 일기를 기록합니다. 
         하지만 글로 쓰여진 일기장 속에서 그날의 모습, 그날의 분위기까지 기억하기란 쉽지 않습니다. 아지트는 시간을 기록하고 공간을 담을 수 있는 일기장 입니다.</h5>
       <div center class="mb-4">
@@ -8,6 +11,8 @@
               class="write-diary"
               btn-text="일기작성" />    
       </div>
+</va-parallax>
+<div >
         
  </div> 
 </template>
@@ -22,7 +27,14 @@ export default {
 </script>
 
 <style>
-
+.s2{
+  z-index: -1;
+}
+.ss{
+  font-size: 40px;
+  font-weight: bold;
+  color: #ccc;
+}
 .left-btns .write-diary{
   float: left;
   margin-right: 20px;
