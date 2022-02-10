@@ -42,6 +42,7 @@
           <!-- @click.native="updateMainVideoStreamManager(sub)" -->
         </div>
       </div>
+      <Buttons class="mx-2" btn-text="녹음시작" @click="MoveSearchModal" />
     </div>
   </va-modal>
 </template>
@@ -49,10 +50,14 @@
 <script>
 import { computed, reactive } from "vue";
 import UserVideo from "./UserVideo.vue";
+import Buttons from "./Buttons.vue";
+// import WhiteButtons from "./WhiteButtons.vue";
 
 export default {
   components: {
     UserVideo,
+    Buttons,
+    // WhiteButtons,
   },
   name: "GroupRecording",
   props: {
