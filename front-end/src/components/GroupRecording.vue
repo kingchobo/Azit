@@ -69,6 +69,9 @@ export default {
     publisher: {
       type: Object,
     },
+    subscribers: {
+      type: Array,
+    },
   },
   setup(props, { emit }) {
     const state = reactive({

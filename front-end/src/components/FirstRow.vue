@@ -47,6 +47,7 @@
       :session="session"
       :publisher="publisher"
       :mainStreamManager="mainStreamManager"
+      :subscribers="subscribers"
       @closeRecording="leaveSession"
     />
 
@@ -83,7 +84,7 @@ import axios from "axios";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 // axios.defaults.baseURL = "/api/v1";
-const OPENVIDU_SERVER_URL = "https://" + location.hostname + ":4443";
+const OPENVIDU_SERVER_URL = "https://" + location.hostname + ":443";
 const OPENVIDU_SERVER_SECRET = "MY_SECRET";
 
 export default {
@@ -127,6 +128,7 @@ export default {
       console.log(this.showSearchModal);
     },
     joinGroup() {
+      this.openRecording = !this.openRecording;
       this.joinSession(this.roomCode);
 
       // this.productList = await this.api("/sample", "post", {
