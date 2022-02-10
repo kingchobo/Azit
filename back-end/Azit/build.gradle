@@ -30,7 +30,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ffbd55f0fe3f63e3f11355ec829599231eeaf7a
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
