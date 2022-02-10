@@ -2,16 +2,8 @@
 <va-parallax
     target=".base-layout__content"
     :src="'https://i.postimg.cc/T245bxnV/back2.jpg'"
-    :height="950"
+    :height="1000"
     class="s1">
-  <h1>함께 오늘을 만들어봐요 </h1>
-  <h1>함께 오늘을 만들어봐요 </h1>
-  <h1>함께 오늘을 만들어봐요 </h1>
-  <h1>함께 오늘을 만들어봐요 </h1>
-  <h1>함께 오늘을 만들어봐요 </h1>
-  <h1>함께 오늘을 만들어봐요 </h1>
-  <h1>함께 오늘을 만들어봐요 </h1>
-  <h1>함께 오늘을 만들어봐요 </h1>
   <h1>함께 오늘을 만들어봐요 </h1>
   <h1>함께 오늘을 만들어봐요 </h1>
 </va-parallax>

@@ -1,11 +1,13 @@
 <template>
-
-    <va-alert center class="mb-4">
-        <h1>당신의 오늘 하루는 어떠셨나요</h1>
-        <Buttons
-              class="write-diary"
-              btn-text="일기작성" />    
-      </va-alert>
+  <va-parallax
+    target=".base-layout__content"
+    :src="'https://i.postimg.cc/T245bxnV/back2.jpg'"
+    :height="1050"
+    class="s1">
+  <div>함께 오늘을 만들어봐요 </div>
+</va-parallax>
+  
+    
 
 <div class="home" >
       

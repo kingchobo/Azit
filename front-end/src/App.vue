@@ -1,11 +1,7 @@
 <template>
-  
   <Navbars />
-
   <router-view/>
-
 </template>
-
 <style>
 
 #app {
