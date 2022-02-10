@@ -1,5 +1,6 @@
 
 // Vue3 관련 설정 파일
+const path = require('path');
 module.exports = {
   devServer: {
     https: false,
@@ -11,7 +12,8 @@ module.exports = {
       }
     },
     historyApiFallback: true,
-    hot: true
+    hot: true,
+    contentBase: path.join(__dirname, '')
   },
   css: {
     requireModuleExtension: false // import 시에 경로에 .module 포함 안해도 됨.

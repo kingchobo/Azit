@@ -6,26 +6,27 @@
     
     <div>
       <div class="emotion-content-bar">
+        {{this.diaryContentDetail.emotions}}
         <div class="my-1 text--bold muted">기쁨</div>
-        <va-progress-bar :model-value="80" color="danger" />
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.joy" color="danger" />
         <br />
         <div class="my-1 text--bold muted">중립</div>
         <va-progress-bar :model-value="10" color="success" />
         <br />
         <div class="my-1 text--bold muted">두려움</div>
-        <va-progress-bar :model-value="10" color="#BE81F7"/>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.fear" color="#BE81F7"/>
         <br />
         <div class="my-1 text--bold muted">슬픔</div>
-        <va-progress-bar :model-value="5" color="warning"/>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.sadness" color="warning"/>
         <br />
         <div class="my-1 text--bold muted">놀람</div>
-        <va-progress-bar :model-value="5" color="#1f00ff" />
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.surprise" color="#1f00ff" />
         <br />
         <div class="my-1 text--bold muted">혐오</div>
-        <va-progress-bar :model-value="5" color="#F7FE2E"/>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.contempt" color="#F7FE2E"/>
         <br />
         <div class="my-1 text--bold muted">화남</div>
-        <va-progress-bar :model-value="5" color="#000058" />
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.anger" color="#000058" />
       </div>
 
       <div>
@@ -43,22 +44,19 @@
 <script>
 import Buttons from './Buttons.vue'
 export default {
-    name: 'DiaryDetailEmotion'
-    
-    ,
+    name: 'DiaryDetailEmotion',
+    props: {
+      diaryContentDetail: {
+        type: Object
+      }
+    },
     components: {
-        
         Buttons
     },
     setup(props, {emit}) {
-       
-        
         const closeDetail = function() {
             emit('closeDetail')
         }
-
-
-
         const moveEmotion = function() {
             let card = document.querySelector('.detail-container')
             if (card.style.transform == "rotateY(180deg)") {

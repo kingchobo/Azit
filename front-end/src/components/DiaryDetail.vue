@@ -16,8 +16,15 @@
             <div class="mx-3 my-5">
                 
                 <div class="detail-container">
-                    <DiaryDetailContent class="front" @moveContent="moveContent"/>
-                    <DiaryDetailEmotion class="back"/> 
+                    <DiaryDetailText 
+                     :diaryContentDetail="state.diaryContentDetail"
+                     class="front" 
+                     @moveContent="moveContent"
+                    />
+                    <DiaryDetailEmotion 
+                     class="back"
+                     :diaryContentDetail="state.diaryContentDetail"
+                    /> 
                 </div>
 
             </div>
@@ -30,7 +37,7 @@
 
 <script>
 import { computed, reactive } from 'vue'
-import DiaryDetailContent from '@/components/DiaryDetailContent.vue'
+import DiaryDetailText from '@/components/DiaryDetailText.vue'
 import DiaryDetailEmotion from '@/components/DiaryDetailEmotion.vue'
 // import Buttons from './Buttons.vue'
 // import WhiteButtons from './WhiteButtons.vue'
@@ -42,9 +49,12 @@ export default {
             type: Boolean,
             default: false
         },
+        diaryContent: {
+            type: Object
+        }
     },
     components: {
-        DiaryDetailContent,
+        DiaryDetailText,
         DiaryDetailEmotion,
         // Buttons,
         // WhiteButtons
@@ -52,7 +62,8 @@ export default {
     setup(props, {emit}) {
         const state = reactive({
             detailVisible: computed(() => props.open),
-            contentVisible: false
+            contentVisible: false,
+            diaryContentDetail: computed(() => props.diaryContent)
         })
         
         const closeDetail = function() {

@@ -1,5 +1,5 @@
 <template>
-  <va-navbar color="secondary">
+  <va-navbar class="navbar">
     <template #left>       
       <va-navbar-item>
         <router-link class="nav-link" to="/">아지트</router-link>
@@ -65,6 +65,10 @@
   text-decoration-line: none;
 
 }
+.navbar {
+  z-index: 1;
+}
+
 </style>
 
 <script>

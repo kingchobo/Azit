@@ -1,7 +1,10 @@
 <template>
-  <div id="navbar">
+  <!-- <div id="navbar">
     <Navbars />
-  </div>
+  </div> -->
+  
+  <Navbars/>
+
   <router-view/>
 
 </template>
@@ -16,13 +19,13 @@
   color: #b3c7db;
 }
 
-#navbar {
+/* #navbar { */
   /* padding: 30px; */
-  z-index: 200;
+  /* z-index: 200;
   position: fixed;
   width : 100%;
 
-}
+} */
 
 #nav a {
   font-weight: bold;
