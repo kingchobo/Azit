@@ -1,12 +1,13 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  
+  <Navbars />
+
   <router-view/>
+
 </template>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,3 +29,13 @@
   color: #42b983;
 }
 </style>
+<script>
+import Navbars from '@/components/Navbars.vue'
+
+export default {
+  components: {
+    Navbars
+  }
+}
+
+</script>
