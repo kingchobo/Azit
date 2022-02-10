@@ -1,7 +1,6 @@
 <template>
-  <va-navbar color="gray" >
+  <va-navbar color="secondary">
     <template #left>       
-
       <va-navbar-item>
         <router-link class="nav-link" to="/">아지트</router-link>
       </va-navbar-item>

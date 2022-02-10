@@ -1,5 +1,5 @@
 <template>
-  <div class="flex md4">
+  <div class="flex md3">
     <va-card @click="onOpenDetail" class="item" style="margin: 0.75rem;">
       <va-image
         :src=diary.thumbnail
@@ -10,8 +10,8 @@
         style="height: 200px;"
       /> -->
       <!-- <va-card-title>{{diary.title}}</va-card-title> -->
-      <va-card-content>{{diary.title}}</va-card-content>
-      <va-card-content>{{diary.create_date}}</va-card-content>
+      <va-card-content>제목 : {{diary.title}}</va-card-content>
+      <va-card-content>작성일 : {{diary.create_date}}</va-card-content>
     </va-card>
   </div>
   <DiaryDetail 

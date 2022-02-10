@@ -1,14 +1,14 @@
 <template>
   <div class="home">
       <main id="fullpage">
-      <section class="section">
+      <section id="section1" class="section">
         <div id="app"></div>
           <section-1 />
       </section>
-      <section class="section">
+      <section id="section1"  class="section">
           <section-2 />
       </section>
-      <section class="section">
+      <section id="section1" class="section">
         <section-3 />
 
       </section>
@@ -44,11 +44,23 @@ export default {
     Footer1,
     
   },
-
+ beforeUnmount() {
+    // if(window.location.pathname == "/"){
+         this.$router.go();
+    // }
+  }
 
   
 
 }
 </script>
-
+<style scoped>
+#section1{
+background:url("https://images-ext-2.discordapp.net/external/LOdKxZjaob0pkSIxWkenNdoWRLuSrSKMc-PJwqr1Jbo/https/images.wallpaperscraft.com/image/single/ocean_beach_aerial_view_134429_1280x800.jpg?width=1082&height=676") center top no-repeat; 
+background-position: fixed;
+background-color: #000000;
+background-repeat: no-repeat;
+background-size: 100% 100%;
+} 
+</style>
 
