@@ -1,11 +1,11 @@
 <template>
   <div class="home">
       <main id="fullpage">
-      <section class="section">
+      <section class="section" id="section1">
         <div id="app"></div>
           <section-1 />
       </section>
-      <section class="section">
+      <section class="section" id="section1">
           <section-2 />
       </section>
       <section class="section">
@@ -46,5 +46,15 @@ export default {
   // }
 }
 </script>
+
+<style scoped>
+#section1 {
+  background:url("https://images-ext-2.discordapp.net/external/LOdKxZjaob0pkSIxWkenNdoWRLuSrSKMc-PJwqr1Jbo/https/images.wallpaperscraft.com/image/single/ocean_beach_aerial_view_134429_1280x800.jpg?width=1082&height=676") center top no-repeat; 
+  background-position: fixed;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+} 
+</style>
 
 

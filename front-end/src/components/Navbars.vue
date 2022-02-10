@@ -1,5 +1,5 @@
 <template>
-  <va-navbar color="gray" >
+  <va-navbar class="navbar">
     <template #left>       
 
       <va-navbar-item>
@@ -66,6 +66,10 @@
   text-decoration-line: none;
 
 }
+.navbar {
+  z-index: 1;
+}
+
 </style>
 
 <script>

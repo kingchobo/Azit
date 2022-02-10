@@ -7,7 +7,6 @@ $(function(){
 		// scrollHorizontally: true,
 		// navigation:true,
 		navigationPosition:'right',
-		sectionsColor:['#ccc','#bbb','#ddd','#eee','#fff',],
 		afterLoad: function(anchorLink, index){
 			console.log("현재섹션은" + index);
 			// if(index==5){
