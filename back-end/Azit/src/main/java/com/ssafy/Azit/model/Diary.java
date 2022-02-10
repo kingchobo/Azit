@@ -1,6 +1,5 @@
 package com.ssafy.Azit.model;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,7 +45,7 @@ public class Diary {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group group;
+    private DiaryGroup diaryGroup;
 
     /* Foreign Keys */
 //    @NotNull
