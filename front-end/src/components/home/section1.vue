@@ -1,26 +1,39 @@
 <template>
-  <va-parallax
-    target=".base-layout__content"
-    :src="'https://i.postimg.cc/T245bxnV/back2.jpg'"
-    :height="1050"
-    class="s1">
-  <div>함께 오늘을 만들어봐요 </div>
-</va-parallax>
-  
-    
+<div>
+      <va-alert center class="mb-4">
+        <h1>당신의 오늘 하루는 어떠셨나요</h1>
+        <Buttons
+              class="write-diary"
+              btn-text="일기작성" 
+              @click="onOpenRecording"/>    
+      </va-alert>
 
-<div class="home" >
-      
-   
+    <Recording
+      :open="openRecording"
+      @closeRecording="this.openRecording = !this.openRecording"
+    />
  </div> 
 </template>
 
 <script>
 import Buttons from '@/components/Buttons.vue'
+import Recording from '@/components/Recording.vue'
+
 export default {
   components: {
-    Buttons
+    Buttons,
+    Recording
   },
+  data() {
+    return {
+      openRecording: false,
+    }
+  },
+  methods:{
+  onOpenRecording () {
+      this.openRecording = !this.openRecording
+    },
+}
 }
 </script>
 
@@ -33,51 +46,16 @@ export default {
 }
 .left-btns .write-with-diary{
   float: left;
-}
-
-.right-btn {
-  float: right;
-  margin-left: 20px;
-}
-
-.search {
-  float: right;
-  position: relative;
-  height: 34px;
-  vertical-align: middle;
-  top: 20px;
-}
-
-.search input {
-  width: 200px;
-  height: inherit;
-  padding: 4px 10px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  border-radius: 5px;
-  outline: none;
-  background-color: #fff;
-  color: #777;
-  font-size: 12px;
-}
-
-.search input:focus {
-  width: 200px;
-  border-color: #000080;
-}
-
-.search .material-icons {
-  height: 24px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 5px;
-  margin: auto;
-  cursor: pointer;
-}
-
-.search.focused .material-icons {
-  opacity: 0;
+  }
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+    
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  height: 950px;
+  z-index: -1;
 }
 
 </style>

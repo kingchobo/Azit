@@ -1,19 +1,15 @@
-// import { createStore } from 'vuex'
-// import Vue from 'vue'
-// import Vuex from 'vuex'
+// Vuex 조립
+import state from './state'
+import * as getters from './getters'
+import * as mutations from './mutations'
+import * as actions from './actions'
 
-// Vue.use(Vuex)
+const root = {
+  namespaced: true,
+  state,
+  getters,
+  mutations,
+  actions
+}
 
-// export default createStore({
-//   state: {
-//     diary:{
-      
-//     }
-//   },
-//   mutations: {
-//   },
-//   actions: {
-//   },
-//   modules: {
-//   }
-// })
+export default root

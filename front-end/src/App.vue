@@ -1,5 +1,10 @@
 <template>
-  <Navbars />
+  <!-- <div id="navbar">
+    <Navbars />
+  </div> -->
+  
+  <Navbars/>
+
   <router-view/>
 </template>
 <style>
@@ -9,12 +14,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #b3c7db;
 }
 
-#nav {
-  padding: 30px;
-}
+/* #navbar { */
+  /* padding: 30px; */
+  /* z-index: 200;
+  position: fixed;
+  width : 100%;
+
+} */
 
 #nav a {
   font-weight: bold;

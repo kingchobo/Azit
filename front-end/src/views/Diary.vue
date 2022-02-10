@@ -15,18 +15,30 @@
 <script>
 import FirstRow from '@/components/FirstRow.vue'
 import DiaryList from '@/components/DiaryList.vue'
+
 export default {
   components: {
     FirstRow,
-    DiaryList
-  }
+    DiaryList,
+
+  },
+  data () {
+    return {
+      
+    }
+  },
+  beforeUnmount() {
+    // if(window.location.pathname == "/"){
+         this.$router.go();
+    // }
+  },
 }
 </script>
 
 <style>
 
 .diary-container{
-  margin: 3rem;
+  /* margin: 3rem; */
 }
 
 </style>
