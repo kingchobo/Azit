@@ -17,7 +17,8 @@
       </div>
 
       <div class="modal-content">
-        <section class="mx-3 my-5 video" @click="moveRecordingVideo"></section>
+        <video :src=this.recordingUrl controls ></video>
+        <!-- <section class="mx-3 my-5 video" @click="moveRecordingVideo"></section> -->
         <section class="mx-3 my-5 contain">
           <va-tabs v-model="state.value" color="#5959be">
             <template #tabs>
