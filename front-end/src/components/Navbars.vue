@@ -1,30 +1,31 @@
 <template>
-  <va-navbar class="navbar">
+  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.7); position:relative;">
     <template #left>       
       <va-navbar-item>
         <router-link class="nav-link" to="/">아지트</router-link>
       </va-navbar-item>
     </template>
     <template #center>
-      <va-navbar-item class="nav-link" color="danger">
-        <router-link class="nav-link" to="/#section1">Home</router-link>
-      </va-navbar-item>
-      <va-navbar-item>
-        <router-link class="nav-link" to="/diary">일기장</router-link>
-      </va-navbar-item>
+      <div class="row justify--space-around" style="margin-left: 7rem">
+        
+        <va-navbar-item class="nav-link" color="danger">
+          <router-link class="nav-link" to="/">Home</router-link>
+        </va-navbar-item>
         <va-navbar-item>
-          <router-link class="nav-link" to="/about">커뮤니티</router-link>
-      </va-navbar-item>
-      <va-navbar-item>
-        <router-link class="nav-link" to="/about">고객지원</router-link>
-      </va-navbar-item>
+          <router-link class="nav-link" to="/diary">일기장</router-link>
+        </va-navbar-item>
+          <va-navbar-item>
+            <router-link class="nav-link" to="/about">커뮤니티</router-link>
+        </va-navbar-item>
+    </div>
     </template>
     <template #right>
+
       <va-navbar-item>
-          <va-button @click="onOpenSignup" flat color="#ffffff">회원가입</va-button>
+          <va-button class="nav-link" @click="onOpenSignup" flat color="#ffffff">회원가입</va-button>
       </va-navbar-item>
       <va-navbar-item>
-          <va-button @click="onOpenLogin" flat color="#ffffff">로그인</va-button>
+          <va-button class="nav-link" @click="onOpenLogin" flat color="#ffffff">로그인</va-button>
       </va-navbar-item>
     </template>
   </va-navbar>
@@ -47,6 +48,7 @@
   color: #2c3e50;
 }
 
+
 #nav {
   padding: 30px;
 }
@@ -63,10 +65,13 @@
 .nav-link {
   color : #ffffff;
   text-decoration-line: none;
-
+  margin : 0 1rem
 }
 .navbar {
   z-index: 1;
+  background-color:rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
+  
 }
 
 </style>

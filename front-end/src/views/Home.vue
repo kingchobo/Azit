@@ -48,10 +48,12 @@ export default {
     Footer1,
     
   },
+  created() {
+            // alert(this.$store.state.userId)
+  },
  beforeUnmount() {
-    // if(window.location.pathname == "/"){
+
          this.$router.go();
-    // }
   }
 
   
@@ -65,6 +67,6 @@ background-position: fixed;
 background-color: #000000;
 background-repeat: no-repeat;
 background-size: 100% 100%;
-} 
+}
 </style>
 

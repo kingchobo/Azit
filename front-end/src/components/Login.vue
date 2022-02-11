@@ -13,7 +13,9 @@
             <va-form 
                 style="width: 300px;"
                 ref="form"
+                tag="form"
                 @validation="validation = $event"
+                @submit.prevent="handleSubmit"
             >
             <p class="mb-1">아이디</p>
             <va-input
@@ -29,23 +31,24 @@
                 outline
                 :rules="[value => value.length > 8 || '최소 9글자를 입력해야 합니다']"
             />
-
-            </va-form>
-            <div>
-                <va-button 
-                    class="login-btn" 
-                    :rounded="false" 
-                    @click="$refs.form.validate()"
-                > 로그인 
-                </va-button>
-            </div>
-        </div>
+        
+            <va-button 
+                type="submit"
+                class="mt-2" 
+                :rounded="false" 
+                @click="$refs.form.validate()"
+            > 로그인 
+            </va-button>
+        
+        </va-form>
+    </div>
         
     </va-modal>
 </template>
 
 <script>
 import { computed, reactive } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
     props: {
@@ -55,6 +58,7 @@ export default {
         }
     },
     setup(props, {emit}) {
+        
         const state = reactive({
             loginVisible: computed(() => props.open),
             idValue: '',
@@ -66,9 +70,34 @@ export default {
             emit('closeLogin')
         }
         return { state, closeLogin }
+    },
+    methods :{
+    logInId(){
+        this.$store.commit('logInId',this.userId);
+    },
+    handleSubmit () {
+        if (this.$refs.form.validate()){
+            this.$store.state.userId = this.state.idValue
+             this.$store.commit('logInId',this.userId);
+            alert(this.$store.state.userId)
+            this.closeLogin()
+        }
+        else{
+            alert("아이디와 비밀번호를 확인해주세요")
+        }
+      
+    },
+ 
+    },
+    computed: {
+         count() {
+      return this.$store.state.userId;
+    },
     }
+  }
+
     
-}
+
 </script>
 
 <style>

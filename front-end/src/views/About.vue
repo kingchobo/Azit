@@ -41,9 +41,7 @@ export default {
     }
   },
     beforeUnmount() {
-    // if(window.location.pathname == "/"){
          this.$router.go();
-    // }
   }
 }
 

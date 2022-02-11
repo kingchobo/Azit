@@ -12,15 +12,26 @@
   </div>
   <InfiniteLoading :comments="diarys" @infinite="load" />
   <div> -->
+ <vue-typer class="display-3"
+                   :text='["안녕하세요.","김정훈의 포트폴리오입니다!!!","방문 감사합니다!!!"]'
+                   :repeat='Infinity'
+                   initial-action='typing'
+                   :pre-type-delay='100'
+                   :type-delay='200'
+                   :pre-erase-delay='1500'
+                   :erase-delay='250'
+                   erase-style='backspace'
+                   :erase-on-complete='false'
+                   caret-animation='blink'
+        ></vue-typer>
 
-
-    <div class="row">
+      <div class="row">
         <diary-list-item class="result"
          v-for="diary in diarys"
          :key="diary.title"
          :diary="diary"
         />
-                <InfiniteLoading :diarys="diarys" @infinite="load" />
+        <InfiniteLoading :diarys="diarys" @infinite="load" />
 
       </div>
 
@@ -81,7 +92,7 @@ import { ref } from "vue";
 
     try {
       const response = await fetch(
-        "https://d373f615-141e-4add-8fb7-910b49246039.mock.pstmn.io/diarylist/" + page
+        "https://d373f615-141e-4add-8fb7-910b49246039.mock.pstmn.io/diarylist/1/" + page
       );
       const json = await response.json();
       console.log(json)

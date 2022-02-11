@@ -20,7 +20,6 @@ const routes = [
     name: "About",
     component: About,
   },
-  
 ]
 
 const router = createRouter({
