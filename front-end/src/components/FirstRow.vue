@@ -12,15 +12,15 @@
     </div>
 
     <div class="right-btns">
-     <!-- Search -->
-        <div class="search">
-          <input
-            type="text" v-model="searchTitle"
-            placeholder="내용을 입력해주세요." />
-          <div @click="searchDiary" class="material-icons">
-            search
-          </div>
-        </div>
+      <!-- Search -->
+      <div class="search">
+        <input
+          type="text"
+          v-model="searchTitle"
+          placeholder="내용을 입력해주세요."
+        />
+        <div @click="searchDiary" class="material-icons">search</div>
+      </div>
 
       <!-- Right Buttons -->
       <Buttons class="search-filter" btn-text="필터" />
@@ -59,6 +59,7 @@
     <DiaryDetail
       :move="moveDiaryDetail"
       :recordingUrl="recordingUrl"
+      :diaryContent="diaryContent"
       @closeDetail="this.moveDiaryDetail = !this.moveDiaryDetail"
     />
     <!-- 방 검색 modal -->
@@ -112,12 +113,14 @@ export default {
       moveDiaryDetail: false,
       showWithModal: false,
       showSearchModal: false,
-      searchTitle : '',
-      joinGroupId : '',
-      searchData : [],
+      searchTitle: "",
+      joinGroupId: "",
+      searchData: [],
       userId: "testUser", // sessionId를 userId로 대체
       recordingTest: null,
       recordingUrl: null,
+      diaryContent: [],
+      diary_id: 1,
 
       OV: undefined,
       session: undefined,
@@ -145,8 +148,13 @@ export default {
       this.showSearchModal = !this.showSearchModal;
       console.log(this.showSearchModal);
     },
-    async searchDiary(){
-      this.searchData = await this.api('https://15f8ee3f-349a-4cf2-86ef-1f8c61ec2767.mock.pstmn.io/api/diary/'+this.searchTitle,'get',{}) //url
+    async searchDiary() {
+      this.searchData = await this.api(
+        "https://15f8ee3f-349a-4cf2-86ef-1f8c61ec2767.mock.pstmn.io/api/diary/" +
+          this.searchTitle,
+        "get",
+        {}
+      ); //url
       console.log(this.searchTitle);
       console.log(this.searchData);
     },
@@ -302,6 +310,13 @@ export default {
           console.log(res.data.url);
           this.recordingUrl = res.data.url;
           this.leaveSession();
+          axios
+            .get(
+              `https://eab5b3d9-43de-4dee-bee6-77ceb04377eb.mock.pstmn.io/diary/1`
+            )
+            .then((response) => {
+              this.diaryContent = response.data;
+            });
           this.moveDiaryDetail = !this.moveDiaryDetail;
 
           // this.recordingUrl =
