@@ -131,11 +131,7 @@ export default {
 
 .login-header{
     display: flex;
+    justify-content: flex-end;
 }
-
-.login-close-btn {
-    margin-left: auto;
-}
-
 
 </style>

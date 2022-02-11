@@ -1,12 +1,17 @@
 <template>
 <div>
-      <va-alert center class="mb-4">
-        <h1>당신의 오늘 하루는 어떠셨나요</h1>
+  
+      <div class="parent">
+        <div class="child">
+          당신의 오늘 하루는 어떠셨나요?
+        </div>
+      </div>
+      <div >
         <Buttons
-              class="write-diary"
-              btn-text="일기작성" 
-              @click="onOpenRecording"/>    
-      </va-alert>
+          class="write-diary"
+          btn-text="일기작성" 
+          @click="onOpenRecording"/>    
+      </div>
 
     <Recording
       :open="openRecording"
@@ -37,7 +42,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 
 .left-btns .write-diary{
@@ -57,5 +62,28 @@ export default {
   height: 950px;
   z-index: -1;
 }
+
+.section1-text{
+  z-index: 1;
+}
+
+.parent {
+    height: 3em; /* 애니메이션 높이 */
+    overflow-y: hidden;
+    display: block;
+}
+.parent .child {
+    font-size: 3em;/* 애니메이션 높이 */
+    font-weight: bold;
+    line-height: 1;
+    animation-name: grow;
+    animation-duration: 1s;/* 애니메이션 시간 */
+}
+/* 키프레임 애니메이션 */
+@keyframes grow {
+    from { transform: translateY(3em) }/* 애니메이션 높이 */
+    to { transform: translateY(0) }
+}
+ 
 
 </style>

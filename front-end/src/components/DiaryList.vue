@@ -25,15 +25,16 @@
                    caret-animation='blink'
         ></vue-typer>
 
-      <div class="row">
-        <diary-list-item class="result"
-         v-for="diary in diarys"
-         :key="diary.title"
-         :diary="diary"
-        />
-        <InfiniteLoading :diarys="diarys" @infinite="load" />
 
-      </div>
+    <div class="row">
+      <diary-list-item class="result"
+        v-for="diary in diarys"
+        :key="diary.diary_id"
+        :diary="diary"
+      />
+      <InfiniteLoading :diarys="diarys" @infinite="load" />
+
+    </div>
 
       <!-- <div class="flex md4 lg3" v-if="diarys.length"> 
         <diary-list-item
@@ -50,49 +51,37 @@
 
 <script>
 import DiaryListItem from '@/components/DiaryListItem.vue'
-import axios from 'axios'
 
 export default {
   components: {
     DiaryListItem
   },
 
-  data(){
-    return{
-      diarys: []
-    };
-  },
   methods:{
     newdiary(){
       this.$router.push({ name : 'Record'})
     }
   },
-  created() {
-    // axios.get('https://d373f615-141e-4add-8fb7-910b49246039.mock.pstmn.io/diarylist/1')
-    // .then(response => {
-    //   this.diarys = response.data
-    //   console.log(response.data)
-    // })
-  }
-
 };
 
 </script>
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import { ref } from "vue";
+  import { ref } from "vue";
   import InfiniteLoading from "v3-infinite-loading";
   import "v3-infinite-loading/lib/style.css";
 
   let diarys = ref([]);
   let page = 1;
+  // userid는 로그인 정보 이용해서 받아오기!! (수정 필요)
+  let userid = 1;
   const load = async $state => {
     console.log("loading...");
-
+    console.log(userid)
     try {
       const response = await fetch(
-        "https://d373f615-141e-4add-8fb7-910b49246039.mock.pstmn.io/diarylist/1/" + page
+        `https://eab5b3d9-43de-4dee-bee6-77ceb04377eb.mock.pstmn.io/diarylist/${userid}/` + page
       );
       const json = await response.json();
       console.log(json)

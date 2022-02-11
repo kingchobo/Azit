@@ -75,18 +75,18 @@ export default {
   display: block;
   width: 25vw;
   height: 50vh;
-  background: rgb(228, 228, 228);
+  /* background: rgb(228, 228, 228); */
 }
 .emotion-content-text{
   
   font-size: 23px;
   padding-left: 20px;
   padding-top: 25px;
-  background: black(0, 0, 0);
+  /* background: black(0, 0, 0); */
 }
 .emotion-content-bar{
   display: block;
-   width: 25vw;
+  width: 25vw;
   height: 50vh;
   font-size: 13px;
   padding-top: 20px;

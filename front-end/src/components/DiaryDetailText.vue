@@ -2,11 +2,8 @@
   <div class="video-content">
     <div class="main-container">
      <div>
-       <tr>{{this.diaryContentDetail.title}}</tr>
-       <!-- <tr>{{title}}</tr>
-       <tr>{{user}}</tr>
-       <tr>{{title}}</tr> -->
-      {{this.diaryContentDetail.content}}
+        <h2 class="text-title">{{this.diaryContentDetail.title}}</h2>
+      <div class="text-content">{{this.diaryContentDetail.content}}</div>
      </div>
     </div>
 
@@ -22,16 +19,13 @@
 </template>
 
 <script>
-import Buttons from './Buttons.vue'
+
 export default {
     name: "DiaryDetailText",
     props: {
       diaryContentDetail: {
         type: Object
       }
-    },
-    components: {
-        Buttons
     },
     setup(props, {emit}) {
       const moveContent = function() {
@@ -58,7 +52,7 @@ export default {
 
   width: 25vw;
   height: 50vh;
-  background: rgb(228, 228, 228);
+  /* background: rgb(228, 228, 228); */
   font-size: 10px;
 }
 .main-container{
@@ -86,6 +80,16 @@ export default {
 .detail-btns {
     display: flex;
     justify-content: flex-end;
+}
+
+.text-title{
+  font-size: 25px;
+}
+
+.text-content {
+  margin-top: 10%;
+  text-indent: 15px;
+  font-size: 20px;
 }
 
 </style>

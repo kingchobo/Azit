@@ -11,7 +11,6 @@
             <va-button class="modal-btn" color=#6565ca icon="clear" @click="closeRecording"></va-button>
         </div>
     </div>
-
     </va-modal>
 </template>
 
@@ -28,7 +27,7 @@ export default {
     },
     setup(props, {emit}) {
         const state = reactive({
-            recordingVisible: computed(() => props.open)
+            recordingVisible: computed(() => props.open),
         })
 
         const closeRecording = function() {

@@ -14,7 +14,7 @@
         <div class="modal-content">
             <section class="mx-3 my-5 video"></section>
             <section class="mx-3 my-5 contain">
-                <va-tabs v-model="state.value" >
+                <va-tabs v-model="state.value" color="#5959be">
                     <template #tabs>
                     <va-tab
                         v-for="tab in ['Contents', 'Emotions']"
@@ -25,24 +25,18 @@
                     </template>
                 </va-tabs>    
                     <div v-if="state.value ===1">
-                <!-- <div class="mx-3 my-5">
-                    
-                    <div class="detail-container">
-                        <DiaryDetailText 
-                        :diaryContentDetail="state.diaryContentDetail"
-                        class="front" 
-                        @moveContent="moveContent"
-                        />
-                        <DiaryDetailEmotion 
-                        class="back"
-                        :diaryContentDetail="state.diaryContentDetail"
-                        /> 
-                    </div> -->
 
-                        <DiaryDetailContent class="front" />
+                        <DiaryDetailText 
+                         :diaryContentDetail="state.diaryContentDetail"
+                         class="front" 
+                         @moveContent="moveContent"
+                        />
                     </div>
                     <div v-else-if="state.value ===2">
-                         <DiaryDetailEmotion class="back"/> 
+                         <DiaryDetailEmotion 
+                          class="back"
+                          :diaryContentDetail="state.diaryContentDetail"
+                        /> 
                     </div>       
             </section>
         </div>
@@ -55,8 +49,6 @@
 import { computed, reactive } from 'vue'
 import DiaryDetailText from '@/components/DiaryDetailText.vue'
 import DiaryDetailEmotion from '@/components/DiaryDetailEmotion.vue'
-// import Buttons from './Buttons.vue'
-// import WhiteButtons from './WhiteButtons.vue'
 
 export default {
     
@@ -76,8 +68,6 @@ export default {
     components: {
         DiaryDetailText,
         DiaryDetailEmotion,
-        // Buttons,
-        // WhiteButtons
     },
     setup(props, {emit}) {
         
@@ -85,12 +75,12 @@ export default {
         const state = reactive({
             detailVisible: computed(() => props.open),
             contentVisible: false,
-            value: 0,
-
+            value: 1,
             diaryContentDetail: computed(() => props.diaryContent)
         })
      
         const closeDetail = function() {
+            state.value = 1
             emit('closeDetail')
         }
 
@@ -146,7 +136,7 @@ export default {
   display: block;
   width: 30vw;
   height: 55vh;
-  background: rgb(228, 228, 228);
+  /* background: rgb(228, 228, 228); */
 }
  
 
@@ -194,8 +184,7 @@ export default {
     transform: rotateY(0deg); 
 } 
 
-.back { 
-    
+.back {
     transform: rotateY(0deg); 
 } 
 
