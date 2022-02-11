@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <va-modal
     v-model="state.recordingVisible"
     no-outside-dismiss
@@ -20,6 +21,29 @@
       <div id="session" v-if="session">
         <!-- session 헤더 및 leaveSession 버튼 -->
         <!-- <div id="session-header">
+=======
+    <va-modal
+        v-model="state.recordingVisible"
+        no-outside-dismiss
+        hide-default-actions
+        max-height="100%"
+        max-width="100%"
+    >
+        <div class="recording-modal">
+            <div class="modal-header">
+                <va-button
+                    class="modal-btn"
+                    color="#6565ca"
+                    icon="clear"
+                    @click="closeRecording"
+                ></va-button>
+            </div>
+
+            <!-- 영상 출력 -->
+            <div id="session" v-if="session">
+                <!-- session 헤더 및 leaveSession 버튼 -->
+                <!-- <div id="session-header">
+>>>>>>> 814224538debb4d7a919bd8c62c29ffada16dd29
           <input
             class="btn btn-large btn-danger"
             type="button"
@@ -28,6 +52,7 @@
             value="Leave session"
           />
         </div> -->
+<<<<<<< HEAD
         <div id="main-video" class="flex md4">
           <user-video :stream-manager="mainStreamManager" />
         </div>
@@ -44,11 +69,36 @@
       </div>
     </div>
   </va-modal>
+=======
+                <div id="main-video" class="flex md4">
+                    <user-video :stream-manager="mainStreamManager" />
+                </div>
+                <div id="video-container" class="flex md4">
+                    <user-video :stream-manager="publisher" />
+                    <!-- @click.native="updateMainVideoStreamManager(publisher)" -->
+                    <user-video
+                        v-for="sub in subscribers"
+                        :key="sub.stream.connection.connectionId"
+                        :stream-manager="sub"
+                    />
+                    <!-- @click.native="updateMainVideoStreamManager(sub)" -->
+                </div>
+            </div>
+            <Buttons
+                class="mx-2"
+                btn-text="녹화 시작"
+                @click="recordingStart"
+            />
+            <Buttons class="mx-2" btn-text="녹화 중지" @click="recordingStop" />
+        </div>
+    </va-modal>
+>>>>>>> 814224538debb4d7a919bd8c62c29ffada16dd29
 </template>
 
 <script>
 import { computed, reactive } from "vue";
 import UserVideo from "./UserVideo.vue";
+<<<<<<< HEAD
 
 export default {
   components: {
@@ -83,11 +133,107 @@ export default {
     };
     return { state, closeRecording };
   },
+=======
+import Buttons from "./Buttons.vue";
+import axios from "axios";
+// import WhiteButtons from "./WhiteButtons.vue";
+
+axios.defaults.headers.post["Content-Type"] = "application/json";
+const OPENVIDU_SERVER_URL = "https://" + location.hostname + ":4443";
+const OPENVIDU_SERVER_SECRET = "MY_SECRET";
+
+export default {
+    components: {
+        UserVideo,
+        Buttons,
+        // WhiteButtons,
+    },
+    name: "GroupRecording",
+    props: {
+        open: {
+            type: Boolean,
+            default: false,
+        },
+        session: {
+            type: Object,
+        },
+        mainStreamManager: {
+            type: Object,
+        },
+        publisher: {
+            type: Object,
+        },
+        subscribers: {
+            type: Array,
+        },
+    },
+    data() {
+        return {
+            recordingTest: null,
+        };
+    },
+    methods: {
+        recordingStart() {
+            // console.log("녹화 시작");
+            axios
+                .post(
+                    `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/start`,
+                    {
+                        session: "testUser",
+                    },
+                    {
+                        auth: {
+                            username: "OPENVIDUAPP",
+                            password: OPENVIDU_SERVER_SECRET,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res);
+                    this.recordingTest = res.data.id;
+                });
+        },
+        recordingStop() {
+            // const str1 = "나는 문자열입니다.";
+            // const str2 = "나는 문자열입니다.${}";
+
+            // const str3 = `나는 문자열입니다. 근데 좀더 좋아요 예를 들면 ${str1}`;
+            // console.log(str1);
+            // console.log(str2);
+            // console.log(str3);
+            axios
+                .post(
+                    `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/stop/${this.recordingTest}`,
+                    {},
+                    {
+                        auth: {
+                            username: "OPENVIDUAPP",
+                            password: OPENVIDU_SERVER_SECRET,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res);
+                });
+        },
+    },
+    setup(props, { emit }) {
+        const state = reactive({
+            recordingVisible: computed(() => props.open),
+        });
+
+        const closeRecording = function () {
+            emit("closeRecording");
+        };
+        return { state, closeRecording };
+    },
+>>>>>>> 814224538debb4d7a919bd8c62c29ffada16dd29
 };
 </script>
 
 <style scoped>
 .recording-modal {
+<<<<<<< HEAD
   width: 90vw;
   height: 85vh;
 }
@@ -191,3 +337,106 @@ input.btn {
 </style>
 
 
+=======
+    width: 90vw;
+    height: 85vh;
+}
+
+.modal-header {
+    display: flex;
+}
+
+.modal-btn {
+    margin-left: auto;
+}
+
+#session-header {
+    margin-bottom: 20px;
+}
+
+#session-title {
+    display: inline-block;
+}
+
+#buttonLeaveSession {
+    float: right;
+    margin-top: 20px;
+}
+
+#session img {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    object-fit: contain;
+    vertical-align: baseline;
+}
+
+#session #video-container img {
+    position: relative;
+    float: left;
+    width: 50%;
+    cursor: pointer;
+    object-fit: cover;
+    height: 180px;
+}
+
+#video-container video {
+    position: relative;
+    float: left;
+    width: 50%;
+    cursor: pointer;
+}
+
+#video-container video + div {
+    float: left;
+    width: 50%;
+    position: relative;
+    margin-left: -50%;
+}
+
+#video-container p {
+    display: inline-block;
+    background: #f8f8f8;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #777777;
+    font-weight: bold;
+    border-bottom-right-radius: 4px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+#main-video p {
+    position: absolute;
+    display: inline-block;
+    background: #f8f8f8;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 22px;
+    color: #777777;
+    font-weight: bold;
+    border-bottom-right-radius: 4px;
+}
+
+input.btn {
+    font-weight: bold;
+}
+
+.btn {
+    font-weight: bold !important;
+}
+
+.btn-success {
+    background-color: #06d362 !important;
+    border-color: #06d362;
+}
+
+.btn-success:hover {
+    background-color: #1abd61 !important;
+    border-color: #1abd61;
+}
+</style>
+>>>>>>> 814224538debb4d7a919bd8c62c29ffada16dd29

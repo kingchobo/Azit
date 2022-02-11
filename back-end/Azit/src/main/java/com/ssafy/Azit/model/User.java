@@ -1,12 +1,9 @@
 package com.ssafy.Azit.model;
 
 import com.ssafy.Azit.enums.Gender;
-import com.ssafy.Azit.enums.GroupOpen;
+import com.ssafy.Azit.enums.GroupStatus;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,6 +13,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -41,9 +39,11 @@ public class User {
 
     private String password;
 
+    @Temporal(TemporalType.DATE)
     private Date signDate;
 
     @Enumerated(EnumType.STRING)
-    private GroupOpen groupOpen;
+    @NotNull
+    private GroupStatus groupStatus;
 
 }

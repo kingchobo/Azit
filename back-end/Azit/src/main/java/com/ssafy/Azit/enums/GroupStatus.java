@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum GroupOpen {
+public enum GroupStatus {
 
-    OPEN("T", "열림"),
-    CLOSE("F", "닫힘");
+    OPENED("OPENED", "열림"),
+    CLOSED("CLOSED", "닫힘");
 
 
     private String code;
