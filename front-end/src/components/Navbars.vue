@@ -35,6 +35,7 @@
   <Signup
    :open="openSignup" 
    @closeSignup="closeSignup"
+   @moveLogin="moveLogin"
   />
 </template>
 
@@ -106,6 +107,10 @@ export default {
     },
     closeSignup () {
       this.openSignup = !this.openSignup
+    },
+    moveLogin () {
+      this.openSignup = !this.openSignup
+      this.openLogin = !this.openLogin
     }
   },
   beforeUnmount() {

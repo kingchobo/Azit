@@ -38,7 +38,7 @@ export default {
 <style>
 
 .diary-container{
-  /* margin: 3rem; */
+  margin: 3rem;
 }
 
 </style>

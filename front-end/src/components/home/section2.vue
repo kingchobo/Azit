@@ -1,6 +1,8 @@
 <template>
   <!-- <img src="../../assets/firstSection.jpg" id="second-bg" alt=""> -->
-  <h1>함께 오늘을 만들어봐요</h1>
+
+    <h1>함께 오늘을 만들어봐요</h1>
+  
 
 </template>
 
@@ -12,11 +14,6 @@ export default {
   },data () {
     return {
       imageSrc: '~@/assets/back1.jpg',
-    }
-  },
-  data () {
-    return {
-      
     }
   }
 }

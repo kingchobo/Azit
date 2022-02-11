@@ -7,6 +7,8 @@
 
   <router-view/>
 </template>
+
+
 <style>
 
 #app {
@@ -36,8 +38,13 @@
 </style>
 <script>
 import Navbars from '@/components/Navbars.vue'
+import AOS from 'aos';
+import "aos/dist/aos.css";
 
 export default {
+  created() {
+    AOS.init()
+  },
   components: {
     Navbars
   }
