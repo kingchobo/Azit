@@ -2,8 +2,10 @@ package com.ssafy.Azit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication()
+@ComponentScan(basePackages = {"com.ssafy.Azit.controller"})
 public class AzitApplication {
 
 	public static void main(String[] args) {

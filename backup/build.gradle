@@ -46,24 +46,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 4ffbd55f0fe3f63e3f11355ec829599231eeaf7a
-=======
->>>>>>> 0e41a814c3972004cbe1687914154a066d9c13c4
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-=======
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 814224538debb4d7a919bd8c62c29ffada16dd29
->>>>>>> develop
 }
 
 tasks.named('test') {
