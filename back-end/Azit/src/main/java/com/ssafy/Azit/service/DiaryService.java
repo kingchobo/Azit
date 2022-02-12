@@ -10,9 +10,11 @@ public interface DiaryService {
     Diary createDiary(Diary diary);
 //    Diary createDiary(Diary diary, User user);
     Diary getDiary(long diaryId);
+
+    List<Diary> listDiary(String userId);
+    List<Diary> listSearchDiary(String word);
+
     Diary updateDiary(Diary diary);
     Diary deleteDiary(long diaryId);
-    List<Diary> listDiary();
-    List<Diary> listSearchDiary(String word);
 
 }
