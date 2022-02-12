@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface UserRepoDSL {
 
     public Optional<User> findByUserId(String userId);
-
+    public Optional<User> login(User user);
 
 }

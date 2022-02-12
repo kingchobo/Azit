@@ -3,6 +3,7 @@ package com.ssafy.Azit.querydsl;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.Azit.model.QUser;
 import com.ssafy.Azit.model.User;
+import com.ssafy.Azit.res.UserRes;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
@@ -17,26 +18,22 @@ public class UserRepoDSLImpl implements UserRepoDSL {
     @Override
     public Optional<User> findByUserId(String userId) {
 
-        System.out.println("-------------");
-        System.out.println(userId);
-        System.out.println(userId);
-        System.out.println(userId);
-        System.out.println(userId);
-        System.out.println(userId);
-        System.out.println(jpaQueryFactory);
-        System.out.println("-------------");
-
-        User user = jpaQueryFactory.selectFrom(qUser).where(qUser.userId.eq(userId)).fetchOne();
-
-
-        System.out.println("동작");
-        System.out.println("동작");
-        System.out.println("동작");
-        System.out.println("동작");
-        System.out.println("동작");
+        User user = jpaQueryFactory.select(qUser).from(qUser).where(qUser.userId.eq(userId)).fetchOne();
 
         if(user == null) return Optional.empty();
         return Optional.ofNullable(user);
     }
+
+    @Override
+    public Optional<User> login(User user) {
+
+        User loginUser = jpaQueryFactory.selectFrom(qUser)
+                .where(qUser.userId.eq(user.getUserId()), qUser.password.eq(user.getPassword())).fetchOne();
+
+
+        if(loginUser == null) return Optional.empty();
+        return Optional.ofNullable(loginUser);
+    }
+
 
 }
