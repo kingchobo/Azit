@@ -60,15 +60,13 @@ import Buttons from "./Buttons.vue";
 import axios from "axios";
 import * as faceapi from "face-api.js";
 
-// import WhiteButtons from "./WhiteButtons.vue";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export default {
     components: {
         UserVideo,
-        Buttons,
-        // WhiteButtons,
+        Buttons
     },
     name: "GroupRecording",
     props: {
@@ -87,27 +85,14 @@ export default {
         },
         subscribers: {
             type: Array,
-        },
-        setup(props, { emit }) {
-            const state = reactive({
-                recordingVisible: computed(() => props.open),
-            });
-
-            const closeRecording = function () {
-                emit("closeRecording");
-            };
-            return { state, closeRecording };
-        },
+        }
     },
-    data() {
-        return {};
-    },
-
     setup(props, { emit }) {
         const state = reactive({
             recordingVisible: computed(() => props.open),
             interval: null,
             speechRecognizer: Object,
+            recordingText: ''
         });
 
         const closeRecording = function () {
@@ -207,7 +192,8 @@ export default {
                     //     '<span style="color:#999">' +
                     //     interimTranscripts +
                     //     "</span>";
-                    console.log(finalTranscripts);
+                    // console.log(finalTranscripts);
+                    state.recordingText += finalTranscripts
                 };
                 state.speechRecognizer.onerror = function () {};
             } else {
@@ -219,6 +205,7 @@ export default {
 
         const recordingStop = function () {
             emit("recordingStop");
+            console.log(state.recordingText)
             state.speechRecognizer.stop();
             clearInterval(state.interval);
         };
