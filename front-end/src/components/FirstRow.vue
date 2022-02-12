@@ -324,7 +324,7 @@ export default {
           this.leaveSession();
           axios
             .get(
-              `https://eab5b3d9-43de-4dee-bee6-77ceb04377eb.mock.pstmn.io/diary/1`
+              `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/diary/1`
             )
             .then((response) => {
               this.diaryContent = response.data;

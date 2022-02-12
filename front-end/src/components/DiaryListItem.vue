@@ -46,7 +46,7 @@ export default {
       // axios.get('https://d373f615-141e-4add-8fb7-910b49246039.mock.pstmn.io/diarydetail')
       axios
         .get(
-          `https://eab5b3d9-43de-4dee-bee6-77ceb04377eb.mock.pstmn.io/diary/${this.diary.diary_id}`
+          `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/diary/${this.diary.diary_id}`
         )
         .then((response) => {
           this.diaryContent = response.data;
