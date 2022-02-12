@@ -17,7 +17,7 @@
       </div>
 
       <div class="modal-content">
-        <video :src=this.recordingUrl controls ></video>
+        <video class="mx-3 my-5 recorded-video" :src=this.recordingUrl controls ></video>
         <!-- <section class="mx-3 my-5 video" @click="moveRecordingVideo"></section> -->
         <section class="mx-3 my-5 contain">
           <va-tabs v-model="state.value" color="#5959be">
@@ -127,11 +127,10 @@ export default {
   margin-top: 1vw;
 }
 
-.video {
+.recorded-video {
   display: block;
   width: 45vw;
   height: 55vh;
-  background: rgb(223, 214, 214);
 }
 .contain {
   display: block;

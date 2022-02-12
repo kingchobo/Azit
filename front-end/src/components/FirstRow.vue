@@ -222,7 +222,7 @@ export default {
       this.getToken(roomCode).then((token) => {
         this.session
           .connect(token, { clientData: this.myUserName })
-          .then((res) => {
+          .then(() => {
             // --- Get your own camera stream with the desired properties ---
 
             let publisher = this.OV.initPublisher(undefined, {

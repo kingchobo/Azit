@@ -95,12 +95,15 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+
+    };
   },
 
   setup(props, { emit }) {
     const state = reactive({
       recordingVisible: computed(() => props.open),
+      interval: null
     });
 
     const closeRecording = function () {
@@ -121,7 +124,7 @@ export default {
     const recordingStart = function () {
       emit("recordingStart");
       const video = document.getElementById("local-video-undefined");
-      setInterval(async () => {
+      state.interval = setInterval(async () => {
         const detections = await faceapi
           .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
           .withFaceLandmarks()
@@ -152,6 +155,7 @@ export default {
 
     const recordingStop = function () {
       emit("recordingStop");
+      clearInterval(state.interval);
     };
 
     Promise.all([
