@@ -103,6 +103,7 @@ export default {
     const state = reactive({
       recordingVisible: computed(() => props.open),
       interval: null,
+      speechRecognizer: Object,
     });
 
     const closeRecording = function () {
@@ -152,23 +153,25 @@ export default {
       }, 1000);
 
       // 음성인식 API 시작
+
       const r = document.getElementById("result");
       if ("webkitSpeechRecognition" in window) {
         //Web speech API Function
-        var speechRecognizer = new webkitSpeechRecognition();
+        // var speechRecognizer = new webkitSpeechRecognition();
+        state.speechRecognizer = new webkitSpeechRecognition();
         //continuous : you will catch mic only one time or not
-        speechRecognizer.continuous = true;
+        state.speechRecognizer.continuous = true;
         //interimResults : during capturing the mic you will send results or not
-        speechRecognizer.interimResults = true;
+        state.speechRecognizer.interimResults = true;
         //lang : language (ko-KR : Korean, en-IN : englist)
-        speechRecognizer.lang = "ko-KR";
+        state.speechRecognizer.lang = "ko-KR";
         //start!
-        speechRecognizer.start();
+        state.speechRecognizer.start();
 
         var finalTranscripts = "";
 
         //if the voice catched onresult function will start
-        speechRecognizer.onresult = function (event) {
+        state.speechRecognizer.onresult = function (event) {
           var interimTranscripts = "";
           for (var i = event.resultIndex; i < event.results.length; i++) {
             var transcript = event.results[i][0].transcript;
@@ -187,9 +190,9 @@ export default {
             '<span style="color:#999">' +
             interimTranscripts +
             "</span>";
-          console.log(r);
+          console.log(r.innerText);
         };
-        speechRecognizer.onerror = function () {};
+        state.speechRecognizer.onerror = function () {};
       } else {
         //if browser don't support this function. this message will show in your web
         r.innerHTML =
@@ -200,6 +203,7 @@ export default {
 
     const recordingStop = function () {
       emit("recordingStop");
+      state.speechRecognizer.stop();
       clearInterval(state.interval);
     };
 
