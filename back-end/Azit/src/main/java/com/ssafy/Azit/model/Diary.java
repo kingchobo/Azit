@@ -1,5 +1,6 @@
 package com.ssafy.Azit.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class Diary {
 
     private String thumbNail;
 
+//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
