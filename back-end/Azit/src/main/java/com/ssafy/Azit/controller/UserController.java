@@ -20,23 +20,16 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> findUser (@PathVariable String userId){
-//        System.out.println(userId);
-//        System.out.println(userRepository.findById(userId));
         User user = userService.getUserByUserId(userId);
 
         return ResponseEntity.ok().body(user);
     }
     @PostMapping()
     public ResponseEntity<String> createUser(@RequestBody User user){
-//        System.out.println(user);
-
-//        System.out.println("-------------------------");
-//        System.out.println("sdf" +  userRepository.save(user) + "sdf");
-//        System.out.println("-------------------------");
 
         User createdUser = userService.createUser(user);
 
-        if(!ObjectUtils.isEmpty(createdUser))
+        if(createdUser != null)
             return ResponseEntity.ok().body(SUCCESS);
         return ResponseEntity.ok().body(FAIL);
 
