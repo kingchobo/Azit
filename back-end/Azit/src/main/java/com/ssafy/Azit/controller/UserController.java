@@ -24,6 +24,7 @@ public class UserController {
 
         return ResponseEntity.ok().body(user);
     }
+
     @PostMapping()
     public ResponseEntity<String> createUser(@RequestBody User user){
 
@@ -34,4 +35,15 @@ public class UserController {
         return ResponseEntity.ok().body(FAIL);
 
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody User user){
+
+        User loginUser = userService.login(user);
+        if(loginUser != null)
+            return ResponseEntity.ok().body(loginUser);
+        return ResponseEntity.ok().body(null);
+
+    }
+
 }
