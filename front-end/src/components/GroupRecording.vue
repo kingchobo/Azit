@@ -123,6 +123,11 @@ export default {
 
     const recordingStart = function () {
       emit("recordingStart");
+      faceEmotions();
+      voiceTextStart();
+    };
+
+    const faceEmotions = function () {
       const video = document.getElementById("local-video-undefined");
       state.interval = setInterval(async () => {
         const detections = await faceapi
@@ -151,10 +156,9 @@ export default {
           console.log(0);
         }
       }, 1000);
-
-      // 음성인식 API 시작
-
-      const r = document.getElementById("result");
+    };
+    const voiceTextStart = function () {
+      const voiceTextObject = document.getElementById("result");
       if ("webkitSpeechRecognition" in window) {
         //Web speech API Function
         // var speechRecognizer = new webkitSpeechRecognition();
@@ -185,20 +189,19 @@ export default {
             }
           }
           //insert into HTML
-          r.innerHTML =
+          voiceTextObject.innerHTML =
             finalTranscripts +
             '<span style="color:#999">' +
             interimTranscripts +
             "</span>";
-          console.log(r.innerText);
+          console.log(voiceTextObject.innerText);
         };
         state.speechRecognizer.onerror = function () {};
       } else {
         //if browser don't support this function. this message will show in your web
-        r.innerHTML =
+        voiceTextObject.innerHTML =
           "your browser is not supported. If google chrome. Please upgrade!";
       }
-      // 음성인식 API 끝
     };
 
     const recordingStop = function () {
@@ -213,7 +216,14 @@ export default {
       faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
       faceapi.nets.faceExpressionNet.loadFromUri("/models"),
     ]);
-    return { state, closeRecording, recordingStart, recordingStop };
+    return {
+      state,
+      closeRecording,
+      recordingStart,
+      recordingStop,
+      voiceTextStart,
+      faceEmotions,
+    };
   },
 };
 </script>
@@ -321,7 +331,7 @@ input.btn {
   border-color: #1abd61;
 }
 
-#result {
+/* #result {
   height: 200px;
   border: 1px solid #ccc;
   padding: 10px;
@@ -329,5 +339,5 @@ input.btn {
   margin-bottom: 30px;
   font-size: 14px;
   line-height: 25px;
-}
+} */
 </style>
