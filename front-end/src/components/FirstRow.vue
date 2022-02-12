@@ -62,11 +62,21 @@
       @recordingStart="recordingStart"
       @recordingStop="recordingStop"
     />
-    <DiaryDetail
+    <!-- <DiaryDetail
       :move="moveDiaryDetail"
       :recordingUrl="recordingUrl"
       :diaryContent="diaryContent"
       @closeDetail="this.moveDiaryDetail = !this.moveDiaryDetail"
+    /> -->
+
+    <!-- 화면 녹화 디테일 Modal -->
+    <DiaryRecordingDetail
+      :move="moveDiaryRecordingDetail"
+      :recordingUrl="recordingUrl"
+      :diaryContent="diaryContent"
+      @closeDetail="
+        this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail
+      "
     />
     <!-- 방 검색 modal -->
     <va-modal v-model="showSearchModal" hide-default-actions>
@@ -97,7 +107,7 @@ import WhiteButtons from "./WhiteButtons.vue";
 import { OpenVidu } from "openvidu-browser";
 import Recording from "./Recording.vue";
 import GroupRecording from "./GroupRecording.vue";
-import DiaryDetail from "./DiaryDetail.vue";
+import DiaryRecordingDetail from "./DiaryRecordingDetail.vue";
 import axios from "axios";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -111,13 +121,14 @@ export default {
     WhiteButtons,
     Recording,
     GroupRecording,
-    DiaryDetail,
+    DiaryRecordingDetail,
   },
   data() {
     return {
       openRecording: false,
       OpenPersonalRecording: false,
       moveDiaryDetail: false,
+      moveDiaryRecordingDetail: false,
       showWithModal: false,
       showSearchModal: false,
       searchTitle: "",
@@ -329,7 +340,7 @@ export default {
             .then((response) => {
               this.diaryContent = response.data;
             });
-          this.moveDiaryDetail = !this.moveDiaryDetail;
+          this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
 
           // this.recordingUrl =
           //   "https://localhost:4443/openvidu/recordings/testUser-20/testUser-20.mp4";

@@ -44,6 +44,7 @@
       </div>
       <Buttons class="mx-2" btn-text="녹화 시작" @click="recordingStart" />
       <Buttons class="mx-2" btn-text="녹화 중지" @click="recordingStop" />
+      <div id="result"></div>
     </div>
   </va-modal>
 </template>
@@ -95,15 +96,13 @@ export default {
     },
   },
   data() {
-    return {
-
-    };
+    return {};
   },
 
   setup(props, { emit }) {
     const state = reactive({
       recordingVisible: computed(() => props.open),
-      interval: null
+      interval: null,
     });
 
     const closeRecording = function () {
@@ -151,6 +150,52 @@ export default {
           console.log(0);
         }
       }, 1000);
+
+      // 음성인식 API 시작
+      const r = document.getElementById("result");
+      if ("webkitSpeechRecognition" in window) {
+        //Web speech API Function
+        var speechRecognizer = new webkitSpeechRecognition();
+        //continuous : you will catch mic only one time or not
+        speechRecognizer.continuous = true;
+        //interimResults : during capturing the mic you will send results or not
+        speechRecognizer.interimResults = true;
+        //lang : language (ko-KR : Korean, en-IN : englist)
+        speechRecognizer.lang = "ko-KR";
+        //start!
+        speechRecognizer.start();
+
+        var finalTranscripts = "";
+
+        //if the voice catched onresult function will start
+        speechRecognizer.onresult = function (event) {
+          var interimTranscripts = "";
+          for (var i = event.resultIndex; i < event.results.length; i++) {
+            var transcript = event.results[i][0].transcript;
+            transcript.replace("\n", "<br>");
+
+            //isFinal : if speech recognition is finished, isFinal = true
+            if (event.results[i].isFinal) {
+              finalTranscripts += transcript;
+            } else {
+              interimTranscripts += transcript;
+            }
+          }
+          //insert into HTML
+          r.innerHTML =
+            finalTranscripts +
+            '<span style="color:#999">' +
+            interimTranscripts +
+            "</span>";
+          console.log(r);
+        };
+        speechRecognizer.onerror = function () {};
+      } else {
+        //if browser don't support this function. this message will show in your web
+        r.innerHTML =
+          "your browser is not supported. If google chrome. Please upgrade!";
+      }
+      // 음성인식 API 끝
     };
 
     const recordingStop = function () {
@@ -270,5 +315,15 @@ input.btn {
 .btn-success:hover {
   background-color: #1abd61 !important;
   border-color: #1abd61;
+}
+
+#result {
+  height: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 0 10px 0 #bbb;
+  margin-bottom: 30px;
+  font-size: 14px;
+  line-height: 25px;
 }
 </style>
