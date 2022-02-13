@@ -74,6 +74,8 @@ export default {
 import { ref } from "vue";
 import InfiniteLoading from "v3-infinite-loading";
 import "v3-infinite-loading/lib/style.css";
+import { useStore } from "vuex";
+const store = useStore();
 
 let diarys = ref([]);
 let page = 1;
@@ -82,9 +84,10 @@ let userid = 1;
 const load = async ($state) => {
   console.log("loading...");
   console.log(userid);
+  console.log(store.state.userId);
   try {
     const response = await fetch(
-      `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/diarylist/${userid}/` +
+      `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/diarylist/?userid=${store.state.userId}&diarypage=` +
         page
     );
     const json = await response.json();
