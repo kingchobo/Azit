@@ -18,13 +18,13 @@ public class Emotions {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long emotionsId;
 
-    private Double surprise;
-    private Double joy;
-    private Double sadness;
-    private Double anger;
-    private Double fear;
-    private Double disgust;
-    private Double contempt;
+    private Double neutral;
+    private Double happy;
+    private Double sad;
+    private Double angry;
+    private Double fearful;
+    private Double disgusted;
+    private Double surprised;
 
     @ManyToOne
     @JoinColumn(name="user_id")
