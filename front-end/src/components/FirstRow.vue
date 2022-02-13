@@ -278,6 +278,25 @@ export default {
             );
           });
       });
+    console.log("join")
+      this.session
+        .signal({
+          data: "My custom message", // Any string (optional)
+          to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+          type: "my-chat", // The type of message (optional)
+        })
+        .then(() => {
+          console.log("Message successfully sent");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      this.session.on('signal', (event) => {
+        console.log(event.data); // Message
+        console.log(event.from); // Connection object of the sender
+        console.log(event.type); // The type of message
+    });
 
       window.addEventListener("beforeunload", this.leaveSession);
     },
