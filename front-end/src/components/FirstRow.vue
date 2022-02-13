@@ -62,22 +62,14 @@
       @recordingStart="recordingStart"
       @recordingStop="recordingStop"
     />
-    <!-- <DiaryDetail
+    <!-- 화면 녹화 디테일 Modal -->
+    <DiaryDetail
       :move="moveDiaryDetail"
       :recordingUrl="recordingUrl"
       :diaryContent="diaryContent"
       @closeDetail="this.moveDiaryDetail = !this.moveDiaryDetail"
-    /> -->
-
-    <!-- 화면 녹화 디테일 Modal -->
-    <DiaryRecordingDetail
-      :move="moveDiaryRecordingDetail"
-      :recordingUrl="recordingUrl"
-      :diaryContent="diaryContent"
-      @closeDetail="
-        this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail
-      "
     />
+
     <!-- 방 검색 modal -->
     <va-modal v-model="showSearchModal" hide-default-actions>
       <b>방에 참여 하시겠습니까?</b>
@@ -98,6 +90,7 @@
         <Buttons class="mx-2" btn-text="참여하기" @click="joinGroup" />
       </div>
     </va-modal>
+
   </div>
 </template>
 
@@ -106,8 +99,8 @@ import Buttons from "./Buttons.vue";
 import WhiteButtons from "./WhiteButtons.vue";
 import { OpenVidu } from "openvidu-browser";
 import Recording from "./Recording.vue";
+import DiaryDetail from "./DiaryDetail.vue"
 import GroupRecording from "./GroupRecording.vue";
-import DiaryRecordingDetail from "./DiaryRecordingDetail.vue";
 import axios from "axios";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -121,14 +114,14 @@ export default {
     WhiteButtons,
     Recording,
     GroupRecording,
-    DiaryRecordingDetail,
+    DiaryDetail
   },
   data() {
     return {
       openRecording: false,
       OpenPersonalRecording: false,
       moveDiaryDetail: false,
-      moveDiaryRecordingDetail: false,
+      // moveDiaryRecordingDetail: false,
       showWithModal: false,
       showSearchModal: false,
       searchTitle: "",
@@ -359,7 +352,7 @@ export default {
             .then((response) => {
               this.diaryContent = response.data;
             });
-          this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
+          this.moveDiaryDetail = !this.moveDiaryDetail;
 
           // this.recordingUrl =
           //   "https://localhost:4443/openvidu/recordings/testUser-20/testUser-20.mp4";
@@ -367,6 +360,7 @@ export default {
       // this.leaveSession();
       // this.moveDiaryDetail = !this.moveDiaryDetail;
     },
+
 
     updateMainVideoStreamManager(stream) {
       if (this.mainStreamManager === stream) return;

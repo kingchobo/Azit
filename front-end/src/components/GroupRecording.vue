@@ -67,6 +67,24 @@
       </div>
     </div>
   </va-modal>
+
+    <!-- 제목 수정 modal -->
+    <va-modal v-model="state.showTitleModal" hide-default-actions>
+        <div class="diaryTitleModal">
+
+            <b>어떤 추억으로 기록하시겠어요?</b>
+            <div>
+            <va-input
+                class="mt-4 mb-2"
+                v-model="state.diaryTitle"
+                placeholder="일기 제목을 입력하세요."
+            />
+            </div>
+            <div>
+            <Buttons class="mx-2" btn-text="저장하기" @click="saveDiary" />
+            </div>
+        </div>
+    </va-modal>
 </template>
 
 <script>
@@ -104,7 +122,7 @@ export default {
   },
   data() {
     return {
-      interval: null,
+      interval: null
     };
   },
   methods: {
@@ -141,6 +159,8 @@ export default {
       interval: null,
       speechRecognizer: Object,
       recordingText: "",
+      showTitleModal: false,
+      diaryTitle: ''
     });
 
     const closeRecording = function () {
@@ -164,20 +184,20 @@ export default {
       voiceTextStart();
       //   receiveMessage();
     };
-    const sendMessage = function () {
-      this.session
-        .signal({
-          data: "My custom message", // Any string (optional)
-          to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
-          type: "my-chat", // The type of message (optional)
-        })
-        .then(() => {
-          console.log("Message successfully sent");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
+    // const sendMessage = function () {
+    //   this.session
+    //     .signal({
+    //       data: "My custom message", // Any string (optional)
+    //       to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+    //       type: "my-chat", // The type of message (optional)
+    //     })
+    //     .then(() => {
+    //       console.log("Message successfully sent");
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+    // };
     // const receiveMessage = function () {
     //   state.interval = setInterval(async () => {
     //     this.session.on("signal", (event) => {
@@ -342,24 +362,30 @@ export default {
     //   }, 1000);
     // };
 
-        const recordingStop = function () {
-            // const params = {               
-            //     'user_id': '',
-            //     'video_link':'',
-            //     'emotions_id':'',
-            //     'content': state.recordingText,
-            //     'thumbnail':''
-            // }
-            // axios.post(`https://api/diary`, params)
-            //     .then((response) => {
-            //         console.log(response)
-            // });
+    const recordingStop = function () {
 
-            emit("recordingStop");
-            console.log(state.recordingText)
-            state.speechRecognizer.stop();
-            clearInterval(state.interval);
-        };
+        state.showTitleModal = !state.showTitleModal
+        console.log(state.recordingText)
+        state.speechRecognizer.stop();
+        clearInterval(state.interval);
+    };
+
+    const saveDiary = function() {
+        // const params = {               
+        //     'user_id': '',
+        //     'video_link':'',
+        //     'emotions_id':'',
+        //     'title': state.diaryTitle,
+        //     'content': state.recordingText,
+        //     'thumbnail':''
+        // }
+        // axios.post(`https://api/diary`, params)
+        //     .then((response) => {
+        //         console.log(response)
+        // });
+        emit("recordingStop");
+        state.showTitleModal = !state.showTitleModal
+    };
 
     Promise.all([
       faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
@@ -375,6 +401,7 @@ export default {
       voiceTextStart,
       faceRecognizeEmotions,
       getEmothiontList,
+      saveDiary
     };
   },
 };
@@ -487,6 +514,12 @@ input.btn {
 .btn-success:hover {
   background-color: #1abd61 !important;
   border-color: #1abd61;
+}
+
+.diaryTitleModal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* #result {
