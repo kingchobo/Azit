@@ -67,9 +67,13 @@
             :myTossUser="myTossUser"
             :tossCount="tossCount"
             :isMyOrder="isMyOrder"
+            :tossArray="tossArray"
+            :userListStr="userListStr"
             @closeRecording="leaveSession"
             @recordingStart="recordingStart"
             @recordingStop="recordingStop"
+            @isMyOrderSwitch="isMyOrderSwitch"
+            @setUserListStr="setUserListStr"
         />
         <!-- <DiaryDetail
       :move="moveDiaryDetail"
@@ -163,11 +167,23 @@ export default {
             myTossUser: null,
             isMyOrder: false,
             tossCount: 0,
+            tossArray: [],
+            userListStr: "",
         };
     },
     methods: {
         isMyOrderSwitch() {
             this.isMyOrder = !this.isMyOrder;
+        },
+        setUserListStr() {
+            let userArray = this.tossArray.slice(1);
+
+            for (let i = 0; i < userArray.length; i++) {
+                if (i !== userArray.length - 1)
+                    this.userListStr += userArray[i].connectionId + ",";
+                else this.userListStr += userArray[i].connectionId;
+            }
+            console.log(this.userListStr);
         },
         /**
          * 함께쓰기 시 모달 창을 열고 Openvidu 세션을 생성하는 함수
@@ -240,7 +256,7 @@ export default {
 
             // Toss할 유저를 선택할 connection 객체 설정
             this.session.on("connectionCreated", ({ connection }) => {
-                if (this.myTossUser === null) this.myTossUser = connection;
+                this.tossArray.push(connection);
             });
 
             // On every asynchronous exception...
@@ -251,7 +267,7 @@ export default {
             // toss버튼 시그널 들어왔을 시
             this.session.on("signal:toss", ({ data: message }) => {
                 console.log("toss 시", message);
-                this.tossCount = message;
+                this.userListStr = message;
                 this.isMyOrderSwitch();
             });
 

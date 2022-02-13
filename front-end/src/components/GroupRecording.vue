@@ -128,6 +128,12 @@ export default {
         isMyOrder: {
             type: Boolean,
         },
+        tossArray: {
+            type: Array,
+        },
+        userListStr: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -139,28 +145,11 @@ export default {
         // console.log(this.subscribers);
         // console.log(this.currentUserId);
     },
-    methods: {
-        tossUser() {
-            emit("isMyOrderSwitch");
-            props.session
-                .signal({
-                    data: this.tossCount + 1, // Any string (optional)
-                    to: [this.myTossUser], // Array of Connection objects (optional. Broadcast to everyone if empty)
-                    type: "toss", // The type of message (optional)
-                })
-                .then(() => {
-                    console.log("Message successfully sent");
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        },
-    },
-
     setup(props, { emit }) {
         const state = reactive({
             recordingVisible: computed(() => props.open),
             interval: null,
+            // userListStr: "",
             speechRecognizer: Object,
             recordingText: "",
         });
@@ -186,6 +175,15 @@ export default {
             faceRecognizeEmotions();
             voiceTextStart();
 
+            emit("setUserListStr");
+
+            // for (let i = 0; i < userArray.length; i++) {
+            //     if (i !== userArray.length - 1)
+            //         state.userListStr += userArray[i].connectionId + ",";
+            //     else state.userListStr += userArray[i].connectionId;
+            // }
+            // console.log(state.userListStr);
+
             props.session
                 .signal({
                     data: "recordingStarted", // Any string (optional)
@@ -193,12 +191,46 @@ export default {
                     type: "recordStatus", // The type of message (optional)
                 })
                 .then(() => {
-                    // console.log("Message successfully sent");
+                    console.log("Message successfully sent");
                 })
                 .catch((error) => {
                     console.error(error);
                 });
             //   receiveMessage();
+        };
+
+        const tossUser = function () {
+            emit("isMyOrderSwitch");
+
+            let userArray = props.userListStr.split(",");
+            console.log(userArray);
+
+            let tossTarget = [];
+
+            for (let i = 0; i < props.tossArray.length; i++) {
+                console.log(props.tossArray[i].connectionId);
+                if (props.tossArray[i].connectionId === userArray[0])
+                    tossTarget.push(props.tossArray[i]);
+            }
+
+            let userData = "";
+            for (let i = 1; i < userArray.length; i++) {
+                if (i !== userArray.length - 1) userData += userArray[i] + ",";
+                else userData += userArray[i];
+            }
+
+            props.session
+                .signal({
+                    data: userData, // Any string (optional)
+                    to: tossTarget, // Array of Connection objects (optional. Broadcast to everyone if empty)
+                    type: "toss", // The type of message (optional)
+                })
+                .then(() => {
+                    console.log("Message successfully sent");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         };
         // const sendMessage = function () {
         //   this.session
@@ -430,6 +462,7 @@ export default {
             state,
             closeRecording,
             recordingStart,
+            tossUser,
             recordingStop,
             voiceTextStart,
             faceRecognizeEmotions,
