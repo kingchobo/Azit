@@ -1,7 +1,7 @@
 <template>
 <div class="layer">
 
-      <div class="parent" style="margin-top: 500px">
+      <div class="parent" style="margin-top: 20%">
         <div class="child">
           Another World
         </div>
@@ -31,12 +31,11 @@
 </template>
 
 <script>
-import Buttons from '@/components/Buttons.vue'
 import Recording from '@/components/Recording.vue'
 
 export default {
   components: {
-    Buttons,
+
     Recording
   },
   data() {
@@ -88,15 +87,15 @@ export default {
 
  .parent .child {
     color: aliceblue;
-    font-size: 80px;/* 애니메이션 높이 */
+    font-size: 60px;/* 애니메이션 높이 */
     font-weight: bold;
     
     line-height: 1;
     
     animation-name: grow;
     animation-duration: 1.5s;/* 애니메이션 시간 */
-    float : right;
-    margin-right: 300px;
+    float : left;
+    margin-left: 55%;
     
 }
 /* 키프레임 애니메이션 */

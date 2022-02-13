@@ -1,6 +1,6 @@
 <template>
     <div class="layer">  
-      <div class="parent2" style="margin-top: 500px">
+      <div class="parent2" style="margin-top: 20%">
         <div class="child2">
          Zoom
         </div>
@@ -51,14 +51,14 @@ export default {
 
 .parent2 .child2 {
     color: aliceblue;
-    font-size: 80px;/* 애니메이션 높이 */
+    font-size: 60px;/* 애니메이션 높이 */
     font-weight: bold;
     line-height: 1;
     animation-delay: 2s;
     animation-name: grow;
     animation-duration: 1.5s;/* 애니메이션 시간 */
-    float : right;
-    margin-right: 300px;
+   float : left;
+    margin-left: 55%;
     
 }
 

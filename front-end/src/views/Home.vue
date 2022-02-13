@@ -2,6 +2,7 @@
 <head>
  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
 </head>
   <div class="home">
       <main id="fullpage">
@@ -14,13 +15,15 @@
       </section>
       <section id="sectionC" class="section">
         <section-3 />
-
       </section>
-      <footer class="section fp-auto-height">
+      <section id="sectionD" class="section">
+        <section-4 />
+      </section>
+      <!-- <footer class="section fp-auto-height">
         <footer-1/>
         <h2>footer</h2>
 
-      </footer>
+      </footer> -->
     </main>
   </div>
   <va-button @click="onOpenDetail">상세페이지 보기</va-button>
@@ -38,6 +41,7 @@ import Footer1 from '../components/home/footer1.vue'
 import Section1 from '../components/home/section1.vue'
 import Section2 from '../components/home/section2.vue'
 import Section3 from '../components/home/section3.vue'
+import Section4 from '../components/home/section4.vue'
 
 export default {
   name: 'Home',
@@ -45,6 +49,7 @@ export default {
     Section1,
     Section2,
     Section3,
+    Section4,
     Footer1,
     
   },

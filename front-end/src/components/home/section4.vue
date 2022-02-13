@@ -1,15 +1,15 @@
 <template>
 <div class="layer">
   <div class="wrap">
-   <div class="parent3" style="margin-top: 23%">
-        <div class="child3">
-          Impress 
+   <div class="parent4" style="margin-top: 23%">
+        <div class="child4">
+          Together
         </div>
         <br>
       </div>
-      <div class="parent3">
-        <div class="child3">
-           잊지 못할 우리만의 놀이터
+      <div class="parent4">
+        <div class="child4">
+          함께 작성해 보세요.
         </div>
         <br>
       </div>
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style>
-.parent3 {
+.parent4 {
     height: 6em; /* 애니메이션 높이 */
     overflow-y: hidden;
     display: block;
@@ -39,7 +39,7 @@ export default {
     
 }
 
-.parent3 .child3 {
+.parent4 .child4 {
     color: aliceblue;
     font-size: 60px;/* 애니메이션 높이 */
     font-weight: bold;

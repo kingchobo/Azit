@@ -1,5 +1,5 @@
 <template>
-  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:relative;">
+  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:fixed;">
     <template #left>       
       <va-navbar-item>
         <router-link class="nav-link" to="/">아지트</router-link>
@@ -7,16 +7,21 @@
     </template>
     <template #center>
       <div class="row justify--space-around" style="margin-left: 7rem">
-        
-        <va-navbar-item class="nav-link" color="danger">
-          <router-link class="nav-link" to="/">Home</router-link>
-        </va-navbar-item>
+        <div class="btnbox">
+          <va-navbar-item >
+            <router-link class="btn2" to="/">Home</router-link>
+          </va-navbar-item>
+        </div>
+        <div class="btnbox">
         <va-navbar-item>
-          <router-link class="nav-link" to="/diary">일기장</router-link>
+          <router-link class="btn2" to="/diary">일기장</router-link>
         </va-navbar-item>
+        </div>
+        <div class="btnbox">
           <va-navbar-item>
-            <router-link class="nav-link" to="/about">커뮤니티</router-link>
+            <router-link class="btn2" to="/about">커뮤니티</router-link>
         </va-navbar-item>
+        </div>
     </div>
     </template>
     <template #right>
@@ -48,7 +53,32 @@
   text-align: center;
   color: #2c3e50;
 }
+.btnbox{
+  margin-left: 50px;
+}
+.btn2 {
+  width: 100px;
+  padding: 10px;
+  /* border-radius: 20px; */
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  margin: 20px 0;
+  background-color:(255,255,255);
+  color: #fff;
+  display: block;
+  box-sizing: border-box;
+  
+  
+}
+.btn2:hover {
 
+  border-bottom: solid 1px;
+  border-bottom-color: #fff;
+  color: #ffffff;
+}
 
 #nav {
   padding: 30px;
@@ -60,7 +90,7 @@
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #bd0f0f;
 }
 
 .nav-link {
@@ -72,6 +102,7 @@
   z-index: 1;
   background-color:rgba(0, 0, 0, 0.2);
   border-radius: 0.2rem;
+  width: 100%;
   
 }
 
