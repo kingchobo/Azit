@@ -52,12 +52,14 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public Diary updateDiary(Diary diary) {
-        return null;
+        return diaryRepository.save(diary);
     }
 
     @Override
-    public Diary deleteDiary(long diaryId) {
-        return null;
+    public int deleteDiary(long diaryId) {
+
+        diaryRepository.deleteById(diaryId);
+        return 1;
     }
 
 
