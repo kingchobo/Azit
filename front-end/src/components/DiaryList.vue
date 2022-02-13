@@ -87,7 +87,7 @@ const load = async ($state) => {
   console.log(store.state.userId);
   try {
     const response = await fetch(
-      `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/diarylist/?userid=${store.state.userId}&diarypage=` +
+      `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diarylist/?userid=${store.state.userId}&diarypage=` +
         page
     );
     const json = await response.json();
