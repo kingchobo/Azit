@@ -212,7 +212,7 @@ export default {
                     //     interimTranscripts +
                     //     "</span>";
                     // console.log(finalTranscripts);
-                    state.recordingText += finalTranscripts
+                    state.recordingText = finalTranscripts
                 };
                 state.speechRecognizer.onerror = function () {};
             } else {
@@ -251,7 +251,7 @@ export default {
       };
       try {
         const response = await fetch(
-          `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/emotionList`,
+          `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/emotionList`,
           requestOptions
         );
         const json = await response.json();
@@ -297,6 +297,18 @@ export default {
     // };
 
         const recordingStop = function () {
+            // const params = {               
+            //     'user_id': '',
+            //     'video_link':'',
+            //     'emotions_id':'',
+            //     'content': state.recordingText,
+            //     'thumbnail':''
+            // }
+            // axios.post(`https://api/diary`, params)
+            //     .then((response) => {
+            //         console.log(response)
+            // });
+
             emit("recordingStop");
             console.log(state.recordingText)
             state.speechRecognizer.stop();
