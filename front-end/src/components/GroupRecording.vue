@@ -29,7 +29,7 @@
           />
         </div> -->
         <div class="row justify--space-around">
-          <div class="flex md6 lg4">
+          <!-- <div class="flex md6 lg4">
             <va-card stripe stripe-color="success">
               <va-card-title> 자기 화면</va-card-title>
               <hr />
@@ -37,11 +37,9 @@
                 <user-video :stream-manager="mainStreamManager" />
               </div>
             </va-card>
-          </div>
-          <div class="flex md6 lg4">
-            <va-card stripe stripe-color="primary">
-              <va-card-title>그룹 화면</va-card-title>
-              <hr />
+          </div> -->
+          <div class="flex md6 lg12 justify--space-center">
+          
               <div id="video-container" class="flex md videocenter4">
                 <user-video :stream-manager="publisher" />
                 <!-- @click.native="updateMainVideoStreamManager(publisher)" -->
@@ -51,14 +49,16 @@
                   :stream-manager="sub"
                 />
               </div>
-            </va-card>
           </div>
           <!-- @click.native="updateMainVideoStreamManager(sub)" -->
         </div>
       </div>
-      <hr />
       <div class="row justify--center">
         <Buttons class="mx-2" btn-text="녹화 시작" @click="recordingStart" />
+        <Buttons
+          class="mx-2"
+          btn-text="toss"        
+        />
         <Buttons
           class="mx-2"
           btn-text="녹화 중지"
@@ -161,6 +161,8 @@ export default {
                             }
                         }
                         statusPercent[status] += valueStatus;
+                        cnt++;
+                        statusAverage[status] = statusPercent[status] / cnt;
                         console.log(statusPercent);
                     });
                 } else {
@@ -215,8 +217,8 @@ export default {
                 state.speechRecognizer.onerror = function () {};
             } else {
                 //if browser don't support this function. this message will show in your web
-                voiceTextObject.innerHTML =
-                    "your browser is not supported. If google chrome. Please upgrade!";
+                // voiceTextObject.innerHTML =
+                //     "your browser is not supported. If google chrome. Please upgrade!";
             }
         };
     let statusAverage = {

@@ -1,5 +1,5 @@
 <template>
-  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.7); position:relative;">
+  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:relative;">
     <template #left>       
       <va-navbar-item>
         <router-link class="nav-link" to="/">아지트</router-link>
