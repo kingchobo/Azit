@@ -28,22 +28,43 @@
             value="Leave session"
           />
         </div> -->
-        <div id="main-video" class="flex md4">
-          <user-video :stream-manager="mainStreamManager" />
-        </div>
-        <div id="video-container" class="flex md4">
-          <user-video :stream-manager="publisher" />
-          <!-- @click.native="updateMainVideoStreamManager(publisher)" -->
-          <user-video
-            v-for="sub in subscribers"
-            :key="sub.stream.connection.connectionId"
-            :stream-manager="sub"
-          />
+        <div class="row justify--space-around">
+          <div class="flex md6 lg4">
+            <va-card stripe stripe-color="success">
+              <va-card-title> 자기 화면</va-card-title>
+              <hr />
+              <div id="main-video" class="flex md10 videocenter">
+                <user-video :stream-manager="mainStreamManager" />
+              </div>
+            </va-card>
+          </div>
+          <div class="flex md6 lg4">
+            <va-card stripe stripe-color="primary">
+              <va-card-title>그룹 화면</va-card-title>
+              <hr />
+              <div id="video-container" class="flex md videocenter4">
+                <user-video :stream-manager="publisher" />
+                <!-- @click.native="updateMainVideoStreamManager(publisher)" -->
+                <user-video
+                  v-for="sub in subscribers"
+                  :key="sub.stream.connection.connectionId"
+                  :stream-manager="sub"
+                />
+              </div>
+            </va-card>
+          </div>
           <!-- @click.native="updateMainVideoStreamManager(sub)" -->
         </div>
       </div>
-      <Buttons class="mx-2" btn-text="녹화 시작" @click="recordingStart" />
-      <Buttons class="mx-2" btn-text="녹화 중지" @click="recordingStop" />
+      <hr />
+      <div class="row justify--center">
+        <Buttons class="mx-2" btn-text="녹화 시작" @click="recordingStart" />
+        <Buttons
+          class="mx-2"
+          btn-text="녹화 중지"
+          @click="recordingStop(), getEmothiontList()"
+        />
+      </div>
     </div>
   </va-modal>
 </template>
@@ -95,20 +116,43 @@ export default {
     },
   },
   data() {
-    return {
-
-    };
+    return {};
   },
+  // methods :{
+  //   async getEmothiontList(){
+  //     this.emothiontList = await this.api('https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/emotionList','post',{
+  //       "default" : this.statusAverage[default],
+  //       "neutral" : this.statusAverage["neutral"],
+  //       "happy" : this.statusAverage["happy"],
+  //       "sad" : this.statusAverage["sad"],
+  //       "angry" : this.statusAverage["angry"],
+  //       "fearful" : this.statusAverage["fearful"],
+  //       "disgusted" : this.statusAverage["disgusted"],
+  //       "surprised" : this.statusAverage["surprised"],
 
+  //     })
+  //     console.log(this.emothiontList);
+  //   },
+  //   async api(url,method,data){
+  //     return(await axios({
+  //       method :method,
+  //       url : url,
+  //       data : data
+  //     }).catch( e =>{
+  //       console.log(e);
+  //     })).data;
+  //   }
+  // },
   setup(props, { emit }) {
     const state = reactive({
       recordingVisible: computed(() => props.open),
-      interval: null
+      interval: null,
     });
 
     const closeRecording = function () {
       emit("closeRecording");
     };
+    let cnt = 0;
 
     let statusPercent = {
       default: 0,
@@ -121,6 +165,46 @@ export default {
       surprised: 0,
     };
 
+    let statusAverage = {
+      default: 0,
+      neutral: 0,
+      happy: 0,
+      sad: 0,
+      angry: 0,
+      fearful: 0,
+      disgusted: 0,
+      surprised: 0,
+    };
+
+    const getEmothiontList = async () => {
+      console.log("loading...");
+      console.log(statusAverage);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          default: statusAverage["default"],
+          neutral: statusAverage["neutral"],
+          happy: statusAverage["happy"],
+          sad: statusAverage["sad"],
+          angry: statusAverage["angry"],
+          fearful: statusAverage["fearful"],
+          disgusted: statusAverage["disgusted"],
+          surprised: statusAverage["surprised"],
+        }),
+      };
+      try {
+        const response = await fetch(
+          `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/emotionList`,
+          requestOptions
+        );
+        const json = await response.json();
+        console.log(json);
+      } catch (error) {
+        // alert("마지막 페이지 입니다")
+        // $state.error();
+      }
+    };
     const recordingStart = function () {
       emit("recordingStart");
       const video = document.getElementById("local-video-undefined");
@@ -137,7 +221,6 @@ export default {
           detections.forEach((element) => {
             let status = "";
             let valueStatus = 0.0;
-
             for (const [key, value] of Object.entries(element.expressions)) {
               if (value > valueStatus) {
                 status = key;
@@ -145,7 +228,11 @@ export default {
               }
             }
             statusPercent[status] += valueStatus;
+            cnt++;
+            statusAverage[status] = statusPercent[status] / cnt;
             console.log(statusPercent);
+            console.log(cnt);
+            console.log(statusAverage);
           });
         } else {
           console.log(0);
@@ -164,7 +251,13 @@ export default {
       faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
       faceapi.nets.faceExpressionNet.loadFromUri("/models"),
     ]);
-    return { state, closeRecording, recordingStart, recordingStop };
+    return {
+      state,
+      closeRecording,
+      recordingStart,
+      recordingStop,
+      getEmothiontList,
+    };
   },
 };
 </script>
@@ -254,6 +347,12 @@ video {
   border-bottom-right-radius: 4px;
 }
 
+.videocenter {
+  border-radius: 3rem;
+  margin: auto;
+  text-align: center;
+}
+
 input.btn {
   font-weight: bold;
 }
@@ -270,5 +369,8 @@ input.btn {
 .btn-success:hover {
   background-color: #1abd61 !important;
   border-color: #1abd61;
+}
+.m-3 {
+  margin: 3rem;
 }
 </style>
