@@ -43,12 +43,12 @@ public class DiaryController {
 
     // 일기 전체 목록 조회 (로그인 한 아이디의 일기 목록)
     @GetMapping("/list")
-    public ResponseEntity<List<Diary>> getDiaryList (@RequestParam(name = "userid") String userId, @RequestParam(name = "diarypage") int page) {
+    public ResponseEntity<List<Diary>> getDiaryList (@RequestParam(name = "userId") String userId, @RequestParam(name = "diaryPage") int diaryPage) {
 
         System.out.println("----------------");
         System.out.println(userId);
         System.out.println("----------------");
-        List<Diary> diaryList = diaryService.listDiary(userId);
+        List<Diary> diaryList = diaryService.listDiary(userId, diaryPage);
 
         if(!ObjectUtils.isEmpty(diaryList))
             return ResponseEntity.ok().body(diaryList);

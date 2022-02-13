@@ -28,7 +28,7 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public List<Diary> listDiary(String userId) {
+    public List<Diary> listDiary(String userId, int page) {
 
         User user = new User();
         user.setUserId(userId);
@@ -42,7 +42,7 @@ public class DiaryServiceImpl implements DiaryService {
                 diaryList.add(diary);
             }
         }
-        return diaryList;
+        return diaryList.subList((page-1)*10, (page*10));
     }
 
     @Override
