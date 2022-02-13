@@ -1,17 +1,27 @@
 <template>
-<div>
-  
-      <div class="parent">
+<div class="layer">
+
+      <div class="parent" style="margin-top: 500px">
         <div class="child">
-          당신의 오늘 하루는 어떠셨나요?
+          Another World
         </div>
+        <br>
       </div>
-      <div >
+      <div class="parent" >
+        <div class="child">
+           우리들만의 또다른 세상
+        </div>
+        <br>
+      </div>
+   
+
+      <!-- <div >
+        
         <Buttons
           class="write-diary"
           btn-text="일기작성" 
           @click="onOpenRecording"/>    
-      </div>
+      </div> -->
 
     <Recording
       :open="openRecording"
@@ -67,17 +77,27 @@ export default {
   z-index: 1;
 }
 
-.parent {
-    height: 3em; /* 애니메이션 높이 */
+ .parent {
+    height: 5em; /* 애니메이션 높이 */
     overflow-y: hidden;
     display: block;
+    
+    
+    
 }
-.parent .child {
-    font-size: 3em;/* 애니메이션 높이 */
+
+ .parent .child {
+    color: aliceblue;
+    font-size: 80px;/* 애니메이션 높이 */
     font-weight: bold;
+    
     line-height: 1;
+    
     animation-name: grow;
-    animation-duration: 1s;/* 애니메이션 시간 */
+    animation-duration: 1.5s;/* 애니메이션 시간 */
+    float : right;
+    margin-right: 300px;
+    
 }
 /* 키프레임 애니메이션 */
 @keyframes grow {

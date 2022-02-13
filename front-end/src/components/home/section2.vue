@@ -1,9 +1,19 @@
 <template>
-  <!-- <img src="../../assets/firstSection.jpg" id="second-bg" alt=""> -->
-
-    <h1>함께 오늘을 만들어봐요</h1>
+    <div class="layer">  
+      <div class="parent2" style="margin-top: 500px">
+        <div class="child2">
+         Zoom
+        </div>
+        <br>
+      </div>
+      <div class="parent2">
+        <div class="child2">
+          우리의 일상을 확대해 보세요
+        </div>
+        <br>
+      </div>
   
-
+    </div>
 </template>
 
 <script>
@@ -30,6 +40,26 @@ export default {
   min-width: 100%;
   height: 700px;
   z-index: -1;
+}
+.parent2 {
+    height: 5em; /* 애니메이션 높이 */
+    overflow-y: hidden;
+    display: block;
+    
+    
+}
+
+.parent2 .child2 {
+    color: aliceblue;
+    font-size: 80px;/* 애니메이션 높이 */
+    font-weight: bold;
+    line-height: 1;
+    animation-delay: 2s;
+    animation-name: grow;
+    animation-duration: 1.5s;/* 애니메이션 시간 */
+    float : right;
+    margin-right: 300px;
+    
 }
 
 </style>

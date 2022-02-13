@@ -5,14 +5,14 @@
 </head>
   <div class="home">
       <main id="fullpage">
-      <section id="section1" class="section">
+      <section id="sectionA" class="section">
         <div id="app"></div>
           <section-1 />
       </section>
-      <section id="section1"  class="section">
+      <section id="sectionB"  class="section">
           <section-2 />
       </section>
-      <section id="section1" class="section">
+      <section id="sectionC" class="section">
         <section-3 />
 
       </section>
@@ -61,12 +61,34 @@ export default {
 }
 </script>
 <style scoped>
-#section1{
-background:url("https://images-ext-2.discordapp.net/external/LOdKxZjaob0pkSIxWkenNdoWRLuSrSKMc-PJwqr1Jbo/https/images.wallpaperscraft.com/image/single/ocean_beach_aerial_view_134429_1280x800.jpg?width=1082&height=676") center top no-repeat; 
+#sectionA{
+background:url("https://cdn.pixabay.com/photo/2017/12/27/14/02/friends-3042751_960_720.jpg") center top no-repeat; 
+background-position: fixed;
+background-color: (#000000);
+background-repeat: no-repeat;
+background-size: 100% 100%;
+}
+#sectionB{
+background:url("https://cdn.pixabay.com/photo/2018/04/21/07/03/people-3337797_960_720.jpg") center top no-repeat; 
 background-position: fixed;
 background-color: #000000;
 background-repeat: no-repeat;
 background-size: 100% 100%;
+}
+#sectionC{
+background:url("https://cdn.pixabay.com/photo/2015/05/01/14/46/new-york-748595_960_720.jpg") center top no-repeat; 
+background-position: fixed;
+background-color: #000000;
+background-repeat: no-repeat;
+background-size: 100% 100%;
+}
+.layer {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 </style>
 
