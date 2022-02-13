@@ -15,6 +15,6 @@ public interface DiaryService {
     List<Diary> listSearchDiary(String word);
 
     Diary updateDiary(Diary diary);
-    Diary deleteDiary(long diaryId);
+    int deleteDiary(long diaryId);
 
 }
