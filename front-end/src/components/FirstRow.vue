@@ -13,7 +13,7 @@
 
         <div class="right-btns">
             <!-- Search -->
-            <div class="search">              
+            <div class="search">
                 <div @click="searchDiary" class="material-icons">search</div>
             </div>
             <!-- Right Buttons -->
@@ -51,6 +51,7 @@
 
         <!-- 방 생성 modal -->
         <GroupRecording
+            ref="groupRecordingRef"
             :open="openRecording"
             :session="session"
             :publisher="publisher"
@@ -58,11 +59,12 @@
             :subscribers="subscribers"
             :recordingStatus="recordingStatus"
             :currentUserId="currentUserId"
-            :myTossUser="myTossUser"
-            :tossCount="tossCount"
             :isMyOrder="isMyOrder"
             :tossArray="tossArray"
             :userListStr="userListStr"
+            :isFinalUser="isFinalUser"
+            :videoLink="videoLink"
+            :diaryGroupId="diaryGroupId"
             @closeRecording="leaveSession"
             @recordingStart="recordingStart"
             @recordingStop="recordingStop"
@@ -141,11 +143,13 @@ export default {
             searchTitle: "",
             joinGroupId: "",
             searchData: [],
-            userId: "testUser", // sessionId를 userId로 대체
-            recordingTest: null,
+            userId: "giho3", // sessionId를 userId로 대체
+            recordingId: null,
             recordingUrl: null,
             diaryContent: [],
             diaryId: 1,
+            videoLink: null,
+            diaryGroupId: null,
 
             OV: undefined,
             session: undefined,
@@ -154,15 +158,14 @@ export default {
             subscribers: [],
             // sessionId: 'SessionA',
             roomCode: "", // roomCode는 방을 만든 사람의 userId값
-            myName: "testUser" + Math.random() * 100,
+            // myName: "testUser" + Math.random() * 100,
 
             recordingStatus: "beforeStarted",
             // currentUserId: "",
-            myTossUser: null,
             isMyOrder: false,
-            tossCount: 0,
             tossArray: [],
             userListStr: "",
+            isFinalUser: false,
         };
     },
     methods: {
@@ -260,15 +263,46 @@ export default {
 
             // toss버튼 시그널 들어왔을 시
             this.session.on("signal:toss", ({ data: message }) => {
-                console.log("toss 시", message);
+                console.log("FirstRow 토스 받음", message);
                 this.userListStr = message;
-                this.isMyOrderSwitch();
+
+                this.$refs.groupRecordingRef.faceRecognizeEmotions();
+                this.$refs.groupRecordingRef.voiceTextStart();
+
+                if (message !== "") this.isMyOrderSwitch();
+
+                if (message === "") this.isFinalUser = true;
             });
 
             // 녹화 시작/종료버튼 signal 들어왔을 시
             this.session.on("signal:recordStatus", ({ data: message }) => {
-                console.log("녹화 시작/종료", message);
+                // console.log("녹화 감지", message);
                 this.recordingStatus = message;
+                if (message === "recordingStopped") {
+                    // console.log("녹화 종료 감지");
+                    this.$refs.groupRecordingRef.saveDiary();
+                }
+            });
+
+            // 그룹번호를 받아오기 위한 signal TODO
+            this.session.on("signal:group", ({ data: diaryGroupId }) => {
+                // console.log("다이어리그룹 번호 받음");
+                // console.log(diaryGroupId);
+                this.diaryGroupId = diaryGroupId * 1;
+            });
+
+            // 영상 링크를 받아오기 위한 signal
+            this.session.on("signal:videoLink", ({ data: videoLink }) => {
+                // console.log("비디오링크 받음");
+                // console.log(videoLink);
+                this.videoLink = videoLink;
+            });
+
+            // recordingId를 받아오기 위한 signal
+            this.session.on("signal:recordingId", ({ data: recordingId }) => {
+                // console.log("녹화번호 받음");
+                // console.log(recordingId);
+                this.recordingId = recordingId;
             });
 
             // --- Connect to the session with a valid user token ---
@@ -325,19 +359,19 @@ export default {
                         );
                     });
             });
-            console.log("join");
-            this.session
-                .signal({
-                    data: "My custom message", // Any string (optional)
-                    to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
-                    type: "my-chat", // The type of message (optional)
-                })
-                .then(() => {
-                    console.log("Message successfully sent");
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
+            // console.log("join");
+            // this.session
+            //     .signal({
+            //         data: "My custom message", // Any string (optional)
+            //         to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+            //         type: "my-chat", // The type of message (optional)
+            //     })
+            //     .then(() => {
+            //         console.log("Message FGsuccessfully sent");
+            //     })
+            //     .catch((error) => {
+            //         console.error(error);
+            //     });
 
             this.session.on("signal", (event) => {
                 console.log(event.data); // Message
@@ -361,14 +395,14 @@ export default {
 
             window.removeEventListener("beforeunload", this.leaveSession);
         },
-        recordingStart() {
+        async recordingStart() {
             // console.log("녹화 시작");
             // Face API 시작
-            axios
+            await axios
                 .post(
                     `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/start`,
                     {
-                        session: "testUser",
+                        session: "giho3",
                     },
                     {
                         auth: {
@@ -379,13 +413,27 @@ export default {
                 )
                 .then((res) => {
                     console.log(res);
-                    this.recordingTest = res.data.id;
+                    this.recordingId = res.data.id;
+
+                    this.session
+                        .signal({
+                            data: this.recordingId, // Any string (optional)
+                            to: [], // 모든 구성원에게 보내기
+                            type: "recordingId", // The type of message (optional)
+                        })
+                        .then(() => {
+                            console.log("Message successfully sent");
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
                 });
         },
-        recordingStop() {
-            axios
+        async recordingStop() {
+            // openvidu 녹화 중지 API
+            await axios
                 .post(
-                    `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/stop/${this.recordingTest}`,
+                    `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/stop/${this.recordingId}`,
                     {},
                     {
                         auth: {
@@ -395,23 +443,53 @@ export default {
                     }
                 )
                 .then((res) => {
-                    console.log(res);
-                    console.log(res.data.url);
+                    // console.log(res);
+                    // console.log(res.data.url);
                     this.recordingUrl = res.data.url;
-                    this.leaveSession();
-                    axios
-                        .get(
-                            `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diary/1`
-                        )
-                        .then((response) => {
-                            this.diaryContent = response.data;
-                        });
+                    // axios
+                    //     .get(
+                    //         `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diary/1`
+                    //     )
+                    //     .then((response) => {
+                    //         this.diaryContent = response.data;
+                    //     });
+                    // TODO method로 빼서 saveDiary에서 호출
                     this.moveDiaryRecordingDetail =
                         !this.moveDiaryRecordingDetail;
 
                     // this.recordingUrl =
                     //   "https://localhost:4443/openvidu/recordings/testUser-20/testUser-20.mp4";
                 });
+
+            // 녹화영상 URL 모든 참여자에게 전송
+            this.session
+                .signal({
+                    data: this.recordingUrl, // Any string (optional)
+                    to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+                    type: "videoLink", // The type of message (optional)
+                })
+                .then(() => {
+                    console.log("비디오링크 보냄");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
+            // 녹화가 끝났음을 모든 참여자에게 전송
+            this.session
+                .signal({
+                    data: "recordingStopped", // Any string (optional)
+                    to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+                    type: "recordStatus", // The type of message (optional)
+                })
+                .then(() => {
+                    // console.log("Message successfully sent");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
+            // this.leaveSession();
             // this.leaveSession();
             // this.moveDiaryDetail = !this.moveDiaryDetail;
         },
