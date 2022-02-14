@@ -6,27 +6,26 @@
     
     <div>
       <div class="emotion-content-bar">
-        {{this.diaryContentDetail.emotions}}
-        <div class="my-1 text--bold muted">기쁨</div>
-        <va-progress-bar :model-value="this.diaryContentDetail.emotions.joy" color="danger" />
+        <div class="my-1 text--bold muted">기본</div>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.neutral*100" color="success" />
         <br />
-        <div class="my-1 text--bold muted">중립</div>
-        <va-progress-bar :model-value="10" color="success" />
-        <br />
-        <div class="my-1 text--bold muted">두려움</div>
-        <va-progress-bar :model-value="this.diaryContentDetail.emotions.fear" color="#BE81F7"/>
+        <div class="my-1 text--bold muted">행복</div>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.happy*100" color="#BE81F7"/>
         <br />
         <div class="my-1 text--bold muted">슬픔</div>
-        <va-progress-bar :model-value="this.diaryContentDetail.emotions.sadness" color="warning"/>
-        <br />
-        <div class="my-1 text--bold muted">놀람</div>
-        <va-progress-bar :model-value="this.diaryContentDetail.emotions.surprise" color="#1f00ff" />
-        <br />
-        <div class="my-1 text--bold muted">혐오</div>
-        <va-progress-bar :model-value="this.diaryContentDetail.emotions.contempt" color="#F7FE2E"/>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.sad*100" color="warning"/>
         <br />
         <div class="my-1 text--bold muted">화남</div>
-        <va-progress-bar :model-value="this.diaryContentDetail.emotions.anger" color="#000058" />
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.angry*100" color="#1f00ff" />
+        <br />
+        <div class="my-1 text--bold muted">두려움</div>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.fearful*100" color="danger"/>
+        <br />
+        <div class="my-1 text--bold muted">혐오</div>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.disgusted*100" color="#000058" />
+        <br />
+        <div class="my-1 text--bold muted">놀람</div>
+        <va-progress-bar :model-value="this.diaryContentDetail.emotions.surprised*100" color="#000058" />
       </div>
 
       <!-- <div>

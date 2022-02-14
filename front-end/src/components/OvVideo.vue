@@ -1,5 +1,5 @@
 <template>
-	<video autoplay/>
+	<video class="video_board" autoplay/>
 </template>
 
 <script>
@@ -15,3 +15,12 @@ export default {
 	},
 };
 </script>
+
+<style>
+.video_board {
+	/* margin : 0.005rem;  */
+	/* border: thick double #32a1ce; */
+	border-radius: 1rem;
+}
+
+</style>

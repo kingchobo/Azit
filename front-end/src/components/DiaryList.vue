@@ -34,7 +34,7 @@
     <diary-list-item
       class="result"
       v-for="diary in diarys"
-      :key="diary.diary_id"
+      :key="diary.diaryId"
       :diary="diary"
     />
     <InfiniteLoading :diarys="diarys" @infinite="load" />
@@ -87,12 +87,15 @@ const load = async ($state) => {
   console.log(store.state.userId);
   try {
     const response = await fetch(
-      `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diarylist/?userid=${store.state.userId}&diarypage=` +
+      `http://localhost:8080/api/diary/list?userId=${store.state.userId}&diaryPage=` +
         page
     );
     const json = await response.json();
     console.log(json);
-    if (json.length < 10) $state.complete();
+    if (json.length < 10) {
+         diarys.value.push(...json);
+        // $state.complete();
+      }
     else {
       diarys.value.push(...json);
       $state.loaded();
