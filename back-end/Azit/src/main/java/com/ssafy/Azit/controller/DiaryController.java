@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -40,17 +42,41 @@ public class DiaryController {
     }
 
     // 일기 전체 목록 조회 (로그인 한 아이디의 일기 목록)
-    @GetMapping("/list/{userId}")
-    public ResponseEntity<List<Diary>> getDiaryList (@PathVariable String userId) {
+    @GetMapping("/list")
+    public ResponseEntity<List<Diary>> getDiaryList (@RequestParam(name = "userId") String userId, @RequestParam(name = "diaryPage") int diaryPage) {
 
         System.out.println("----------------");
         System.out.println(userId);
         System.out.println("----------------");
-        List<Diary> diaryList = diaryService.listDiary(userId);
+        List<Diary> diaryList = diaryService.listDiary(userId, diaryPage);
 
         if(!ObjectUtils.isEmpty(diaryList))
             return ResponseEntity.ok().body(diaryList);
         return ResponseEntity.ok().body(diaryList);
+    }
+
+    // 일기 수정
+    @PutMapping()
+    public ResponseEntity<String> updateDiary (@RequestParam(name="diaryid") long diaryId, @RequestBody Diary diary) {
+
+        Diary getDiary = diaryService.getDiary(diaryId);
+
+        if(!ObjectUtils.isEmpty(getDiary)) {
+            diary.setDiaryId(diaryId);
+            diaryService.updateDiary(diary);
+            return ResponseEntity.ok().body(SUCCESS);
+        }
+        return ResponseEntity.ok().body(FAIL);
+    }
+
+    // 일기 삭제
+    @DeleteMapping("/{diaryId}")
+    public ResponseEntity<String> deleteDiary (@PathVariable long diaryId) {
+        int success = diaryService.deleteDiary(diaryId);
+
+        if(success != 1)
+            return ResponseEntity.ok().body(FAIL);
+        return ResponseEntity.ok().body(SUCCESS);
     }
 
 }

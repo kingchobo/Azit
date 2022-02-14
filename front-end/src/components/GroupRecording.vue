@@ -28,47 +28,57 @@
             value="Leave session"
           />
         </div> -->
-        <div class="row justify--space-around">
-          <!-- <div class="flex md6 lg4">
-            <va-card stripe stripe-color="success">
+                <div class="row justify--space-around">
+                    <div class="flex md3 lg6">
+                        <div id="video-container" class="flex md videocenter4">
+                            <user-video :stream-manager="publisher" />
+                            <!-- @click.native="updateMainVideoStreamManager(publisher)" -->
+                            <user-video
+                                v-for="sub in subscribers"
+                                :key="sub.stream.connection.connectionId"
+                                :stream-manager="sub"
+                                style="margin: 3rem"
+                            />
+                        </div>
+                    </div>
+                    <div class="flex md6 lg6">
+                        <div></div>
+                        <!-- <va-card stripe stripe-color="success">
               <va-card-title> 자기 화면</va-card-title>
               <hr />
               <div id="main-video" class="flex md10 videocenter">
                 <user-video :stream-manager="mainStreamManager" />
               </div>
-            </va-card>
-          </div> -->
-          <div class="flex md6 lg12 justify--space-center">
-          
-              <div id="video-container" class="flex md videocenter4">
-                <user-video :stream-manager="publisher" />
-                <!-- @click.native="updateMainVideoStreamManager(publisher)" -->
-                <user-video
-                  v-for="sub in subscribers"
-                  :key="sub.stream.connection.connectionId"
-                  :stream-manager="sub"
+            </va-card> -->
+                    </div>
+                    <!-- @click.native="updateMainVideoStreamManager(sub)" -->
+                </div>
+            </div>
+            <div class="row justify--center" v-if="session">
+                <Buttons
+                    v-show="recordingStatus === 'beforeStarted'"
+                    class="mx-2"
+                    btn-text="녹화 시작"
+                    @click="recordingStart"
                 />
-              </div>
-          </div>
-          <!-- @click.native="updateMainVideoStreamManager(sub)" -->
-        </div>
-      </div>
-      <div class="row justify--center">
-        <Buttons class="mx-2" btn-text="녹화 시작" @click="recordingStart" />
-        <Buttons
-          class="mx-2"
-          btn-text="toss"        
-        />
-        <Buttons
-          class="mx-2"
-          btn-text="녹화 중지"
-          @click="recordingStop(), getEmothiontList()"          
-        />
-        <!-- <div id="result"></div> -->
 
-      </div>
-    </div>
-  </va-modal>
+                <Buttons
+                    class="mx-2"
+                    btn-text="toss"
+                    v-show="recordingStatus === 'recordingStarted' && isMyOrder"
+                    @click="tossUser"
+                />
+                <!-- <Buttons class="mx-2" btn-text="받기" @click="receiveMessage" /> -->
+                <Buttons
+                    v-show="myTossUser === null && tossCount === 3"
+                    class="mx-2"
+                    btn-text="녹화 중지"
+                    @click="recordingStop(), getEmothiontList()"
+                />
+                <!-- <div id="result"></div> -->
+            </div>
+        </div>
+    </va-modal>
 </template>
 
 <script>
@@ -78,13 +88,12 @@ import Buttons from "./Buttons.vue";
 import axios from "axios";
 import * as faceapi from "face-api.js";
 
-
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export default {
     components: {
         UserVideo,
-        Buttons
+        Buttons,
     },
     name: "GroupRecording",
     props: {
@@ -103,14 +112,46 @@ export default {
         },
         subscribers: {
             type: Array,
-        }
+        },
+        recordingStatus: {
+            type: String,
+        },
+        // currentUserId: {
+        //     type: String,
+        // },
+        myTossUser: {
+            type: Object,
+        },
+        tossCount: {
+            type: Number,
+        },
+        isMyOrder: {
+            type: Boolean,
+        },
+        tossArray: {
+            type: Array,
+        },
+        userListStr: {
+            type: String,
+        },
+    },
+    data() {
+        return {
+            interval: null,
+            // currentUserId: 0,
+        };
+    },
+    created() {
+        // console.log(this.subscribers);
+        // console.log(this.currentUserId);
     },
     setup(props, { emit }) {
         const state = reactive({
             recordingVisible: computed(() => props.open),
             interval: null,
+            // userListStr: "",
             speechRecognizer: Object,
-            recordingText: ''
+            recordingText: "",
         });
 
         const closeRecording = function () {
@@ -130,9 +171,91 @@ export default {
 
         const recordingStart = function () {
             emit("recordingStart");
+            emit("isMyOrderSwitch");
             faceRecognizeEmotions();
             voiceTextStart();
+
+            emit("setUserListStr");
+
+            // for (let i = 0; i < userArray.length; i++) {
+            //     if (i !== userArray.length - 1)
+            //         state.userListStr += userArray[i].connectionId + ",";
+            //     else state.userListStr += userArray[i].connectionId;
+            // }
+            // console.log(state.userListStr);
+
+            props.session
+                .signal({
+                    data: "recordingStarted", // Any string (optional)
+                    to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+                    type: "recordStatus", // The type of message (optional)
+                })
+                .then(() => {
+                    console.log("Message successfully sent");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            //   receiveMessage();
         };
+
+        const tossUser = function () {
+            emit("isMyOrderSwitch");
+
+            let userArray = props.userListStr.split(",");
+            console.log(userArray);
+
+            let tossTarget = [];
+
+            for (let i = 0; i < props.tossArray.length; i++) {
+                console.log(props.tossArray[i].connectionId);
+                if (props.tossArray[i].connectionId === userArray[0])
+                    tossTarget.push(props.tossArray[i]);
+            }
+
+            let userData = "";
+            for (let i = 1; i < userArray.length; i++) {
+                if (i !== userArray.length - 1) userData += userArray[i] + ",";
+                else userData += userArray[i];
+            }
+
+            props.session
+                .signal({
+                    data: userData, // Any string (optional)
+                    to: tossTarget, // Array of Connection objects (optional. Broadcast to everyone if empty)
+                    type: "toss", // The type of message (optional)
+                })
+                .then(() => {
+                    console.log("Message successfully sent");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+        // const sendMessage = function () {
+        //   this.session
+        //     .signal({
+        //       data: "My custom message", // Any string (optional)
+        //       to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+        //       type: "my-chat", // The type of message (optional)
+        //     })
+        //     .then(() => {
+        //       console.log("Message successfully sent");
+        //     })
+        //     .catch((error) => {
+        //       console.error(error);
+        //     });
+        // };
+        // const receiveMessage = function () {
+        //   state.interval = setInterval(async () => {
+        //     this.session.on("signal", (event) => {
+        //         console.log("들어왔다");
+        //       console.log(event.data); // Message
+        //       console.log(event.from); // Connection object of the sender
+        //       console.log(event.type); // The type of message
+        //     });
+        //   }, 1000);
+        // };
 
         const faceRecognizeEmotions = function () {
             const video = document.getElementById("local-video-undefined");
@@ -212,7 +335,7 @@ export default {
                     //     interimTranscripts +
                     //     "</span>";
                     // console.log(finalTranscripts);
-                    state.recordingText += finalTranscripts
+                    state.recordingText += finalTranscripts;
                 };
                 state.speechRecognizer.onerror = function () {};
             } else {
@@ -221,86 +344,112 @@ export default {
                 //     "your browser is not supported. If google chrome. Please upgrade!";
             }
         };
-    let statusAverage = {
-      default: 0,
-      neutral: 0,
-      happy: 0,
-      sad: 0,
-      angry: 0,
-      fearful: 0,
-      disgusted: 0,
-      surprised: 0,
-    };
+        let statusAverage = {
+            default: 0,
+            neutral: 0,
+            happy: 0,
+            sad: 0,
+            angry: 0,
+            fearful: 0,
+            disgusted: 0,
+            surprised: 0,
+        };
 
-    const getEmothiontList = async () => {
-      console.log("loading...");
-      console.log(statusAverage);
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          default: statusAverage["default"],
-          neutral: statusAverage["neutral"],
-          happy: statusAverage["happy"],
-          sad: statusAverage["sad"],
-          angry: statusAverage["angry"],
-          fearful: statusAverage["fearful"],
-          disgusted: statusAverage["disgusted"],
-          surprised: statusAverage["surprised"],
-        }),
-      };
-      try {
-        const response = await fetch(
-          `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock..io/emotionList`,
-          requestOptions
-        );
-        const json = await response.json();
-        console.log(json);
-      } catch (error) {
-        // alert("마지막 페이지 입니다")
-        // $state.error();
-      }
-    };
-    // const recordingStart = function () {
-    //   emit("recordingStart");
-    //   const video = document.getElementById("local-video-undefined");
-    //   state.interval = setInterval(async () => {
-    //     const detections = await faceapi
-    //       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-    //       .withFaceLandmarks()
-    //       .withFaceExpressions();
-    //     console.log(detections);
-    //     // const resizedDetections = faceapi.resizeResults(detections, displaySize)
-    //     // faceapi.draw.drawDetections(canvas, resizedDetections)
+        const getEmothiontList = async () => {
+            console.log("loading...");
+            console.log(statusAverage);
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    default: statusAverage["default"],
+                    neutral: statusAverage["neutral"],
+                    happy: statusAverage["happy"],
+                    sad: statusAverage["sad"],
+                    angry: statusAverage["angry"],
+                    fearful: statusAverage["fearful"],
+                    disgusted: statusAverage["disgusted"],
+                    surprised: statusAverage["surprised"],
+                }),
+            };
+            try {
+                const response = await fetch(
+                    `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/emotionList`,
+                    requestOptions
+                );
+                const json = await response.json();
+                console.log(json);
+            } catch (error) {
+                // alert("마지막 페이지 입니다")
+                // $state.error();
+            }
+        };
+        // const recordingStart = function () {
+        //   emit("recordingStart");
+        //   const video = document.getElementById("local-video-undefined");
+        //   state.interval = setInterval(async () => {
+        //     const detections = await faceapi
+        //       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+        //       .withFaceLandmarks()
+        //       .withFaceExpressions();
+        //     console.log(detections);
+        //     // const resizedDetections = faceapi.resizeResults(detections, displaySize)
+        //     // faceapi.draw.drawDetections(canvas, resizedDetections)
 
-    //     if (detections.length > 0) {
-    //       detections.forEach((element) => {
-    //         let status = "";
-    //         let valueStatus = 0.0;
-    //         for (const [key, value] of Object.entries(element.expressions)) {
-    //           if (value > valueStatus) {
-    //             status = key;
-    //             valueStatus = value;
-    //           }
-    //         }
-    //         statusPercent[status] += valueStatus;
-    //         cnt++;
-    //         statusAverage[status] = statusPercent[status] / cnt;
-    //         console.log(statusPercent);
-    //         console.log(cnt);
-    //         console.log(statusAverage);
-    //       });
-    //     } else {
-    //       console.log(0);
-    //     }
-    //   }, 1000);
-    // };
+        //     if (detections.length > 0) {
+        //       detections.forEach((element) => {
+        //         let status = "";
+        //         let valueStatus = 0.0;
+        //         for (const [key, value] of Object.entries(element.expressions)) {
+        //           if (value > valueStatus) {
+        //             status = key;
+        //             valueStatus = value;
+        //           }
+        //         }
+        //         statusPercent[status] += valueStatus;
+        //         cnt++;
+        //         statusAverage[status] = statusPercent[status] / cnt;
+        //         console.log(statusPercent);
+        //         console.log(cnt);
+        //         console.log(statusAverage);
+        //       });
+        //     } else {
+        //       console.log(0);
+        //     }
+        //   }, 1000);
+        // };
 
         const recordingStop = function () {
-            emit("recordingStop");
-            console.log(state.recordingText)
+            // const params = {
+            //     'user_id': '',
+            //     'video_link':'',
+            //     'emotions_id':'',
+            //     'content': state.recordingText,
+            //     'thumbnail':''
+            // }
+            // axios.post(`https://api/diary`, params)
+            //     .then((response) => {
+            //         console.log(response)
+            // });
+
+            console.log(state.recordingText);
+
+            this.session
+                .signal({
+                    data: "recordingStopped", // Any string (optional)
+                    to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+                    type: "recordStatus", // The type of message (optional)
+                })
+                .then(() => {
+                    // console.log("Message successfully sent");
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
             state.speechRecognizer.stop();
             clearInterval(state.interval);
+
+            emit("recordingStop");
         };
 
         Promise.all([
@@ -313,11 +462,11 @@ export default {
             state,
             closeRecording,
             recordingStart,
+            tossUser,
             recordingStop,
             voiceTextStart,
             faceRecognizeEmotions,
             getEmothiontList,
-
         };
     },
 };
@@ -409,9 +558,9 @@ video {
 }
 
 .videocenter {
-  border-radius: 3rem;
-  margin: auto;
-  text-align: center;
+    border-radius: 3rem;
+    margin: auto;
+    text-align: center;
 }
 
 input.btn {
