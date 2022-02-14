@@ -48,7 +48,6 @@
 
 <script>
 import { computed, reactive } from 'vue'
-import { useStore } from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -87,7 +86,7 @@ export default {
       
     },
     async loginApi(id,password){
-      this.user = await this.api('https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/api/user/login','post',{
+      this.user = await this.api('http://localhost:8080/api/user/login','post',{
           "userId" : id,
           "password" : password
           })

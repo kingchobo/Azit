@@ -29,7 +29,7 @@
           />
         </div> -->
                 <div class="row justify--space-around">
-                    <div class="flex md3 lg6">
+                    <div class="flex md1 lg6">
                         <div id="video-container" class="flex md videocenter4">
                             <user-video :stream-manager="publisher" />
                             <!-- @click.native="updateMainVideoStreamManager(publisher)" -->
@@ -37,7 +37,6 @@
                                 v-for="sub in subscribers"
                                 :key="sub.stream.connection.connectionId"
                                 :stream-manager="sub"
-                                style="margin: 3rem"
                             />
                         </div>
                     </div>

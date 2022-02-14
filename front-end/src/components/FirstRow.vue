@@ -17,7 +17,7 @@
                 <div @click="searchDiary" class="material-icons">search</div>
             </div>
             <!-- Right Buttons -->
-            <Buttons class="search-filter" btn-text="필터" />
+            <!-- <Buttons class="search-filter" btn-text="필터" /> -->
         </div>
 
         <!-- 일기 작성 modal -->
@@ -145,7 +145,7 @@ export default {
             recordingTest: null,
             recordingUrl: null,
             diaryContent: [],
-            diary_id: 1,
+            diaryId: 1,
 
             OV: undefined,
             session: undefined,
@@ -222,7 +222,7 @@ export default {
          * 함께쓰기 방 생성 함수
          */
         createRoom() {
-            this.joinSession(this.userId);
+            this.joinSession(this.$store.state.userId);
         },
         /* Openvidu API 시작 */
         joinSession(roomCode) {
