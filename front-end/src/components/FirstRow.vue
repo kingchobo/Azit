@@ -143,7 +143,7 @@ export default {
             searchTitle: "",
             joinGroupId: "",
             searchData: [],
-            userId: "giho3", // sessionId를 userId로 대체
+            // userId: "giho3", // sessionId를 userId로 대체
             recordingId: null,
             recordingUrl: null,
             diaryContent: [],
@@ -226,6 +226,7 @@ export default {
          */
         createRoom() {
             this.joinSession(this.$store.state.userId);
+            // this.joinSession("testUser"); // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
         },
         /* Openvidu API 시작 */
         joinSession(roomCode) {
@@ -302,6 +303,7 @@ export default {
             this.session.on("signal:recordingId", ({ data: recordingId }) => {
                 // console.log("녹화번호 받음");
                 // console.log(recordingId);
+                console.log(recordingId);
                 this.recordingId = recordingId;
             });
 
@@ -373,11 +375,11 @@ export default {
             //         console.error(error);
             //     });
 
-            this.session.on("signal", (event) => {
-                console.log(event.data); // Message
-                console.log(event.from); // Connection object of the sender
-                console.log(event.type); // The type of message
-            });
+            // this.session.on("signal", (event) => {
+            //     console.log(event.data); // Message
+            //     console.log(event.from); // Connection object of the sender
+            //     console.log(event.type); // The type of message
+            // });
 
             window.addEventListener("beforeunload", this.leaveSession);
         },
@@ -402,7 +404,8 @@ export default {
                 .post(
                     `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/start`,
                     {
-                        session: "giho3",
+                        session: this.$store.state.userId,
+                        // session: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
                     },
                     {
                         auth: {
@@ -414,6 +417,7 @@ export default {
                 .then((res) => {
                     console.log(res);
                     this.recordingId = res.data.id;
+                    console.log(this.recordingId);
 
                     this.session
                         .signal({
@@ -431,6 +435,7 @@ export default {
         },
         async recordingStop() {
             // openvidu 녹화 중지 API
+            console.log(this.recordingId);
             await axios
                 .post(
                     `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/stop/${this.recordingId}`,
