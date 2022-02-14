@@ -49,6 +49,7 @@
 <script>
 import { computed, reactive } from 'vue'
 import { useStore } from 'vuex'
+import axios from 'axios'
 
 export default {
     props: {
@@ -58,7 +59,6 @@ export default {
         }
     },
     setup(props, {emit}) {
-        
         const state = reactive({
             loginVisible: computed(() => props.open),
             idValue: '',
@@ -77,9 +77,8 @@ export default {
     },
     handleSubmit () {
         if (this.$refs.form.validate()){
-            this.$store.state.userId = this.state.idValue
-             this.$store.commit('logInId',this.userId);
-            alert(this.$store.state.userId)
+            this.loginApi(this.state.idValue,this.state.passwordValue)
+            alert(this.state.idValue)
             this.closeLogin()
         }
         else{
@@ -87,6 +86,27 @@ export default {
         }
       
     },
+    async loginApi(id,password){
+      this.user = await this.api('https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/api/user/login','post',{
+          "userId" : id,
+          "password" : password
+          })
+      if(this.user){
+            this.$store.commit('logInId',this.user.userId);
+      }
+      else{
+          alert("아이디와 비밀번호를 확인해주세요")
+      }
+    },
+    async api(url,method,data){
+      return(await axios({
+        method :method,
+        url : url,
+        data : data
+      }).catch( e =>{
+        console.log(e);
+      })).data;
+    }
  
     },
     computed: {

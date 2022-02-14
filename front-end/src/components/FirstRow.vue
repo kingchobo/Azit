@@ -62,21 +62,11 @@
       @recordingStart="recordingStart"
       @recordingStop="recordingStop"
     />
-    <!-- <DiaryDetail
+    <DiaryDetail
       :move="moveDiaryDetail"
       :recordingUrl="recordingUrl"
       :diaryContent="diaryContent"
       @closeDetail="this.moveDiaryDetail = !this.moveDiaryDetail"
-    /> -->
-
-    <!-- 화면 녹화 디테일 Modal -->
-    <DiaryRecordingDetail
-      :move="moveDiaryRecordingDetail"
-      :recordingUrl="recordingUrl"
-      :diaryContent="diaryContent"
-      @closeDetail="
-        this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail
-      "
     />
     <!-- 방 검색 modal -->
     <va-modal v-model="showSearchModal" hide-default-actions>
@@ -107,7 +97,7 @@ import WhiteButtons from "./WhiteButtons.vue";
 import { OpenVidu } from "openvidu-browser";
 import Recording from "./Recording.vue";
 import GroupRecording from "./GroupRecording.vue";
-import DiaryRecordingDetail from "./DiaryRecordingDetail.vue";
+import DiaryDetail from "./DiaryDetail.vue";
 import axios from "axios";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -121,14 +111,13 @@ export default {
     WhiteButtons,
     Recording,
     GroupRecording,
-    DiaryRecordingDetail,
+    DiaryDetail,
   },
   data() {
     return {
       openRecording: false,
       OpenPersonalRecording: false,
       moveDiaryDetail: false,
-      moveDiaryRecordingDetail: false,
       showWithModal: false,
       showSearchModal: false,
       searchTitle: "",
@@ -202,16 +191,58 @@ export default {
       this.OV = new OpenVidu();
 
       // --- Init a session ---
-      this.session = this.OV.initSession();
+      this.setState(
+      {
+        session: this.OV.initSession(),
+      },
+      () => {
+        var mySession = this.state.session;
 
+        // --- 3) Specify the actions when events take place in the session ---
+        this.session.on("connectionCreated", (event) => {
+          console.log("connection");
+          console.log(event.connection);
+          // var connection = event.connection.connectionId
+          // Object형을 넣어줘야한다.
+          var connection = event.connection;
+          var subscribers = this.state.subscribers;
+          subscribers.push(connection);
+          //Update
+          this.setState({
+            subscribers: subscribers,
+          });
+        });
+        
       // --- Specify the actions when events take place in the session ---
 
       // On every new Stream received...
       this.session.on("streamCreated", ({ stream }) => {
-        const subscriber = this.session.subscribe(stream);
-        this.subscribers.push(subscriber);
+        const subscribers = this.session.subscribe(stream);
+        this.subscribers.push(subscribers);
+
+           this.setState({
+            subscribers: subscribers,
+          });
       });
 
+        this.session.on("signal:chat", (event) => {
+          let chatdata = event.data.split(",");
+          if (chatdata[0] !== this.state.myUserName) {
+            this.setState({
+              messages: [
+                ...this.state.messages,
+                {
+                  userName: chatdata[0],
+                  text: chatdata[1],
+                  chatClass: "messages__item--visitor",
+                },
+              ],
+            });
+          }
+        });
+        this.session.on("signal:captureSignal", (event) => {
+          this.onCapture();
+        });
       // On every Stream destroyed...
       this.session.on("streamDestroyed", ({ stream }) => {
         const index = this.subscribers.indexOf(stream.streamManager, 0);
@@ -276,31 +307,17 @@ export default {
               error.code,
               error.message
             );
-          });
-      });
-    console.log("join")
-      this.session
-        .signal({
-          data: "My custom message", // Any string (optional)
-          to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
-          type: "my-chat", // The type of message (optional)
-        })
-        .then(() => {
-          console.log("Message successfully sent");
-        })
-        .catch((error) => {
-          console.error(error);
+            });
         });
+        window.addEventListener("beforeunload", this.leaveSession);
+      }
+      
+    );
+  },
 
-      this.session.on('signal', (event) => {
-        console.log(event.data); // Message
-        console.log(event.from); // Connection object of the sender
-        console.log(event.type); // The type of message
-    });
-
-      window.addEventListener("beforeunload", this.leaveSession);
-    },
-
+      // 
+      // );
+      // },
     leaveSession() {
       // --- Leave the session by calling 'disconnect' method over the Session object ---
       if (this.session) this.session.disconnect();
@@ -359,7 +376,7 @@ export default {
             .then((response) => {
               this.diaryContent = response.data;
             });
-          this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
+          this.moveDiaryDetail = !this.moveDiaryDetail;
 
           // this.recordingUrl =
           //   "https://localhost:4443/openvidu/recordings/testUser-20/testUser-20.mp4";

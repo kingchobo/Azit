@@ -1,5 +1,5 @@
 <template>
-  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:relative;">
+  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.3); position:relative;">
     <template #left>       
       <va-navbar-item>
         <router-link class="nav-link" to="/">아지트</router-link>
@@ -19,14 +19,24 @@
         </va-navbar-item>
     </div>
     </template>
-    <template #right>
-
-      <va-navbar-item>
+    <template #right >
+      <div v-if="$store.state.userId" class="row align-content--center">
+      <va-navbar-item style="margin : 0.5rem 0">
+              <div>로그인 계정 : {{$store.state.userId}}</div>
+      </va-navbar-item>
+       <va-navbar-item style="margin : 0 1rem">
+          <va-button class="nav-link" @click="logout" flat color="#ffffff">로그아웃</va-button>
+      </va-navbar-item>
+        </div>
+      <div v-else class="row">
+       <va-navbar-item>
           <va-button class="nav-link" @click="onOpenSignup" flat color="#ffffff">회원가입</va-button>
       </va-navbar-item>
       <va-navbar-item>
           <va-button class="nav-link" @click="onOpenLogin" flat color="#ffffff">로그인</va-button>
       </va-navbar-item>
+      </div>
+
     </template>
   </va-navbar>
   <Login
@@ -39,6 +49,7 @@
    @moveLogin="moveLogin"
   />
 </template>
+
 
 <style>
 #app {
@@ -116,10 +127,16 @@ export default {
     moveLogin () {
       this.openSignup = !this.openSignup
       this.openLogin = !this.openLogin
-    }
+    },
+    logout(){
+        this.$store.commit('logInId','');
+  }
   },
   beforeUnmount() {
     this.$router.go();
-  }
+  },
+
 }
+
+
 </script>
