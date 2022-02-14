@@ -56,7 +56,10 @@
             </div>
             <div class="row justify--center" v-if="session">
                 <Buttons
-                    v-show="recordingStatus === 'beforeStarted'"
+                    v-show="
+                        recordingStatus === 'beforeStarted' &&
+                        tossArray.length === 4
+                    "
                     class="mx-2"
                     btn-text="녹화 시작"
                     @click="recordingStart"
@@ -70,10 +73,10 @@
                 />
                 <!-- <Buttons class="mx-2" btn-text="받기" @click="receiveMessage" /> -->
                 <Buttons
-                    v-show="myTossUser === null && tossCount === 3"
+                    v-show="isFinalUser"
                     class="mx-2"
                     btn-text="녹화 중지"
-                    @click="recordingStop(), getEmothiontList()"
+                    @click="recordingStop()"
                 />
                 <!-- <div id="result"></div> -->
             </div>
@@ -116,15 +119,6 @@ export default {
         recordingStatus: {
             type: String,
         },
-        // currentUserId: {
-        //     type: String,
-        // },
-        myTossUser: {
-            type: Object,
-        },
-        tossCount: {
-            type: Number,
-        },
         isMyOrder: {
             type: Boolean,
         },
@@ -132,6 +126,15 @@ export default {
             type: Array,
         },
         userListStr: {
+            type: String,
+        },
+        isFinalUser: {
+            type: Boolean,
+        },
+        diaryGroupId: {
+            type: Number,
+        },
+        videoLink: {
             type: String,
         },
     },
@@ -148,16 +151,35 @@ export default {
     setup(props, { emit }) {
         const state = reactive({
             recordingVisible: computed(() => props.open),
-            interval: null,
+            interval: null, // 감정정보 분석을 위한 interval을 저장
             // userListStr: "",
-            speechRecognizer: Object,
-            recordingText: "",
+            speechRecognizer: Object, // webAPI의 음성인식 객체
+            recordingText: "", // 음성인식된 텍스트를 저장
+            // userEmotions: Object,
         });
+
+        const myDiary = {
+            title: "",
+            videoLink: "",
+            content: "",
+            thumbNail: null,
+            user: {
+                userId: "giho3",
+            },
+            emotions: {
+                emotionsId: -1,
+            },
+            diaryGroup: {
+                groupId: -1,
+            },
+        };
 
         const closeRecording = function () {
             emit("closeRecording");
         };
         let cnt = 0;
+
+        // 감정정보를 담을 객체
         let statusPercent = {
             default: 0,
             neutral: 0,
@@ -169,7 +191,10 @@ export default {
             surprised: 0,
         };
 
-        const recordingStart = function () {
+        /**
+         * 녹화 시작 버튼 누를 시 실행되는 method
+         */
+        const recordingStart = async () => {
             emit("recordingStart");
             emit("isMyOrderSwitch");
             faceRecognizeEmotions();
@@ -184,10 +209,11 @@ export default {
             // }
             // console.log(state.userListStr);
 
+            // 녹화가 시작됨을 모든 구성원에게 알림
             props.session
                 .signal({
                     data: "recordingStarted", // Any string (optional)
-                    to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+                    to: [], // 모든 구성원에게 보내기
                     type: "recordStatus", // The type of message (optional)
                 })
                 .then(() => {
@@ -196,14 +222,61 @@ export default {
                 .catch((error) => {
                     console.error(error);
                 });
-            //   receiveMessage();
+
+            // TODO
+            await axios
+                .post("http://localhost:8080/api/diaryGroup", {})
+                .then(({ data: groupObject }) => {
+                    console.log(groupObject);
+                    console.log(groupObject.groupId);
+                    let diaryGroupId = groupObject.groupId;
+
+                    // 그룹 아이디를 모든 구성원에게 알림
+                    props.session
+                        .signal({
+                            data: diaryGroupId, // 그룹 아이디를 전송
+                            to: [], // 모든 구성원에게 보내기
+                            type: "group", // The type of message (optional)
+                        })
+                        .then(() => {
+                            console.log("Message successfully sent");
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+                });
+
+            console.log(props.diaryGroupId);
         };
 
-        const tossUser = function () {
+        const tossUser = async () => {
             emit("isMyOrderSwitch");
+            state.speechRecognizer.stop();
+            clearInterval(state.interval);
 
+            /* 감정정보 저장 및 감정번호 받아오기 시작 */
+            let myEmotions = statusPercent;
+            myEmotions.user = {
+                userId: "giho3", // 여기에는 자신의 userId가 들어와야 함.
+            };
+            // 감정정보를 저장 후 감정 번호를 받아와야 함.
+            await axios
+                .post("http://localhost:8080/api/emotions", myEmotions)
+                .then(({ data: emotionsObject }) => {
+                    // 감정정보 대입
+                    console.log(emotionsObject.emotionsId);
+                    myDiary.emotions.emotionsId = emotionsObject.emotionsId;
+                });
+            /* 감정정보 저장 및 감정번호 받아오기 끝 */
+
+            // console.log("내가 말한 내용은!");
+            // console.log(state.recordingText);
+            // console.log("내 감정 정보는!");
+            // console.log(statusPercent);
+
+            /* 다음 사람이 토스할 목록을 보내기 위한 작업 시작 */
             let userArray = props.userListStr.split(",");
-            console.log(userArray);
+            // console.log(userArray);
 
             let tossTarget = [];
 
@@ -219,18 +292,19 @@ export default {
                 else userData += userArray[i];
             }
 
-            props.session
+            props.session // 다음 사람에게 녹화해야 하는 유저의 목록 전송
                 .signal({
-                    data: userData, // Any string (optional)
-                    to: tossTarget, // Array of Connection objects (optional. Broadcast to everyone if empty)
-                    type: "toss", // The type of message (optional)
+                    data: userData, // ','구분자를 이용하여 유저의 목록 전송
+                    to: tossTarget, // 다음 녹화 대상에게 전송
+                    type: "toss", // toss 기능을 알리기 위한 type 정의
                 })
                 .then(() => {
-                    console.log("Message successfully sent");
+                    console.log("다음 사람에게 Toss 완료");
                 })
                 .catch((error) => {
                     console.error(error);
                 });
+            /* 다음 사람이 토스할 목록을 보내기 위한 작업 끝*/
         };
         // const sendMessage = function () {
         //   this.session
@@ -267,7 +341,7 @@ export default {
                     )
                     .withFaceLandmarks()
                     .withFaceExpressions();
-                console.log(detections);
+                // console.log(detections);
                 // const resizedDetections = faceapi.resizeResults(detections, displaySize)
                 // faceapi.draw.drawDetections(canvas, resizedDetections)
 
@@ -289,10 +363,11 @@ export default {
                         console.log(statusPercent);
                     });
                 } else {
-                    console.log(0);
+                    // console.log(0);
                 }
             }, 1000);
         };
+
         const voiceTextStart = function () {
             // const voiceTextObject = document.getElementById("result");
             if ("webkitSpeechRecognition" in window) {
@@ -419,64 +494,84 @@ export default {
         //   }, 1000);
         // };
 
-    const recordingStop = function () {
-        this.session
-            .signal({
-                data: "recordingStopped", // Any string (optional)
-                to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
-                type: "recordStatus", // The type of message (optional)
-            })
-            .then(() => {
-                // console.log("Message successfully sent");
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        state.speechRecognizer.stop();
-        clearInterval(state.interval);
+        const recordingStop = async () => {
+            /* 감정정보 저장 및 감정번호 받아오기 시작 */
+            let myEmotions = statusPercent;
+            myEmotions.user = {
+                userId: "giho3", // 여기에는 자신의 userId가 들어와야 함.
+            };
 
-        state.showTitleModal = !state.showTitleModal
-        console.log(state.recordingText)
-        state.speechRecognizer.stop();
-        clearInterval(state.interval);
-        emit("recordingStop");
-    };
+            await axios
+                .post("http://localhost:8080/api/emotions", myEmotions)
+                .then(({ data: emotionsObject }) => {
+                    // 감정정보 대입
+                    console.log(emotionsObject.emotionsId);
+                    myDiary.emotions.emotionsId = emotionsObject.emotionsId;
+                });
+            /* 감정정보 저장 및 감정번호 받아오기 끝 */
+            state.speechRecognizer.stop();
+            clearInterval(state.interval);
 
-    const saveDiary = function() {
-        // const params = {               
-        //     'user_id': '',
-        //     'video_link':'',
-        //     'emotions_id':'',
-        //     'title': state.diaryTitle,
-        //     'content': state.recordingText,
-        //     'thumbnail':''
-        // }
-        // axios.post(`https://api/diary`, params)
-        //     .then((response) => {
-        //         console.log(response)
-        // });
-        emit("recordingStop");
-        state.showTitleModal = !state.showTitleModal
-    };
+            state.showTitleModal = !state.showTitleModal;
+            // console.log(state.recordingText);
+            // console.log("녹화중지 버튼 누름");
+            emit("recordingStop");
+        };
 
-    Promise.all([
-      faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-      faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
-      faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
-      faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-    ]);
-    return {
-      state,
-      closeRecording,
-      recordingStart,
-      recordingStop,
-      voiceTextStart,
-      faceRecognizeEmotions,
-      getEmothiontList,
-      saveDiary,
-      tossUser
-    };
-  },
+        const saveDiary = function () {
+            // 녹음한 텍스트를 myDiary에 대입
+            //     const myDiary = {
+            //     title: "",
+            //     videoLink: "",
+            //     content: "",
+            //     thumbNail: null,
+            //     user: {
+            //         userId: "giho3",
+            //     },
+            //     emotions: {
+            //         emotionsId: -1,
+            //     },
+            //     diaryGroup: {
+            //         groupId: -1,
+            //     },
+            // };
+            myDiary.content = state.recordingText;
+            myDiary.diaryGroup.groupId = props.diaryGroupId;
+            myDiary.title = `제목을 입력하세요`;
+            myDiary.videoLink = props.videoLink;
+
+            // console.log("----저장시의 myDiary 데이터----");
+            // console.log(myDiary);
+            // console.log("-------------------------------");
+
+            axios
+                .post(`http://localhost:8080/api/diary`, myDiary)
+                .then((response) => {
+                    console.log(response);
+                });
+            // emit("recordingStop");
+            state.showTitleModal = !state.showTitleModal;
+            closeRecording();
+        };
+
+        Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
+            faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+            faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
+            faceapi.nets.faceExpressionNet.loadFromUri("/models"),
+        ]);
+        return {
+            state,
+            closeRecording,
+            recordingStart,
+            recordingStop,
+            voiceTextStart,
+            faceRecognizeEmotions,
+            getEmothiontList,
+            saveDiary,
+            tossUser,
+        };
+    },
 };
 </script>
 
@@ -589,7 +684,7 @@ input.btn {
     border-color: #1abd61;
 }
 
-.diaryTitleModal{
+.diaryTitleModal {
     display: flex;
     flex-direction: column;
     align-items: center;
