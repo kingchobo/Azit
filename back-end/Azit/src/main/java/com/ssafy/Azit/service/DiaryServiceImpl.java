@@ -38,16 +38,44 @@ public class DiaryServiceImpl implements DiaryService {
 
         for (Diary diary : diaries) {
 //            System.out.println(diary.getUser().getUserId());
-            if(diary.getUser().getUserId().equals(userId)) {
+            if (diary.getUser().getUserId().equals(userId)) {
                 diaryList.add(diary);
             }
         }
-        return diaryList.subList((page-1)*10, (page*10));
+
+        int start = (page-1)*10;
+        int end = page*10;
+        if(end > diaryList.size()) {
+            end = diaryList.size();
+        }
+        List<Diary> subList = new ArrayList<>(diaryList.subList(start, end));
+
+        return subList;
     }
 
     @Override
-    public List<Diary> listSearchDiary(String word) {
-        return null;
+    public List<Diary> listSearchDiary(String userId, String title, int page) {
+
+        User user = new User();
+        user.setUserId(userId);
+
+        List<Diary> diaries = diaryRepository.findByTitleContaining(title);
+        List<Diary> diaryList = new ArrayList<>();
+
+        for (Diary diary : diaries) {
+            if (diary.getUser().getUserId().equals(userId)) {
+                diaryList.add(diary);
+            }
+        }
+
+        int start = (page-1)*10;
+        int end = page*10;
+        if(end > diaryList.size()) {
+            end = diaryList.size();
+        }
+        List<Diary> subList = new ArrayList<>(diaryList.subList(start, end));
+
+        return subList;
     }
 
     @Override

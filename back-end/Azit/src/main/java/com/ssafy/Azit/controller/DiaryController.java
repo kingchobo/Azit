@@ -43,16 +43,30 @@ public class DiaryController {
 
     // 일기 전체 목록 조회 (로그인 한 아이디의 일기 목록)
     @GetMapping("/list")
-    public ResponseEntity<List<Diary>> getDiaryList (@RequestParam(name = "userId") String userId, @RequestParam(name = "diaryPage") int diaryPage) {
+    public ResponseEntity<List<Diary>> getDiaryList (@RequestParam(name = "userId") String userId,
+                                                     @RequestParam(name = "diaryPage") int diaryPage) {
 
-        System.out.println("----------------");
-        System.out.println(userId);
-        System.out.println("----------------");
+//        System.out.println("----------------");
+//        System.out.println(userId);
+//        System.out.println("----------------");
         List<Diary> diaryList = diaryService.listDiary(userId, diaryPage);
 
         if(!ObjectUtils.isEmpty(diaryList))
             return ResponseEntity.ok().body(diaryList);
         return ResponseEntity.ok().body(diaryList);
+    }
+
+    // 제목으로 일기 조회
+    @GetMapping("/search")
+    public ResponseEntity<List<Diary>> getSearchDiaryList (@RequestParam(name = "userId") String userId,
+                                                           @RequestParam(name = "title") String title,
+                                                           @RequestParam(name = "diaryPage") int diaryPage) {
+
+        List<Diary> diarySearchList = diaryService.listSearchDiary(userId, title, diaryPage);
+
+        if(!ObjectUtils.isEmpty(diarySearchList))
+            return ResponseEntity.ok().body(diarySearchList);
+        return ResponseEntity.ok().body(diarySearchList);
     }
 
     // 일기 수정

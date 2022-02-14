@@ -12,7 +12,7 @@ public interface DiaryService {
     Diary getDiary(long diaryId);
 
     List<Diary> listDiary(String userId, int page);
-    List<Diary> listSearchDiary(String word);
+    List<Diary> listSearchDiary(String userId, String title, int page);
 
     Diary updateDiary(Diary diary);
     int deleteDiary(long diaryId);
