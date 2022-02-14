@@ -1,15 +1,15 @@
 <template>
 <div class="layer">
   <div class="wrap">
-   <div class="parent4" style="margin-top: 23%">
-        <div class="child4" style=" font-family: 'Times New Roman', Times, serif;">
-          <span style="color:#993123; font-size:60px;">T</span>ogether
+   <div class="parent4" style="margin-top: 10%">
+        <div class="child4" style=" font-family: Wide">
+          <span style="color:#993123; font-size:60px;"></span>Together
         </div>
         <br>
       </div>
       <div class="parent4">
         <div class="child4">
-          함께 작성해 보세요.
+          함께 작성해 보세요
         </div>
         <br>
       </div>
@@ -48,7 +48,7 @@ export default {
     animation-name: grow;
     animation-duration: 1.5s;/* 애니메이션 시간 */
     float : left;
-    margin-left: 50%;
+    margin-left: 12%;
     
 }
 /* 키프레임 애니메이션 */

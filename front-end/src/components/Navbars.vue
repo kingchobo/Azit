@@ -1,72 +1,57 @@
 <template>
-  <va-navbar
-    class="navbar"
-    style="background-color: rgba(0, 0, 0, 0); position: fixed"
-  >
-    <template #left>
-      <div class="btnbox">
+  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:fixed; ">
+    
+    <template #left>     
+      <div class="btnbox">  
         <va-navbar-item>
-          <router-link class="nav-link" to="/" style="font-size: 25px"
-            >AZit</router-link
-          >
+          <router-link id="azit" class="nav-link" to="/" style="font-size:25px">AZit</router-link>
         </va-navbar-item>
-      </div>
+       </div>
     </template>
 
     <template #center>
       <div class="row justify--space-around" style="margin-left: 7rem">
+
         <div class="btnbox">
-          <va-navbar-item>
-            <router-link class="btn2" to="/">Home</router-link>
+          <va-navbar-item >
+            <router-link class="btn22" to="/">Home</router-link>
           </va-navbar-item>
         </div>
 
         <div class="btnbox">
           <va-navbar-item>
-            <router-link class="btn2" to="/diary">일기장</router-link>
+            <router-link class="btn22" to="/diary">일기장</router-link>
           </va-navbar-item>
         </div>
 
         <div class="btnbox">
           <va-navbar-item>
-            <router-link class="btn2" to="/about">커뮤니티</router-link>
+            <router-link class="btn22" to="/about">커뮤니티</router-link>
           </va-navbar-item>
         </div>
+
       </div>
     </template>
+
     <template #right>
-      <div v-if="$store.state.userId" class="row align-content--center">
-        <va-navbar-item style="margin: 0.5rem 0">
-          <div>로그인 계정 : {{ $store.state.userId }}</div>
-        </va-navbar-item>
-        <va-navbar-item style="margin: 0 1rem">
-          <va-button class="nav-link" @click="logout" flat color="#ffffff"
-            >로그아웃</va-button
-          >
-        </va-navbar-item>
-      </div>
-      <div v-else class="row">
-        <va-navbar-item>
-          <va-button class="nav-link" @click="onOpenSignup" flat color="#ffffff"
-            >회원가입</va-button
-          >
-        </va-navbar-item>
-        <va-navbar-item>
-          <va-button class="nav-link" @click="onOpenLogin" flat color="#ffffff"
-            >로그인</va-button
-          >
-        </va-navbar-item>
-      </div>
+      <va-navbar-item>
+          <va-button class="nav-link" @click="onOpenSignup" flat color="#ffffff">회원가입</va-button>
+      </va-navbar-item>
+      <va-navbar-item>
+          <va-button class="nav-link" @click="onOpenLogin" flat color="#ffffff">로그인</va-button>
+      </va-navbar-item>
     </template>
   </va-navbar>
-  <Login :open="openLogin" @closeLogin="closeLogin" />
+  <Login
+    :open="openLogin"
+    @closeLogin="closeLogin"
+    />
   <Signup
-    :open="openSignup"
-    @closeSignup="closeSignup"
-    @moveLogin="moveLogin"
+   :open="openSignup" 
+   @closeSignup="closeSignup"
+   @moveLogin="moveLogin"
   />
 </template>
-
 
 <style>
 #app {
@@ -76,20 +61,18 @@
   text-align: center;
   color: #2c3e50;
 }
-.btnbox {
+.btnbox{
   margin-left: 50px;
   font-weight: 700;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.btn2 {
+.btn22 {
   width: 120px;
   padding: 10px;
   /* border-radius: 20px; */
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+color: #ffffff;
   font-weight: 700;
   font-size: 15px;
   text-align: center;
@@ -99,8 +82,11 @@
   color: rgb(255, 255, 255);
   display: block;
   box-sizing: border-box;
+  
+  
 }
-.btn2:hover {
+.btn22:hover {
+
   border-bottom: solid 2px;
   border-bottom-color: rgb(250, 250, 250);
   color: #ffffff;
@@ -118,70 +104,75 @@
 #nav a.router-link-exact-active {
   color: #bd0f0f;
 }
-
+#azit{
+color: #ffffff; 
+}
 .nav-link {
-  color: #ffffff;
+  color : #ffffff;
   text-decoration-line: none;
-  margin: 0 1rem;
+  margin : 0 1rem
 }
 .navbar {
+
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  
 
+  
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color:rgba(0, 0, 0, 0.2);
   border-radius: 0.2rem;
   width: 100%;
+  
 }
+
 </style>
 
 <script>
 // @ is an alias to /src
-import Login from "@/components/Login.vue";
-import Signup from "@/components/Signup.vue";
+import Login from '@/components/Login.vue'
+import Signup from '@/components/Signup.vue'
+
 
 export default {
-  name: "Navbars",
+  name: 'Navbars',
   components: {
     Login,
-    Signup,
+    Signup
   },
-  data() {
+  data () {
     return {
       openLogin: false,
-      openSignup: false,
-    };
+      openSignup: false
+    }
   },
-  methods: {
-    clickrefresh() {
-      this.$router.go();
-      console.log(window.location.pathname);
-      console.log("새로고침");
+  methods : {
+    clickrefresh(){
+       this.$router.go();
+       console.log(window.location.pathname)
+       console.log("새로고침")
     },
-    onOpenLogin() {
-      this.openLogin = !this.openLogin;
+    onOpenLogin () {
+      this.openLogin = !this.openLogin
     },
     closeLogin() {
-      this.openLogin = !this.openLogin;
+      this.openLogin = !this.openLogin
     },
-    onOpenSignup() {
-      this.openSignup = !this.openSignup;
+    onOpenSignup () {
+      this.openSignup = !this.openSignup
     },
-    closeSignup() {
-      this.openSignup = !this.openSignup;
+    closeSignup () {
+      this.openSignup = !this.openSignup
     },
-    moveLogin() {
-      this.openSignup = !this.openSignup;
-      this.openLogin = !this.openLogin;
-    },
-    logout() {
-      this.$store.commit("logInId", "");
-    },
+    moveLogin () {
+      this.openSignup = !this.openSignup
+      this.openLogin = !this.openLogin
+    }
   },
   beforeUnmount() {
     this.$router.go();
-  },
-};
+  }
+}
 </script>

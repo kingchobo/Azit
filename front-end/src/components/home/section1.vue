@@ -1,9 +1,9 @@
 <template>
 <div class="layer">
 
-      <div class="parent" style="margin-top: 20%">
-        <div class="child" style=" font-family: 'Times New Roman', Times, serif;">
-          <span style="color:brown; font-size:60px;">A</span>nother World
+      <div class="parent" style="margin-top: 6%">
+        <div class="child" style=" font-family: Wide">
+          <span style="color:brown; font-size:60px; font-family: Wide"></span>Another World
         </div>
         <br>
       </div>
@@ -95,7 +95,7 @@ export default {
     animation-name: grow;
     animation-duration: 1.5s;/* 애니메이션 시간 */
     float : left;
-    margin-left: 50%;
+    margin-left: 12%;
     
 }
 /* 키프레임 애니메이션 */

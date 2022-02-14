@@ -13,15 +13,9 @@
 
         <div class="right-btns">
             <!-- Search -->
-            <div class="search">
-                <input
-                    type="text"
-                    v-model="searchTitle"
-                    placeholder="내용을 입력해주세요."
-                />
+            <div class="search">              
                 <div @click="searchDiary" class="material-icons">search</div>
             </div>
-
             <!-- Right Buttons -->
             <Buttons class="search-filter" btn-text="필터" />
         </div>

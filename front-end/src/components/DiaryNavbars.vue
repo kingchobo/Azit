@@ -4,7 +4,7 @@
     <template #left>     
       <div class="btnbox">  
         <va-navbar-item>
-          <router-link class="nav-link" to="/">아지트</router-link>
+          <router-link class="nav-link" to="/" style="font-size:25px">AZit</router-link>
         </va-navbar-item>
        </div>
     </template>
@@ -35,10 +35,10 @@
 
     <template #right>
       <va-navbar-item>
-          <va-button class="nav-link" @click="onOpenSignup" flat color="#ffffff">회원가입</va-button>
+          <va-button class="nav-link" id="diarybtn" @click="onOpenSignup" flat color="#000000">회원가입</va-button>
       </va-navbar-item>
       <va-navbar-item>
-          <va-button class="nav-link" @click="onOpenLogin" flat color="#ffffff">로그인</va-button>
+          <va-button class="nav-link" id="diarybtn" @click="onOpenLogin" flat color="#000000">로그인</va-button>
       </va-navbar-item>
     </template>
   </va-navbar>
@@ -61,10 +61,14 @@
   text-align: center;
   color: #2c3e50;
 }
+
 .btnbox{
   margin-left: 50px;
 }
 .btn2 {
+ 
+  transform: translateX(-50%);
+
   width: 120px;
   padding: 10px;
   /* border-radius: 20px; */
@@ -75,7 +79,7 @@
   text-align: center;
   cursor: pointer;
   margin: 20px 0;
-  background-color:rgb(0,0,0);
+  
   color: rgb(0, 0, 0);
   display: block;
   box-sizing: border-box;
@@ -85,9 +89,10 @@
 .btn2:hover {
 
   border-bottom: solid 2px;
-  border-bottom-color: rgb(0, 0, 0);
-  color: #000000;
+  border-bottom-color: rgb(89, 25, 207);
+  color: #6020d6;
 }
+
 
 #nav {
   padding: 30px;
@@ -109,7 +114,7 @@
 }
 .navbar {
   z-index: 1;
-  background-color:rgba(0, 0, 0);
+  background-color:rgb(0, 0, 0);
   border-radius: 0.2rem;
   width: 100%;
   

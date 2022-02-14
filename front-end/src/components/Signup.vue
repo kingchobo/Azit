@@ -6,7 +6,7 @@
         >
         
         <div class="signup-header">
-            <va-button icon="clear" flat color="#353536" @click="closeSignup"></va-button>
+            <va-button icon="clear" flat color="#000000" @click="closeSignup"></va-button>
         </div>
         <div class="signup-body-modal">
             <b class="my-3">아지트에 오신 것을 환영합니다</b>
@@ -46,6 +46,7 @@
             </va-form>
             <div>
                 <va-button 
+                id="signup-btn"
                     class="signup-btn" 
                     :rounded="false" 
                     @click="signup"
@@ -135,26 +136,26 @@ export default {
 </script>
 
 <style>
-.signup-btn{
+#signup-btn{
   /* width: 100px; */
   padding: 10px;
   border-radius: 5px;
-  border: 2px solid #5959be;
-  color: #3b3ba0;
+
+  color: #303031;
   font-weight: 700;
   font-size: 15px;
   text-align: center;
   cursor: pointer;
   transition: .4s;
   margin: 20px 0;
-  background-color: #6565ca;
+  background-color: #1a1a1b;
   color: #fff;
   display: block;
   box-sizing: border-box;
 }
-.signup-btn:hover {
+#signup-btn:hover {
   background-color: #fff;
-  color: #37379c;
+  color: #000000;
 }
 
 .signup-header{
