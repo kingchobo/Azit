@@ -419,56 +419,64 @@ export default {
         //   }, 1000);
         // };
 
-        const recordingStop = function () {
-            // const params = {
-            //     'user_id': '',
-            //     'video_link':'',
-            //     'emotions_id':'',
-            //     'content': state.recordingText,
-            //     'thumbnail':''
-            // }
-            // axios.post(`https://api/diary`, params)
-            //     .then((response) => {
-            //         console.log(response)
-            // });
+    const recordingStop = function () {
+        this.session
+            .signal({
+                data: "recordingStopped", // Any string (optional)
+                to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
+                type: "recordStatus", // The type of message (optional)
+            })
+            .then(() => {
+                // console.log("Message successfully sent");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        state.speechRecognizer.stop();
+        clearInterval(state.interval);
 
-            console.log(state.recordingText);
+        state.showTitleModal = !state.showTitleModal
+        console.log(state.recordingText)
+        state.speechRecognizer.stop();
+        clearInterval(state.interval);
+        emit("recordingStop");
+    };
 
-            this.session
-                .signal({
-                    data: "recordingStopped", // Any string (optional)
-                    to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
-                    type: "recordStatus", // The type of message (optional)
-                })
-                .then(() => {
-                    // console.log("Message successfully sent");
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-            state.speechRecognizer.stop();
-            clearInterval(state.interval);
+    const saveDiary = function() {
+        // const params = {               
+        //     'user_id': '',
+        //     'video_link':'',
+        //     'emotions_id':'',
+        //     'title': state.diaryTitle,
+        //     'content': state.recordingText,
+        //     'thumbnail':''
+        // }
+        // axios.post(`https://api/diary`, params)
+        //     .then((response) => {
+        //         console.log(response)
+        // });
+        emit("recordingStop");
+        state.showTitleModal = !state.showTitleModal
+    };
 
-            emit("recordingStop");
-        };
-
-        Promise.all([
-            faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-            faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
-            faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
-            faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-        ]);
-        return {
-            state,
-            closeRecording,
-            recordingStart,
-            tossUser,
-            recordingStop,
-            voiceTextStart,
-            faceRecognizeEmotions,
-            getEmothiontList,
-        };
-    },
+    Promise.all([
+      faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
+      faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+      faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
+      faceapi.nets.faceExpressionNet.loadFromUri("/models"),
+    ]);
+    return {
+      state,
+      closeRecording,
+      recordingStart,
+      recordingStop,
+      voiceTextStart,
+      faceRecognizeEmotions,
+      getEmothiontList,
+      saveDiary,
+      tossUser
+    };
+  },
 };
 </script>
 
@@ -579,6 +587,12 @@ input.btn {
 .btn-success:hover {
     background-color: #1abd61 !important;
     border-color: #1abd61;
+}
+
+.diaryTitleModal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* #result {

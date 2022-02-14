@@ -29,11 +29,18 @@
             </template>
           </va-tabs>
           <div v-if="state.value === 1">
-            <DiaryDetailText
-              :diaryContentDetail="state.diaryContentDetail"
-              class="front"
-              @moveContent="moveContent"
-            />
+            <div class="text-container">
+              <div>
+              <DiaryDetailText
+                :diaryContentDetail="state.diaryContentDetail"
+                class="front"
+                @moveContent="moveContent"
+              />
+              </div>
+              <div>
+              <Buttons btn-text="수정"/>
+              </div>
+            </div>
           </div>
           <div v-else-if="state.value === 2">
             <DiaryDetailEmotion
@@ -49,6 +56,7 @@
 
 <script>
 import { computed, reactive } from "vue";
+import Buttons from '@/components/Buttons.vue'
 import DiaryDetailText from "@/components/DiaryDetailText.vue";
 import DiaryDetailEmotion from "@/components/DiaryDetailEmotion.vue";
 
@@ -69,6 +77,7 @@ export default {
     },
   },
   components: {
+    Buttons,
     DiaryDetailText,
     DiaryDetailEmotion,
   },
@@ -193,4 +202,9 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
+
+.text-container{
+  /* display: flex; */
+}
+
 </style>
