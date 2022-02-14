@@ -34,12 +34,29 @@
     </template>
 
     <template #right>
-      <va-navbar-item>
-          <va-button class="nav-link" id="diarybtn" @click="onOpenSignup" flat color="#000000">회원가입</va-button>
-      </va-navbar-item>
-      <va-navbar-item>
-          <va-button class="nav-link" id="diarybtn" @click="onOpenLogin" flat color="#000000">로그인</va-button>
-      </va-navbar-item>
+      <div v-if="$store.state.userId" class="row align-content--center">
+        <va-navbar-item style="margin: 0.5rem 0">
+          <div text="black text">로그인 계정 : {{ $store.state.userId }}</div>
+        </va-navbar-item>
+        <va-navbar-item style="margin: 0 1rem">
+          <va-button class="nav-link" @click="logout" flat color="#000000"
+            >로그아웃</va-button
+          >
+        </va-navbar-item>
+      </div>
+      <div v-else class="row">
+        <va-navbar-item>
+          <va-button class="nav-link" @click="onOpenSignup" flat color="#000000"
+            >회원가입</va-button
+          >
+        </va-navbar-item>
+        <va-navbar-item>
+          <va-button class="nav-link" @click="onOpenLogin" flat color="#000000"
+            >로그인</va-button
+          >
+        </va-navbar-item>
+      </div>
+
     </template>
   </va-navbar>
   <Login
