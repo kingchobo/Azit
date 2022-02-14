@@ -1,14 +1,15 @@
 <template>
-    <div class="layer">  
+
+    <div class="layer" >  
       <div class="parent2" style="margin-top: 20%">
         <div class="child2">
-         Zoom
+         <span style="color:#CCFFFF; font-size:60px;  font-family: 'Times New Roman', Times, serif;">Z</span>oom
         </div>
         <br>
       </div>
       <div class="parent2">
         <div class="child2">
-          우리의 일상을 확대해 보세요
+          일상을 확대해 보세요
         </div>
         <br>
       </div>
@@ -51,13 +52,14 @@ export default {
 
 .parent2 .child2 {
     color: aliceblue;
-    font-size: 60px;/* 애니메이션 높이 */
+    font-size: 50px;/* 애니메이션 높이 */
     font-weight: bold;
     line-height: 1;
     animation-delay: 2s;
-    animation-name: grow;
-    animation-duration: 1.5s;/* 애니메이션 시간 */
+    animation-name: grow; 
+    animation-duration: 2.5s;/* 애니메이션 시간 */
    float : left;
+   
     margin-left: 55%;
     
 }

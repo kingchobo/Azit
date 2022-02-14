@@ -173,7 +173,7 @@ export default {
     },
     async searchDiary() {
       this.searchData = await this.api(
-        "https://15f8ee3f-349a-4cf2-86ef-1f8c61ec2767.mock.pstmn.io/api/diary/" +
+        "https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/api/diary/" +
           this.searchTitle,
         "get",
         {}
@@ -335,7 +335,7 @@ export default {
           this.leaveSession();
           axios
             .get(
-              `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/diary/1`
+              `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diary/1`
             )
             .then((response) => {
               this.diaryContent = response.data;

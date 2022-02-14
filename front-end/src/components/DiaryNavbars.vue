@@ -1,10 +1,10 @@
 <template>
-  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:fixed; ">
+  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:fixed;">
     
     <template #left>     
       <div class="btnbox">  
         <va-navbar-item>
-          <router-link class="nav-link" to="/" style="font-size:25px">AZit</router-link>
+          <router-link class="nav-link" to="/">아지트</router-link>
         </va-navbar-item>
        </div>
     </template>
@@ -63,23 +63,20 @@
 }
 .btnbox{
   margin-left: 50px;
-  font-weight: 700;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
 .btn2 {
   width: 120px;
   padding: 10px;
   /* border-radius: 20px; */
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: #000000;
   font-weight: 700;
   font-size: 15px;
   text-align: center;
   cursor: pointer;
   margin: 20px 0;
-
-  color: rgb(255, 255, 255);
+  background-color:rgb(0,0,0);
+  color: rgb(0, 0, 0);
   display: block;
   box-sizing: border-box;
   
@@ -88,8 +85,8 @@
 .btn2:hover {
 
   border-bottom: solid 2px;
-  border-bottom-color: rgb(250, 250, 250);
-  color: #ffffff;
+  border-bottom-color: rgb(0, 0, 0);
+  color: #000000;
 }
 
 #nav {
@@ -106,21 +103,13 @@
 }
 
 .nav-link {
-  color : #ffffff;
+  color : #000000;
   text-decoration-line: none;
   margin : 0 1rem
 }
 .navbar {
-
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  
-
-  
   z-index: 1;
-  background-color:rgba(0, 0, 0, 0.2);
+  background-color:rgba(0, 0, 0);
   border-radius: 0.2rem;
   width: 100%;
   

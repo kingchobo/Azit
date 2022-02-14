@@ -251,7 +251,7 @@ export default {
       };
       try {
         const response = await fetch(
-          `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/emotionList`,
+          `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock..io/emotionList`,
           requestOptions
         );
         const json = await response.json();

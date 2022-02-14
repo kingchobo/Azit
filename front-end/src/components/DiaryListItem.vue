@@ -43,10 +43,10 @@ export default {
     onOpenDetail() {
       this.openDetail = !this.openDetail;
       console.log(this.diary);
-      // axios.get('https://d373f615-141e-4add-8fb7-910b49246039.mock.pstmn.io/diarydetail')
+      // axios.get('https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diarydetail')
       axios
         .get(
-          `https://563995ec-77a8-4f3f-bc66-956833ef5018.mock.pstmn.io/diary/${this.diary.diary_id}`
+          `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diary/${this.diary.diary_id}`
         )
         .then((response) => {
           this.diaryContent = response.data;

@@ -2,8 +2,8 @@
 <div class="layer">
   <div class="wrap">
    <div class="parent3" style="margin-top: 23%">
-        <div class="child3">
-          Impress 
+        <div class="child3" style=" font-family: 'Times New Roman', Times, serif;">
+          <span style="color:#9999FF; font-size:60px;">I</span>mpress 
         </div>
         <br>
       </div>
@@ -41,14 +41,14 @@ export default {
 
 .parent3 .child3 {
     color: aliceblue;
-    font-size: 60px;/* 애니메이션 높이 */
+    font-size: 50px;/* 애니메이션 높이 */
     font-weight: bold;
     line-height: 1;
     animation-delay: 3.5s;
     animation-name: grow;
     animation-duration: 1.5s;/* 애니메이션 시간 */
     float : left;
-    margin-left: 55%;
+    margin-left: 50%;
     
 }
 /* 키프레임 애니메이션 */

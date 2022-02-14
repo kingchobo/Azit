@@ -19,25 +19,13 @@
       <section id="sectionD" class="section">
         <section-4 />
       </section>
-      <!-- <footer class="section fp-auto-height">
-        <footer-1/>
-        <h2>footer</h2>
-
-      </footer> -->
     </main>
   </div>
-  <va-button @click="onOpenDetail">상세페이지 보기</va-button>
-  <DiaryDetail 
-    :open="openDetail"
-    @closeDetail="this.openDetail = !this.openDetail"
-  />
 
 
 </template>
 
 <script>
-import Footer1 from '../components/home/footer1.vue'
-// @ is an alias to /src
 import Section1 from '../components/home/section1.vue'
 import Section2 from '../components/home/section2.vue'
 import Section3 from '../components/home/section3.vue'
@@ -50,7 +38,6 @@ export default {
     Section2,
     Section3,
     Section4,
-    Footer1,
     
   },
   created() {
@@ -87,7 +74,15 @@ background-color: #000000;
 background-repeat: no-repeat;
 background-size: 100% 100%;
 }
+#sectionD{
+background:url("https://cdn.pixabay.com/photo/2017/03/17/10/29/coffee-2151200_960_720.jpg") center top no-repeat; 
+background-position: fixed;
+background-color: #000000;
+background-repeat: no-repeat;
+background-size: 100% 100%;
+}
 .layer {
+ 
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     top: 0;

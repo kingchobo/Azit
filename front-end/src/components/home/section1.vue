@@ -2,8 +2,8 @@
 <div class="layer">
 
       <div class="parent" style="margin-top: 20%">
-        <div class="child">
-          Another World
+        <div class="child" style=" font-family: 'Times New Roman', Times, serif;">
+          <span style="color:brown; font-size:60px;">A</span>nother World
         </div>
         <br>
       </div>
@@ -87,7 +87,7 @@ export default {
 
  .parent .child {
     color: aliceblue;
-    font-size: 60px;/* 애니메이션 높이 */
+    font-size: 50px;/* 애니메이션 높이 */
     font-weight: bold;
     
     line-height: 1;
@@ -95,7 +95,7 @@ export default {
     animation-name: grow;
     animation-duration: 1.5s;/* 애니메이션 시간 */
     float : left;
-    margin-left: 55%;
+    margin-left: 50%;
     
 }
 /* 키프레임 애니메이션 */
