@@ -24,7 +24,7 @@ const store = createStore({
       state.count++
     },
     logInId(state, userId){
-        state.usetId = userId
+        this.state.userId = userId
     }
   },
   actions: {

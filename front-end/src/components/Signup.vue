@@ -80,30 +80,55 @@ export default {
             selectValue: '',
             validation: null,
         }),
-        signup = function () {
-            if (form.value.validate()) {
-                const params = {
-                    name: state.idValue,
-                    email: state.emailValue,
-                    password: state.passwordValue,
-                }
-                // url수정 "/api/user"
-                axios.post('/api/user', params)
-                 .then(function () {
-                    emit('moveLogin')
-                    }
-                 )
-                 .catch(err => {
-                    console.log(err)
-                 })
-            } else {
-                alert('다시 입력하세요')
-            }
-        },
+        // signup = function () {
+        //     if (form.value.validate()) {
+        //         const params = {
+        //             name: state.idValue,
+        //             email: state.emailValue,
+        //             password: state.passwordValue,
+        //         }
+        //         // url수정 "/api/user"
+        //         axios.post('https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/api/user', params)
+        //          .then(function () {
+        //             emit('logInId',params.name)
+        //             }
+        //          )
+        //          .catch(err => {
+        //             console.log(err)
+        //          })
+        //     } else {
+        //         alert('다시 입력하세요')
+        //     }
+        // },
         closeSignup = function() {
             emit('closeSignup')
         }
-        return { state, form, signup, closeSignup }
+        return { state, form, closeSignup }
+    },
+    methods:{
+    async signup(){
+      this.user = await this.api('https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/api/user','post',{
+            "userId": this.state.idValue,
+            "email": this.state.emailValue,
+            "password": this.state.passwordValue,
+          })
+      if(this.user){
+            this.$store.commit('logInId',this.user.userId);
+            this.closeSignup()
+      }
+      else{
+          alert("아이디와 비밀번호를 확인해주세요")
+      }
+    },
+    async api(url,method,data){
+      return(await axios({
+        method :method,
+        url : url,
+        data : data
+      }).catch( e =>{
+        console.log(e);
+      })).data;
+    }
     }
     
 }
