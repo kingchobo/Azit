@@ -19,7 +19,7 @@
             <!-- 영상 출력 -->
             <div id="session" v-if="session">
                 <div class="row justify--space-around">
-                    <div class="flex md1 lg6">
+                    <div class="flex md3 lg6">
                         <div id="video-container" class="flex md videocenter4">
                             <user-video :stream-manager="publisher" />
                             <user-video
@@ -44,7 +44,6 @@
                     btn-text="녹화 시작"
                     @click="recordingStart"
                 />
-
                 <Buttons
                     class="mx-2"
                     btn-text="toss"

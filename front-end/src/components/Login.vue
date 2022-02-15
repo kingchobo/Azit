@@ -77,7 +77,6 @@ export default {
     handleSubmit () {
         if (this.$refs.form.validate()){
             this.loginApi(this.state.idValue,this.state.passwordValue)
-            alert(this.state.idValue)
             this.closeLogin()
         }
         else{
@@ -92,6 +91,7 @@ export default {
           })
       if(this.user){
             this.$store.commit('logInId',this.user.userId);
+            this.$router.go();
       }
       else{
           alert("아이디와 비밀번호를 확인해주세요")

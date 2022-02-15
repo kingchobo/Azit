@@ -108,6 +108,8 @@
             </div>
         </va-modal>
     </div>
+    <hr>
+    <h1>일기 목록</h1>
 </template>
 
 <script>
