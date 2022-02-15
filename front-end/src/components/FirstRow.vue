@@ -414,7 +414,7 @@ export default {
                             type: "recordingId", // The type of message (optional)
                         })
                         .then(() => {
-                            console.log("Message successfully sent");
+                            console.log("녹화번호 전송 완료");
                         })
                         .catch((error) => {
                             console.error(error);
