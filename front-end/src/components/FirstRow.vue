@@ -383,6 +383,7 @@ export default {
         },
 
         leaveSession() {
+            this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
             // --- Leave the session by calling 'disconnect' method over the Session object ---
             if (this.session) this.session.disconnect();
 
@@ -454,8 +455,8 @@ export default {
                     //         this.diaryContent = response.data;
                     //     });
                     // TODO method로 빼서 saveDiary에서 호출
-                    this.moveDiaryRecordingDetail =
-                        !this.moveDiaryRecordingDetail;
+                    // this.moveDiaryRecordingDetail =
+                    //     !this.moveDiaryRecordingDetail;
 
                     // this.recordingUrl =
                     //   "https://localhost:4443/openvidu/recordings/testUser-20/testUser-20.mp4";

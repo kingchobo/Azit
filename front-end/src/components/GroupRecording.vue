@@ -15,12 +15,13 @@
                     @click="closeRecording"
                 ></va-button>
             </div>
-
+            
             <!-- 영상 출력 -->
             <div id="session" v-if="session">
-                <div class="row justify--space-around">
-                    <div class="flex md1 lg6">
-                        <div id="video-container" class="flex md videocenter4">
+                <!-- <div class="row justify--space-between"> -->
+                <div class="row">
+                    <div class="flex md6 lg6">
+                        <div id="video-container" class="flex md videocenter">
                             <user-video :stream-manager="publisher" />
                             <user-video
                                 v-for="sub in subscribers"
@@ -29,11 +30,15 @@
                             />
                         </div>
                     </div>
-                    <div class="flex md6 lg6">
+                    <div class="flex md4 lg1"></div>
+                    <ChatRoom class="flex md4 lg3"/>
+                    <!-- <div class="flex md3 lg3">
                         <div></div>
-                    </div>
+                    </div> -->    
                 </div>
             </div>
+            <!-- <ChatRoom class="flex md3 lg3"/> -->
+            
             <div class="row justify--center" v-if="session">
                 <Buttons
                     v-show="
@@ -60,6 +65,24 @@
             </div>
         </div>
     </va-modal>
+    <!-- 제목 수정 modal -->
+    <va-modal v-model="state.showTitleModal" hide-default-actions>
+        <div class="diaryTitleModal">
+
+            <b>어떤 추억으로 기록하시겠어요?</b>
+            <div>
+            <va-input
+                class="mt-4 mb-2"
+                v-model="state.diaryTitle"
+                placeholder="일기 제목을 입력하세요."
+            />
+            </div>
+            <div>
+            <Buttons class="mx-2" btn-text="저장하기" @click="saveDiary()" />
+            </div>
+        </div>
+    </va-modal>
+
 </template>
 
 <script>
@@ -68,6 +91,7 @@ import UserVideo from "./UserVideo.vue";
 import Buttons from "./Buttons.vue";
 import axios from "axios";
 import * as faceapi from "face-api.js";
+import ChatRoom from './Chat/ChatRoom.vue'
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
@@ -75,6 +99,7 @@ export default {
     components: {
         UserVideo,
         Buttons,
+        ChatRoom
     },
     name: "GroupRecording",
     props: {
@@ -128,6 +153,8 @@ export default {
             interval: null, // 감정정보 분석을 위한 interval을 저장
             speechRecognizer: Object, // webAPI의 음성인식 객체
             recordingText: "", // 음성인식된 텍스트를 저장
+            showTitleModal: false,
+            diaryTitle: ''
         });
 
         const myDiary = {
@@ -301,8 +328,7 @@ export default {
                         statusAverage[status] = statusPercent[status] / cnt;
                         console.log(statusPercent);
                     });
-                } else {
-                }
+                } 
             }, 1000);
         };
 
@@ -409,17 +435,19 @@ export default {
             /* 감정정보 저장 및 감정번호 받아오기 끝 */
             state.speechRecognizer.stop();
             clearInterval(state.interval);
-
+            
+            // 제목 입력 창 띄우기
+            emit("recordingStop");
             state.showTitleModal = !state.showTitleModal;
             // console.log(state.recordingText);
             // console.log("녹화중지 버튼 누름");
-            emit("recordingStop");
         };
 
         const saveDiary = function () {
+            // 일기 저장 
             myDiary.content = state.recordingText;
             myDiary.diaryGroup.groupId = props.diaryGroupId;
-            myDiary.title = `제목을 입력하세요`;
+            myDiary.title = state.diaryTitle;
             myDiary.videoLink = props.videoLink;
 
             // console.log("----저장시의 myDiary 데이터----");
@@ -525,10 +553,10 @@ export default {
     border-bottom-right-radius: 4px;
 }
 
-video {
+/* video {
     width: 100%;
     height: auto;
-}
+} */
 
 #main-video p {
     position: absolute;
@@ -544,7 +572,7 @@ video {
 
 .videocenter {
     border-radius: 3rem;
-    margin: auto;
+    /* margin: auto; */
     text-align: center;
 }
 
@@ -581,4 +609,10 @@ input.btn {
   font-size: 14px;
   line-height: 25px;
 } */
+
+.recording-container{
+    display:flex;
+    justify-content: space-around;
+}
+
 </style>
