@@ -124,8 +124,8 @@ export default {
     methods: {
         async signup() {
             this.user = await this.api(
-                "http://localhost:8080/api/user",
-                "post",
+                '/api/user',
+                'post',
                 {
                     userId: this.state.idValue,
                     email: this.state.emailValue,

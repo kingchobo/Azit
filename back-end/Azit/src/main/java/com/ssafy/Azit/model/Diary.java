@@ -2,6 +2,7 @@ package com.ssafy.Azit.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,7 +26,8 @@ public class Diary {
 
     private String videoLink; // Default length = 255
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date createDate;
 
     @Column(columnDefinition = "TEXT")

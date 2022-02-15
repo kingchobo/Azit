@@ -87,7 +87,7 @@ const load = async ($state) => {
   console.log(store.state.userId);
   try {
     const response = await fetch(
-      `http://localhost:8080/api/diary/list?userId=${store.state.userId}&diaryPage=` +
+      `/api/diary/list?userId=${store.state.userId}&diaryPage=` +
         page
     );
     const json = await response.json();

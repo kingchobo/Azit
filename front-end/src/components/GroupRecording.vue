@@ -219,7 +219,7 @@ export default {
 
             // TODO
             await axios
-                .post("http://localhost:8080/api/diaryGroup", {})
+                .post("/api/diaryGroup", {})
                 .then(({ data: groupObject }) => {
                     console.log(groupObject);
                     console.log(groupObject.groupId);
@@ -249,14 +249,14 @@ export default {
             clearInterval(state.interval);
 
             /* 감정정보 저장 및 감정번호 받아오기 시작 */
-            let myEmotions = statusPercent;
+            let myEmotions = statusAverage;
             myEmotions.user = {
                 userId: store.state.userId, // 여기에는 자신의 userId가 들어와야 함.
                 // userId: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
             };
             // 감정정보를 저장 후 감정 번호를 받아와야 함.
             await axios
-                .post("http://localhost:8080/api/emotions", myEmotions)
+                .post("/api/emotions", myEmotions)
                 .then(({ data: emotionsObject }) => {
                     // 감정정보 대입
                     console.log(emotionsObject.emotionsId);
@@ -391,46 +391,46 @@ export default {
             surprised: 0,
         };
 
-        const getEmothiontList = async () => {
-            console.log("loading...");
-            console.log(statusAverage);
-            const requestOptions = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    default: statusAverage["default"],
-                    neutral: statusAverage["neutral"],
-                    happy: statusAverage["happy"],
-                    sad: statusAverage["sad"],
-                    angry: statusAverage["angry"],
-                    fearful: statusAverage["fearful"],
-                    disgusted: statusAverage["disgusted"],
-                    surprised: statusAverage["surprised"],
-                }),
-            };
-            try {
-                const response = await fetch(
-                    `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/emotionList`,
-                    requestOptions
-                );
-                const json = await response.json();
-                console.log(json);
-            } catch (error) {
-                // alert("마지막 페이지 입니다")
-                // $state.error();
-            }
-        };
+        // const getEmothiontList = async () => {
+        //     console.log("loading...");
+        //     console.log(statusAverage);
+        //     const requestOptions = {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify({
+        //             default: statusAverage["default"],
+        //             neutral: statusAverage["neutral"],
+        //             happy: statusAverage["happy"],
+        //             sad: statusAverage["sad"],
+        //             angry: statusAverage["angry"],
+        //             fearful: statusAverage["fearful"],
+        //             disgusted: statusAverage["disgusted"],
+        //             surprised: statusAverage["surprised"],
+        //         }),
+        //     };
+        //     try {
+        //         const response = await fetch(
+        //             `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/emotionList`,
+        //             requestOptions
+        //         );
+        //         const json = await response.json();
+        //         console.log(json);
+        //     } catch (error) {
+        //         // alert("마지막 페이지 입니다")
+        //         // $state.error();
+        //     }
+        // };
 
         const recordingStop = async () => {
             /* 감정정보 저장 및 감정번호 받아오기 시작 */
-            let myEmotions = statusPercent;
+            let myEmotions = statusAverage;
             myEmotions.user = {
                 userId: store.state.userId, // 여기에는 자신의 userId가 들어와야 함.
                 // userId: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
             };
 
             await axios
-                .post("http://localhost:8080/api/emotions", myEmotions)
+                .post("/api/emotions", myEmotions)
                 .then(({ data: emotionsObject }) => {
                     // 감정정보 대입
                     console.log(emotionsObject.emotionsId);
@@ -481,7 +481,7 @@ export default {
             recordingStop,
             voiceTextStart,
             faceRecognizeEmotions,
-            getEmothiontList,
+            // getEmothiontList,
             saveDiary,
             tossUser,
         };

@@ -206,7 +206,7 @@ export default {
         },
         async searchDiary() {
             this.searchData = await this.api(
-                "https://15f8ee3f-349a-4cf2-86ef-1f8c61ec2767.mock.pstmn.io/api/diary/" +
+                "/api/diary/" +
                     this.searchTitle,
                 "get",
                 {}

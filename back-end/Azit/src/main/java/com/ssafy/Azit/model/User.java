@@ -4,6 +4,7 @@ import com.ssafy.Azit.enums.Gender;
 import com.ssafy.Azit.enums.GroupStatus;
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -39,7 +40,8 @@ public class User {
 
     private String password;
 
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     private Date signDate;
 
     @Enumerated(EnumType.STRING)
