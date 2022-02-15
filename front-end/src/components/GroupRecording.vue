@@ -91,7 +91,11 @@ import UserVideo from "./UserVideo.vue";
 import Buttons from "./Buttons.vue";
 import axios from "axios";
 import * as faceapi from "face-api.js";
+<<<<<<< HEAD
 import ChatRoom from './Chat/ChatRoom.vue'
+=======
+import { useStore } from "vuex";
+>>>>>>> bfd9aad5b85dcf1ed80384dce1cde84fcc8d9fce
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
@@ -148,6 +152,8 @@ export default {
     },
     created() {},
     setup(props, { emit }) {
+        const store = useStore();
+
         const state = reactive({
             recordingVisible: computed(() => props.open),
             interval: null, // 감정정보 분석을 위한 interval을 저장
@@ -163,7 +169,8 @@ export default {
             content: "",
             thumbNail: null,
             user: {
-                userId: "giho3",
+                userId: store.state.userId,
+                // userId: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
             },
             emotions: {
                 emotionsId: -1,
@@ -249,7 +256,8 @@ export default {
             /* 감정정보 저장 및 감정번호 받아오기 시작 */
             let myEmotions = statusPercent;
             myEmotions.user = {
-                userId: "giho3", // 여기에는 자신의 userId가 들어와야 함.
+                userId: store.state.userId, // 여기에는 자신의 userId가 들어와야 함.
+                // userId: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
             };
             // 감정정보를 저장 후 감정 번호를 받아와야 함.
             await axios
@@ -422,7 +430,8 @@ export default {
             /* 감정정보 저장 및 감정번호 받아오기 시작 */
             let myEmotions = statusPercent;
             myEmotions.user = {
-                userId: "giho3", // 여기에는 자신의 userId가 들어와야 함.
+                userId: store.state.userId, // 여기에는 자신의 userId가 들어와야 함.
+                // userId: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
             };
 
             await axios
