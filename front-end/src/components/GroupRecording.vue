@@ -15,7 +15,7 @@
                     @click="closeRecording"
                 ></va-button>
             </div>
-            
+
             <!-- 영상 출력 -->
             <div id="session" v-if="session">
                 <div class="row justify--space-around">
@@ -30,14 +30,14 @@
                         </div>
                     </div>
                     <div class="flex md4 lg1"></div>
-                    <ChatRoom class="flex md4 lg3"/>
+                    <ChatRoom class="flex md4 lg3" />
                     <!-- <div class="flex md3 lg3">
                         <div></div>
-                    </div> -->    
+                    </div> -->
                 </div>
             </div>
             <!-- <ChatRoom class="flex md3 lg3"/> -->
-            
+
             <div class="row justify--center" v-if="session">
                 <Buttons
                     v-show="
@@ -66,21 +66,23 @@
     <!-- 제목 수정 modal -->
     <va-modal v-model="state.showTitleModal" hide-default-actions>
         <div class="diaryTitleModal">
-
             <b>어떤 추억으로 기록하시겠어요?</b>
             <div>
-            <va-input
-                class="mt-4 mb-2"
-                v-model="state.diaryTitle"
-                placeholder="일기 제목을 입력하세요."
-            />
+                <va-input
+                    class="mt-4 mb-2"
+                    v-model="state.diaryTitle"
+                    placeholder="일기 제목을 입력하세요."
+                />
             </div>
             <div>
-            <Buttons class="mx-2" btn-text="저장하기" @click="saveDiary()" />
+                <Buttons
+                    class="mx-2"
+                    btn-text="저장하기"
+                    @click="saveDiary()"
+                />
             </div>
         </div>
     </va-modal>
-
 </template>
 
 <script>
@@ -89,7 +91,7 @@ import UserVideo from "./UserVideo.vue";
 import Buttons from "./Buttons.vue";
 import axios from "axios";
 import * as faceapi from "face-api.js";
-import ChatRoom from './Chat/ChatRoom.vue'
+import ChatRoom from "./Chat/ChatRoom.vue";
 import { useStore } from "vuex";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -98,7 +100,7 @@ export default {
     components: {
         UserVideo,
         Buttons,
-        ChatRoom
+        ChatRoom,
     },
     name: "GroupRecording",
     props: {
@@ -155,7 +157,7 @@ export default {
             speechRecognizer: Object, // webAPI의 음성인식 객체
             recordingText: "", // 음성인식된 텍스트를 저장
             showTitleModal: false,
-            diaryTitle: ''
+            diaryTitle: "",
         });
 
         const myDiary = {
@@ -331,7 +333,7 @@ export default {
                         statusAverage[status] = statusPercent[status] / cnt;
                         console.log(statusPercent);
                     });
-                } 
+                }
             }, 1000);
         };
 
@@ -391,36 +393,6 @@ export default {
             surprised: 0,
         };
 
-        // const getEmothiontList = async () => {
-        //     console.log("loading...");
-        //     console.log(statusAverage);
-        //     const requestOptions = {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify({
-        //             default: statusAverage["default"],
-        //             neutral: statusAverage["neutral"],
-        //             happy: statusAverage["happy"],
-        //             sad: statusAverage["sad"],
-        //             angry: statusAverage["angry"],
-        //             fearful: statusAverage["fearful"],
-        //             disgusted: statusAverage["disgusted"],
-        //             surprised: statusAverage["surprised"],
-        //         }),
-        //     };
-        //     try {
-        //         const response = await fetch(
-        //             `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/emotionList`,
-        //             requestOptions
-        //         );
-        //         const json = await response.json();
-        //         console.log(json);
-        //     } catch (error) {
-        //         // alert("마지막 페이지 입니다")
-        //         // $state.error();
-        //     }
-        // };
-
         const recordingStop = async () => {
             /* 감정정보 저장 및 감정번호 받아오기 시작 */
             let myEmotions = statusAverage;
@@ -439,7 +411,7 @@ export default {
             /* 감정정보 저장 및 감정번호 받아오기 끝 */
             state.speechRecognizer.stop();
             clearInterval(state.interval);
-            
+
             // 제목 입력 창 띄우기
             emit("recordingStop");
             state.showTitleModal = !state.showTitleModal;
@@ -447,22 +419,23 @@ export default {
             // console.log("녹화중지 버튼 누름");
         };
 
-        const saveDiary = function () {
-            // 일기 저장 
+        const saveDiary = async () => {
+            // 일기 저장
             myDiary.content = state.recordingText;
             myDiary.diaryGroup.groupId = props.diaryGroupId;
             myDiary.title = state.diaryTitle;
             myDiary.videoLink = props.videoLink;
 
+            console.log("일기저장 진입");
+
             // console.log("----저장시의 myDiary 데이터----");
             // console.log(myDiary);
             // console.log("-------------------------------");
 
-            axios
-                .post(`/api/diary`, myDiary)
-                .then((response) => {
-                    console.log(response);
-                });
+            await axios.post(`/api/diary`, myDiary).then((response) => {
+                console.log("일기 저장 완료");
+                console.log(response);
+            });
             // emit("recordingStop");
             state.showTitleModal = !state.showTitleModal;
             closeRecording();
@@ -614,9 +587,8 @@ input.btn {
   line-height: 25px;
 } */
 
-.recording-container{
-    display:flex;
+.recording-container {
+    display: flex;
     justify-content: space-around;
 }
-
 </style>

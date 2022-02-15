@@ -206,8 +206,7 @@ export default {
         },
         async searchDiary() {
             this.searchData = await this.api(
-                "/api/diary/" +
-                    this.searchTitle,
+                "/api/diary/" + this.searchTitle,
                 "get",
                 {}
             ); //url
@@ -250,9 +249,17 @@ export default {
                 }
             });
 
-            // Toss할 유저를 선택할 connection 객체 설정
+            // Connection 생성시 설정
             this.session.on("connectionCreated", ({ connection }) => {
                 this.tossArray.push(connection);
+            });
+
+            // Connection 삭제 설정
+            this.session.on("connectionDestroyed", ({ connection }) => {
+                const index = this.tossArray.indexOf(connection, 0);
+                if (index >= 0) {
+                    this.tossArray.splice(index, 1);
+                }
             });
 
             // On every asynchronous exception...
@@ -347,18 +354,19 @@ export default {
         },
 
         leaveSession() {
-            this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
             // --- Leave the session by calling 'disconnect' method over the Session object ---
             if (this.session) this.session.disconnect();
 
-            this.openRecording = !this.openRecording;
             this.session = undefined;
+
+            this.openRecording = !this.openRecording;
             this.mainStreamManager = undefined;
             this.publisher = undefined;
             this.subscribers = [];
             this.OV = undefined;
 
             window.removeEventListener("beforeunload", this.leaveSession);
+            // this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
         },
         async recordingStart() {
             // console.log("녹화 시작");
