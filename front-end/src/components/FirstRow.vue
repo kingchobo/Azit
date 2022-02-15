@@ -108,7 +108,7 @@
             </div>
         </va-modal>
     </div>
-    <hr>
+    <hr />
     <h1>일기 목록</h1>
 </template>
 
@@ -217,16 +217,12 @@ export default {
         joinGroup() {
             this.openRecording = !this.openRecording;
             this.joinSession(this.roomCode);
-
-            // this.productList = await this.api("/sample", "post", {
-            //   userId: this.userId,
-            // });
-            // console.log(this.productList);
         },
         /**
          * 함께쓰기 방 생성 함수
          */
         createRoom() {
+            this.roomCode = this.$store.state.userId;
             this.joinSession(this.$store.state.userId);
             // this.joinSession("testUser"); // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
         },
@@ -337,23 +333,6 @@ export default {
                         // --- Publish your stream ---
 
                         this.session.publish(this.publisher);
-                        // openRecording: false,
-                        //             showWithModal: false,
-                        //             showSearchModal: false,
-                        //             userId: "testUser", // sessionId를 userId로 대체
-
-                        //             OV: undefined,
-                        //             session: undefined,
-                        //             mainStreamManager: undefined,
-                        //             publisher: undefined,
-                        //             subscribers: [],
-                        //             // sessionId: 'SessionA',
-                        //             roomCode: "", // roomCode는 방을 만든 사람의 userId값
-                        //             myName: "테스트 유저"
-                        // console.log(this.openRecording);
-                        // console.log(this.OV);
-                        // console.log(this.session);
-                        // console.log(this.subscribers);
                     })
                     .catch((error) => {
                         console.log(
@@ -363,25 +342,6 @@ export default {
                         );
                     });
             });
-            // console.log("join");
-            // this.session
-            //     .signal({
-            //         data: "My custom message", // Any string (optional)
-            //         to: [], // Array of Connection objects (optional. Broadcast to everyone if empty)
-            //         type: "my-chat", // The type of message (optional)
-            //     })
-            //     .then(() => {
-            //         console.log("Message FGsuccessfully sent");
-            //     })
-            //     .catch((error) => {
-            //         console.error(error);
-            //     });
-
-            // this.session.on("signal", (event) => {
-            //     console.log(event.data); // Message
-            //     console.log(event.from); // Connection object of the sender
-            //     console.log(event.type); // The type of message
-            // });
 
             window.addEventListener("beforeunload", this.leaveSession);
         },
@@ -407,7 +367,7 @@ export default {
                 .post(
                     `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/start`,
                     {
-                        session: this.$store.state.userId,
+                        session: this.roomCode,
                         // session: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
                     },
                     {
@@ -454,19 +414,6 @@ export default {
                     // console.log(res);
                     // console.log(res.data.url);
                     this.recordingUrl = res.data.url;
-                    // axios
-                    //     .get(
-                    //         `https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diary/1`
-                    //     )
-                    //     .then((response) => {
-                    //         this.diaryContent = response.data;
-                    //     });
-                    // TODO method로 빼서 saveDiary에서 호출
-                    // this.moveDiaryRecordingDetail =
-                    //     !this.moveDiaryRecordingDetail;
-
-                    // this.recordingUrl =
-                    //   "https://localhost:4443/openvidu/recordings/testUser-20/testUser-20.mp4";
                 });
 
             // 녹화영상 URL 모든 참여자에게 전송
@@ -496,10 +443,6 @@ export default {
                 .catch((error) => {
                     console.error(error);
                 });
-
-            // this.leaveSession();
-            // this.leaveSession();
-            // this.moveDiaryDetail = !this.moveDiaryDetail;
         },
 
         updateMainVideoStreamManager(stream) {
@@ -585,18 +528,6 @@ export default {
             });
         },
         /* openVidu API 끝 */
-
-        // async api(url, method, data) {
-        //   return (
-        //     await axios({
-        //       method: method,
-        //       url: url,
-        //       data: data,
-        //     }).catch((e) => {
-        //       console.log(e);
-        //     })
-        //   ).data;
-        // },
     },
 };
 </script>
