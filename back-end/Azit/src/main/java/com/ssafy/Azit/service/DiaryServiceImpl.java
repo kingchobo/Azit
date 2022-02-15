@@ -1,6 +1,7 @@
 package com.ssafy.Azit.service;
 
 import com.ssafy.Azit.model.Diary;
+import com.ssafy.Azit.model.DiaryGroup;
 import com.ssafy.Azit.model.User;
 import com.ssafy.Azit.repository.DiaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,25 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public Diary getDiary(long diaryId) {
         return diaryRepository.findByDiaryId(diaryId).get();
+    }
+
+    @Override
+    public List<Diary> getGroupDiary(long diaryId) {
+
+        Diary getDiary = diaryRepository.findByDiaryId(diaryId).get();
+        DiaryGroup diaryGroup = getDiary.getDiaryGroup();
+        long groupID = diaryGroup.getGroupId();
+
+        List<Diary> diaries = diaryRepository.findAll();
+        List<Diary> diaryGroupList = new ArrayList<>();
+
+        for (Diary diary : diaries) {
+            if (diary.getDiaryGroup().getGroupId() == groupID) {
+                diaryGroupList.add(diary);
+            }
+        }
+
+        return diaryGroupList;
     }
 
     @Override
