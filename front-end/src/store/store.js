@@ -7,6 +7,8 @@ const store = createStore({
   state() {
     return {
       userId : '',
+      isColor_w : true,
+      isColor_b : false
     //   count: 0,
     //   cart: [{
     //     product_id: 1,
