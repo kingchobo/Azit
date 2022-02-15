@@ -10,6 +10,7 @@ public interface DiaryService {
     Diary createDiary(Diary diary);
 //    Diary createDiary(Diary diary, User user);
     Diary getDiary(long diaryId);
+    List<Diary> getGroupDiary(long diaryId);
 
     List<Diary> listDiary(String userId, int page);
     List<Diary> listSearchDiary(String userId, String title, int page);

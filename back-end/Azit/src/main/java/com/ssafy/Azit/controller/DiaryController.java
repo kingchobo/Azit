@@ -23,12 +23,22 @@ public class DiaryController {
     private final String SUCCESS = "success";
     private final String FAIL = "fail";
 
-    // 일기 상세 정보 조회
+    // 일기 상세 정보 조회(자신의 일기 정보만 조회)
     @GetMapping("/{diaryId}")
     public ResponseEntity<Diary> getDetailDiary (@PathVariable long diaryId) {
         Diary diary = diaryService.getDiary(diaryId);
 
         return ResponseEntity.ok().body(diary);
+    }
+
+    // 일기 상세 정보 조회(같은 그룹의 일기 정보 조회)
+    @GetMapping("/group/{diaryId}")
+    public ResponseEntity<List<Diary>> getDetailGroupDiary (@PathVariable long diaryId) {
+        List<Diary> groupDiary = diaryService.getGroupDiary(diaryId);
+
+        if(!ObjectUtils.isEmpty(groupDiary))
+            return ResponseEntity.ok().body(groupDiary);
+        return ResponseEntity.ok().body(groupDiary);
     }
 
     // 일기 작성
