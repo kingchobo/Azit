@@ -130,13 +130,13 @@
 
   border-bottom: solid 2px;
   border-bottom-color: rgb(250, 250, 250);
-  color: #000000;
+  color: #ffffff;
 }
 .btn22:hover {
 
   border-bottom: solid 2px;
-  border-bottom-color: rgb(250, 250, 250);
-  color: #ffffff;
+  border-bottom-color: #6565CA;
+  color: #6565CA;
 }
 
 #nav {
