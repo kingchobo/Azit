@@ -35,7 +35,7 @@
     <template #right>
      <div v-if="$store.state.userId" class="row align-content--center">
         <va-navbar-item style="margin: 0.5rem 0">
-          <div :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}">로그인 계정 : {{ $store.state.userId }}</div>
+          <div :class="{tcb : $store.state.isColor_b, tcw :$store.state.isColor_w}">로그인 계정 : {{ $store.state.userId }}</div>
         </va-navbar-item>
         <va-navbar-item style="margin: 0 1rem">
           <router-link @click="logout" flat :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to=""
@@ -50,7 +50,7 @@
           >
         </va-navbar-item>
         <va-navbar-item>
-          <router-link :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to=""
+          <router-link @click="onOpenLogin" :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to=""
             >로그인</router-link
           >
         </va-navbar-item>
@@ -82,7 +82,18 @@
   font-weight: 700;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+.tcw{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: rgb(255, 255, 255);
+  margin: 20px 0;
 
+}
+.tcb{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: rgb(0, 0, 0);
+  margin: 20px 0;
+
+}
 .btn11{
   width: 120px;
   padding: 10px;
