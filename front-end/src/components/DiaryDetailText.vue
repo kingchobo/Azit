@@ -2,21 +2,64 @@
   <div class="video-content">
     <div class="main-container">
       <div>
-        <h2 class="text-title">{{ this.diaryContentDetail.title }}</h2>
-        <div class="text-content">{{ this.diaryContentDetail.content }}</div>
+        <div class="text-container">
+          <span class="text-title">{{ this.diaryContentDetail.title }}</span>
+          <va-popover
+            v-if=state.EditAvaliable
+            placement="top"
+            message="Edit"
+            color="#6565ca"
+          >
+            <va-button
+              icon="edit"
+              outline
+              round
+              color="#6565ca"
+              @click="editDiary"
+            >
+            </va-button>
+          </va-popover>
+          <va-popover 
+            v-else
+            placement="top"
+            message="수정 완료"
+            color="#6565ca"
+          >
+            <va-button
+              icon="save"
+              outline
+              round
+              color="#6565ca"
+              @click="saveDiary"
+            />
+          </va-popover>
+        </div>
+        <!-- <div class="text-content">{{ this.diaryContentDetail.content }}</div> -->
+          <va-input
+            v-if=state.EditAvaliable
+            class="mt-4"
+            v-model=state.diaryGroupText
+            type="textarea"
+            disabled
+            :max-rows="11"
+          />
+          <va-input
+            v-else
+            class="mt-4"
+            v-model=state.diaryMyText
+            type="textarea"
+            :max-rows="11"
+          />
       </div>
     </div>
-
-    <!-- <div>
-        <div class="detail-btns">
-          <button class="detail-next-btn" @click="moveEmotion">다음</button>
-          <Buttons class="mx-3" btn-text="완료"/>
-        </div>
-      </div> -->
+    
   </div>
 </template>
 
 <script>
+import { reactive } from "vue";
+import axios from 'axios';
+
 export default {
   name: "DiaryDetailText",
   props: {
@@ -24,19 +67,46 @@ export default {
       type: Object,
     },
   },
-  setup(props, { emit }) {
-    const moveContent = function () {
-      emit("moveContent");
-    };
-    const moveEmotion = function () {
-      let card = document.querySelector(".detail-container");
-      if (card.style.transform == "rotateY(180deg)") {
-        card.style.transform = "rotateY(0deg)";
-      } else {
-        card.style.transform = "rotateY(180deg)";
+  setup(props) {
+    axios.get(`/api/diary/group/${props.diaryContentDetail.diaryId}`)
+      .then((response) => {
+        state.diaryGroupText = response
+        console.log(response)
+      })
+
+    const state = reactive({
+        EditAvaliable: true,
+        diaryGroupText: '',
+        diaryMyText: props.diaryContentDetail.content,
+        diaryTitle: props.diaryContentDetail.title
+    });
+    // const moveContent = function () {
+    //   emit("moveContent");
+    // };
+    // const moveEmotion = function () {
+    //   let card = document.querySelector(".detail-container");
+    //   if (card.style.transform == "rotateY(180deg)") {
+    //     card.style.transform = "rotateY(0deg)";
+    //   } else {
+    //     card.style.transform = "rotateY(180deg)";
+    //   }
+    // };
+
+    const editDiary = function () {
+      state.EditAvaliable = !state.EditAvaliable
+    }
+
+    const saveDiary = function () {
+      state.EditAvaliable = !state.EditAvaliable
+      const newDiary = {
+        "title": state.diaryTitle,
+        "content": state.diaryMyText
       }
-    };
-    return { moveContent, moveEmotion };
+      axios.put(`api/diary?diaryid=${props.diaryContentDetail.diaryId}`, newDiary).then((response) => {
+          console.log(response);
+      });
+    }
+    return { state, editDiary, saveDiary };
   },
 };
 </script>
@@ -53,30 +123,14 @@ export default {
   font-size: 10px;
 }
 .main-container {
+  border: 1px solid #6565CA;
+  /* min-height:500px; */
+  border-radius: 3rem;
+  margin: 3%;
+
   display: block;
   width: 25vw;
   height: 54vh;
-}
-.detail-next-btn {
-  width: 100px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 2px solid #5959be;
-  color: #3b3ba0;
-  font-weight: 700;
-  font-size: 15px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.4s;
-  margin: 20px 0;
-  background-color: #fff;
-  color: #6565ca;
-  display: block;
-  box-sizing: border-box;
-}
-.detail-btns {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .text-title {
@@ -87,6 +141,11 @@ export default {
   margin-top: 10%;
   text-indent: 15px;
   font-size: 20px;
+}
+
+.text-container {
+  display: flex;
+  justify-content: space-between; 
 }
 </style>
 
