@@ -23,6 +23,7 @@
 import FirstRow from '@/components/FirstRow.vue'
 import DiaryList from '@/components/DiaryList.vue'
 // import DiaryNavbars from '@/components/DiaryNavbars.vue'
+
 export default {
   components: {
     FirstRow,
