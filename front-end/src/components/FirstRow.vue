@@ -65,6 +65,7 @@
             :isFinalUser="isFinalUser"
             :videoLink="videoLink"
             :diaryGroupId="diaryGroupId"
+            :chattingObjArray="chattingObjArray"
             @closeRecording="leaveSession"
             @recordingStart="recordingStart"
             @recordingStop="recordingStop"
@@ -168,6 +169,10 @@ export default {
             tossArray: [],
             userListStr: "",
             isFinalUser: false,
+
+            chattingObjArray: [
+                { user: "system", message: "채팅을 시작합니다." },
+            ],
         };
     },
     methods: {
@@ -310,6 +315,18 @@ export default {
                 // console.log(recordingId);
                 console.log(recordingId);
                 this.recordingId = recordingId;
+            });
+
+            // 채팅 메시지를 받기 위함
+            this.session.on("signal:group-chat", ({ data: chat }) => {
+                console.log(chat);
+                let chatTmp = chat.split(",");
+
+                const chatObj = {
+                    user: chatTmp[0],
+                    message: chatTmp[1],
+                };
+                this.chattingObjArray.push(chatObj);
             });
 
             // --- Connect to the session with a valid user token ---

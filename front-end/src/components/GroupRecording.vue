@@ -30,7 +30,11 @@
                         </div>
                     </div>
                     <div class="flex md4 lg1"></div>
-                    <ChatRoom class="flex md4 lg3" />
+                    <ChatRoom
+                        :session="session"
+                        :chattingObjArray="chattingObjArray"
+                        class="flex md4 lg3"
+                    />
                     <!-- <div class="flex md3 lg3">
                         <div></div>
                     </div> -->
@@ -140,6 +144,9 @@ export default {
         },
         videoLink: {
             type: String,
+        },
+        chattingObjArray: {
+            type: Array,
         },
     },
     data() {
