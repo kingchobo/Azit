@@ -459,7 +459,7 @@ export default {
             // console.log("-------------------------------");
 
             axios
-                .post(`http://localhost:8080/api/diary`, myDiary)
+                .post(`/api/diary`, myDiary)
                 .then((response) => {
                     console.log(response);
                 });
