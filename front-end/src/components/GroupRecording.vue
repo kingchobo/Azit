@@ -18,10 +18,9 @@
             
             <!-- 영상 출력 -->
             <div id="session" v-if="session">
-                <!-- <div class="row justify--space-between"> -->
-                <div class="row">
-                    <div class="flex md6 lg6">
-                        <div id="video-container" class="flex md videocenter">
+                <div class="row justify--space-around">
+                    <div class="flex md3 lg6">
+                        <div id="video-container" class="flex md videocenter4">
                             <user-video :stream-manager="publisher" />
                             <user-video
                                 v-for="sub in subscribers"
@@ -49,7 +48,6 @@
                     btn-text="녹화 시작"
                     @click="recordingStart"
                 />
-
                 <Buttons
                     class="mx-2"
                     btn-text="toss"
@@ -91,11 +89,8 @@ import UserVideo from "./UserVideo.vue";
 import Buttons from "./Buttons.vue";
 import axios from "axios";
 import * as faceapi from "face-api.js";
-<<<<<<< HEAD
 import ChatRoom from './Chat/ChatRoom.vue'
-=======
 import { useStore } from "vuex";
->>>>>>> bfd9aad5b85dcf1ed80384dce1cde84fcc8d9fce
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
