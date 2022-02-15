@@ -1,10 +1,10 @@
 <template>
-  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:fixed; ">
+  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:fixed;" >
     
     <template #left>     
       <div class="btnbox">  
         <va-navbar-item>
-          <router-link id="azit" class="nav-link" to="/" style="font-size:25px">AZit</router-link>
+          <router-link to="/" style="font-size:25px" :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}">AZit</router-link>
         </va-navbar-item>
        </div>
     </template>
@@ -14,19 +14,19 @@
 
         <div class="btnbox">
           <va-navbar-item >
-            <router-link class="btn22" to="/">Home</router-link>
+            <router-link :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to="/">Home</router-link>
           </va-navbar-item>
         </div>
 
         <div class="btnbox">
           <va-navbar-item>
-            <router-link class="btn22" to="/diary">일기장</router-link>
+            <router-link :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to="/diary" @click="navColor">일기장</router-link>
           </va-navbar-item>
         </div>
 
         <div class="btnbox">
           <va-navbar-item>
-            <router-link class="btn22" to="/about">커뮤니티</router-link>
+            <router-link :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to="/about">커뮤니티</router-link>
           </va-navbar-item>
         </div>
       </div>
@@ -35,23 +35,23 @@
     <template #right>
      <div v-if="$store.state.userId" class="row align-content--center">
         <va-navbar-item style="margin: 0.5rem 0">
-          <div>로그인 계정 : {{ $store.state.userId }}</div>
+          <div :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}">로그인 계정 : {{ $store.state.userId }}</div>
         </va-navbar-item>
         <va-navbar-item style="margin: 0 1rem">
-          <va-button class="nav-link" @click="logout" flat color="#ffffff"
-            >로그아웃</va-button
+          <router-link @click="logout" flat :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to=""
+            >로그아웃 </router-link
           >
         </va-navbar-item>
       </div>
       <div v-else class="row">
         <va-navbar-item>
-          <va-button class="nav-link" @click="onOpenSignup" flat color="#ffffff"
-            >회원가입</va-button
+          <router-link @click="onOpenSignup" flat :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to=""
+            >회원가입</router-link
           >
         </va-navbar-item>
         <va-navbar-item>
-          <va-button class="nav-link" @click="onOpenLogin" flat color="#ffffff"
-            >로그인</va-button
+          <router-link :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to=""
+            >로그인</router-link
           >
         </va-navbar-item>
       </div>
@@ -83,12 +83,11 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.btn22 {
+.btn11{
   width: 120px;
   padding: 10px;
   /* border-radius: 20px; */
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-color: #ffffff;
   font-weight: 700;
   font-size: 15px;
   text-align: center;
@@ -98,8 +97,29 @@ color: #ffffff;
   color: rgb(255, 255, 255);
   display: block;
   box-sizing: border-box;
+}
+.btn22 {
+  width: 120px;
+  padding: 10px;
+  /* border-radius: 20px; */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  margin: 20px 0;
+
+  color: rgb(0, 0, 0);
+  display: block;
+  box-sizing: border-box;
   
   
+}
+.btn11:hover {
+
+  border-bottom: solid 2px;
+  border-bottom-color: rgb(250, 250, 250);
+  color: #000000;
 }
 .btn22:hover {
 
@@ -138,10 +158,16 @@ color: #ffffff;
 
   
   z-index: 1;
-  background-color:rgba(0, 0, 0, 0.2);
+  background-color:rgba(0, 0, 0, 0.0);
   border-radius: 0.2rem;
   width: 100%;
   
+}
+
+.navColor2{
+    background-color:rgba(0, 0, 0, 0.7); 
+    color: #000000;
+    position:fixed; 
 }
 
 </style>
@@ -161,7 +187,8 @@ export default {
   data () {
     return {
       openLogin: false,
-      openSignup: false
+      openSignup: false,
+      text_color : "#000000"
     }
   },
   methods : {
@@ -190,7 +217,6 @@ export default {
       this.$store.commit("logInId", "");
       this.$router.go();
     },
-
   },
   beforeUnmount() {
     this.$router.go();

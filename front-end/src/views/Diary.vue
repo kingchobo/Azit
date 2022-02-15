@@ -1,9 +1,11 @@
 <template >
 
-<div class="whitebox" >
+<!-- <div class="whitebox" > -->
 
-  <DiaryNavbars/>
-</div><br><br><br>
+  <!-- <DiaryNavbars/> -->
+<!-- </div><br><br><br> -->
+<div style="height: 80px;">
+</div>
   <div id="diary">
     <div class="diary-container">
       <div>
@@ -20,12 +22,12 @@
 <script>
 import FirstRow from '@/components/FirstRow.vue'
 import DiaryList from '@/components/DiaryList.vue'
-import DiaryNavbars from '@/components/DiaryNavbars.vue'
+// import DiaryNavbars from '@/components/DiaryNavbars.vue'
 export default {
   components: {
     FirstRow,
     DiaryList,
-DiaryNavbars
+// DiaryNavbars
   },
   data () {
     return {
@@ -35,6 +37,10 @@ DiaryNavbars
   beforeUnmount() {
          this.$router.go();
   },
+  created() {
+     this.$store.state.isColor_w = false
+     this.$store.state.isColor_b = true
+  }
 }
 </script>
 

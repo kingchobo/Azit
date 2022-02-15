@@ -41,7 +41,8 @@ export default {
     
   },
   created() {
-            // alert(this.$store.state.userId)
+     this.$store.state.isColor_w = true
+     this.$store.state.isColor_b = false
   },
  beforeUnmount() {
 
