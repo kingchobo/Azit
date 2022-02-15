@@ -39,9 +39,7 @@
                         <div class="text-container">
                             <div>
                                 <DiaryDetailText
-                                    :diaryContentDetail="
-                                        state.diaryContentDetail
-                                    "
+                                    :diaryContentDetail="state.diaryContentDetail"
                                     class="front"
                                     @moveContent="moveContent"
                                 />
