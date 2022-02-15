@@ -414,14 +414,14 @@ export default {
 
             // 제목 입력 창 띄우기
             emit("recordingStop");
-            
+
             // console.log(state.recordingText);
             // console.log("녹화중지 버튼 누름");
         };
 
-        const switchTitleModal = function() {
+        const switchTitleModal = function () {
             state.showTitleModal = !state.showTitleModal;
-        }
+        };
 
         const saveDiary = async () => {
             // 일기 저장
@@ -441,7 +441,7 @@ export default {
                 console.log(response);
             });
             // emit("recordingStop");
-            state.showTitleModal = !state.showTitleModal;
+            switchTitleModal();
             closeRecording();
         };
 
@@ -461,7 +461,7 @@ export default {
             // getEmothiontList,
             saveDiary,
             tossUser,
-            switchTitleModal
+            switchTitleModal,
         };
     },
 };
