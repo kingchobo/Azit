@@ -24,11 +24,11 @@
           </va-navbar-item>
         </div>
 
-        <div class="btnbox">
+        <!-- <div class="btnbox">
           <va-navbar-item>
             <router-link :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to="/about">커뮤니티</router-link>
           </va-navbar-item>
-        </div>
+        </div> -->
       </div>
     </template>
 
