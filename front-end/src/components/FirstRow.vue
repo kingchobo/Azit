@@ -286,7 +286,7 @@ export default {
                 this.recordingStatus = message;
                 if (message === "recordingStopped") {
                     // console.log("녹화 종료 감지");
-                    this.$refs.groupRecordingRef.saveDiary();
+                    this.$refs.groupRecordingRef.switchTitleModal();
                 }
             });
 
