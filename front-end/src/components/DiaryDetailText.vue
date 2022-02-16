@@ -1,56 +1,41 @@
 <template>
     <div class="video-content">
         <div class="main-container">
-            <div>
-                <div class="text-container">
-                    <span class="text-title">{{
-                        this.diaryContentDetail.title
-                    }}</span>
-                    <va-popover
-                        v-if="state.EditAvaliable"
-                        placement="top"
-                        message="Edit"
-                        color="#6565ca"
-                    >
-                        <va-button
-                            icon="edit"
-                            outline
-                            round
-                            color="#6565ca"
-                            @click="editDiary"
-                        >
-                        </va-button>
-                    </va-popover>
-                    <va-popover
-                        v-else
-                        placement="top"
-                        message="수정 완료"
-                        color="#6565ca"
-                    >
-                        <va-button
-                            icon="save"
-                            outline
-                            round
-                            color="#6565ca"
-                            @click="saveDiary"
-                        />
-                    </va-popover>
-                </div>
-                <!-- <div class="text-content">{{ this.diaryContentDetail.content }}</div> -->
-                <va-input
-                    v-if="state.EditAvaliable"
-                    class="mt-4"
-                    v-model="state.diaryGroupText"
-                    type="textarea"
-                    disabled
-                    :max-rows="11"
+            <div class="text-container background-none">
+                <p class="display-3">
+                    {{ this.diaryContentDetail.title }}
+                </p>
+            </div>
+            <!--  -->
+            <div
+                v-show="state.editVisible"
+                class="text-block group-text-area background-none"
+            >
+                <p v-html="state.diaryGroupText"></p>
+            </div>
+
+            <va-input
+                v-show="state.updateVisible"
+                class="mt-4"
+                v-model="state.diaryMyText"
+                type="textarea"
+                :max-rows="11"
+            />
+
+            <div class="row justify--center">
+                <!--  -->
+                <Buttons
+                    v-show="state.editVisible"
+                    class="mx-2"
+                    btn-text="내용 수정"
+                    @click="editDiary"
                 />
-                <va-input
-                    v-else
-                    class="mt-4"
-                    v-model="state.diaryMyText"
-                    type="textarea"
-                    :max-rows="11"
+                <!--  -->
+                <Buttons
+                    v-show="state.updateVisible"
+                    class="mx-2"
+                    btn-text="내용 저장"
+                    @click="saveDiary"
                 />
             </div>
         </div>
@@ -60,9 +45,13 @@
 <script>
 import { reactive } from "vue";
 import axios from "axios";
+import Buttons from "./Buttons.vue";
 
 export default {
     name: "DiaryDetailText",
+    components: {
+        Buttons,
+    },
     props: {
         diaryContentDetail: {
             type: Object,
@@ -72,18 +61,10 @@ export default {
     //     thisTest: "this 테스트용 데이터",
     // },
     setup(props) {
-        axios
-            .get(`/api/diary/group/${props.diaryContentDetail.diaryId}`)
-            .then(({ data: diaryList }) => {
-                diaryList.forEach((diaryObject) => {
-                    console.log(diaryObject); // 일기 객체
-
-                    state.diaryGroupText += diaryObject.content;
-                });
-            });
-
         const state = reactive({
-            EditAvaliable: true,
+            // EditAvaliable: true,
+            editVisible: true,
+            updateVisible: false,
             diaryGroupText: "",
             diaryMyText: props.diaryContentDetail.content,
             diaryTitle: props.diaryContentDetail.title,
@@ -100,17 +81,39 @@ export default {
         //   }
         // };
 
-        const editDiary = function () {
-            state.EditAvaliable = !state.EditAvaliable;
+        const getGroupDiaryContent = () => {
+            state.diaryGroupText = "";
+            axios
+                .get(`/api/diary/group/${props.diaryContentDetail.diaryId}`)
+                .then(({ data: diaryList }) => {
+                    diaryList.forEach(async (diaryObject) => {
+                        console.log(diaryObject); // 일기 객체
+                        await axios
+                            .get(`/api/user/${diaryObject.user.userId}`)
+                            .then(({ data: userObj }) => {
+                                console.log(props.diaryContentDetail);
+                                console.log(userObj.name);
+                                state.diaryGroupText += `<p style="padding:5px; font-size: 1.5em;">${userObj.name}<p>`;
+                            });
+                        state.diaryGroupText += `${diaryObject.content} <br /> <br />`;
+                        console.log(state.diaryGroupText);
+                    });
+                });
         };
 
-        const saveDiary = function () {
-            state.EditAvaliable = !state.EditAvaliable;
-            const newDiary = {
-                title: state.diaryTitle,
-                content: state.diaryMyText,
-            };
-            axios
+        getGroupDiaryContent();
+
+        const editDiary = function () {
+            state.editVisible = false;
+            state.updateVisible = true;
+        };
+
+        const saveDiary = async () => {
+            const newDiary = props.diaryContentDetail;
+
+            newDiary.content = state.diaryMyText;
+
+            await axios
                 .put(
                     `api/diary?diaryid=${props.diaryContentDetail.diaryId}`,
                     newDiary
@@ -118,6 +121,10 @@ export default {
                 .then((response) => {
                     console.log(response);
                 });
+
+            getGroupDiaryContent();
+            state.editVisible = true;
+            state.updateVisible = false;
         };
         return { state, editDiary, saveDiary };
     },
@@ -136,9 +143,9 @@ export default {
     font-size: 10px;
 }
 .main-container {
-    border: 1px solid #6565ca;
+    /* border: 1px solid #6565ca; */
     /* min-height:500px; */
-    border-radius: 3rem;
+    /* border-radius: 3rem; */
     margin: 3%;
 
     display: block;
@@ -159,5 +166,15 @@ export default {
 .text-container {
     display: flex;
     justify-content: space-between;
+}
+
+.background-none {
+    background-color: transparent;
+}
+
+.group-text-area {
+    height: 50%;
+    overflow-y: scroll;
+    font-size: 1.2em;
 }
 </style>

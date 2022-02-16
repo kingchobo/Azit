@@ -15,12 +15,18 @@
           @click="closeRecording"
         ></va-button>
       </div>
+
+      <!-- 영상 출력 -->
+      <div id="session" v-if="session"> 
+        <user-video :stream-manager="publisher" />
+      </div>
     </div>
   </va-modal>
 </template>
 
 <script>
 import { computed, reactive } from "vue";
+import UserVideo from "./UserVideo.vue";
 
 export default {
   name: "Recording",
@@ -29,6 +35,12 @@ export default {
       type: Boolean,
       default: false,
     },
+    publisher: {
+        type: Object,
+    },
+  },
+  components: {
+    UserVideo
   },
   setup(props, { emit }) {
     const state = reactive({
