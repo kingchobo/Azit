@@ -29,7 +29,7 @@
         :erase-on-complete="false"
         caret-animation="blink"
     ></vue-typer>
-    <div v-if="diarys.length">
+    <!-- <div v-if="diarys.length"> -->
         <div class="row">
             <diary-list-item
                 class="result"
@@ -39,10 +39,10 @@
             />
             <InfiniteLoading :diarys="diarys" @infinite="load" />
         </div>
-    </div>
+    <!-- </div>
     <div v-else>
         <h1 style="margin : 20%">아직 작성된 일기가 없습니다.</h1>
-    </div>
+    </div> -->
 
     <!-- <div class="flex md4 lg3" v-if="diarys.length"> 
         <diary-list-item
