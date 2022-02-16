@@ -36,7 +36,7 @@
     <template #right>
       <div v-if="$store.state.userId" class="row align-content--center">
         <va-navbar-item style="margin: 0.5rem 0">
-          <div text="black text">로그인 계정 : {{ $store.state.userId }}</div>
+          <div text="black text">{{ $store.state.userId }}</div>
         </va-navbar-item>
         <va-navbar-item style="margin: 0 1rem">
           <va-button class="nav-link" @click="logout" flat color="#000000"
@@ -72,7 +72,7 @@
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -89,7 +89,7 @@
   width: 120px;
   padding: 10px;
   /* border-radius: 20px; */
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   color: #000000;
   font-weight: 700;
   font-size: 15px;

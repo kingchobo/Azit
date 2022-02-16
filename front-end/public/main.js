@@ -14,7 +14,7 @@ $(function(){
 		controlArrows: true,
 		scrollingSpeed: 1400,
 		afterLoad: function(anchorLink, index){
-			console.log("현재섹션은" + index);
+			// console.log("현재섹션은" + index);
 			// if(index==5){
 			// 	alert('마지막입니다');
 			// }
