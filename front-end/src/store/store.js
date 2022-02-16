@@ -8,7 +8,11 @@ const store = createStore({
     return {
       userId : '',
       isColor_w : true,
-      isColor_b : false
+      isColor_b : false,
+      styleObject : {
+        'background-color' : 'rgba(255, 255, 255, 0.0)',
+        'position':'fixed'
+      },
     //   count: 0,
     //   cart: [{
     //     product_id: 1,

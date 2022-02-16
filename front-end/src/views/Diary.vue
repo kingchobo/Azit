@@ -42,6 +42,7 @@ export default {
   created() {
      this.$store.state.isColor_w = false
      this.$store.state.isColor_b = true
+     this.$store.state.styleObject['background-color'] = 'rgba(255, 255, 255, 0.9)'
   }
 }
 </script>
