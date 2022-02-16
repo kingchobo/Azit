@@ -86,7 +86,7 @@ export default {
       
     },
     async loginApi(id,password){
-      this.user = await this.api('http://localhost:8080/api/user/login','post',{
+      this.user = await this.api('/api/user/login','post',{
           "userId" : id,
           "password" : password
           })
