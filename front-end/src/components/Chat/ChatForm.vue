@@ -23,9 +23,11 @@ export default {
     methods: {
         sendMessage() {
             console.log("ChatForm.vue의 sendMessage");
-            let message = `${this.$store.state.userId},${this.msg}`;
-            this.msg = ""
-            this.$parent.sendMessage(message);
+            if (this.msg.trim()) {
+                let message = `${this.$store.state.userId},${this.msg}`;
+                this.msg = ""
+                this.$parent.sendMessage(message);
+            }
         },
     },
 };
