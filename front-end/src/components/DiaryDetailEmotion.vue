@@ -6,25 +6,25 @@
     
     <div>
       <div class="emotion-content-bar">
-        <div class="my-1 text--bold muted">기본</div>
+        <div class="my-1 text--bold muted">neutral</div>
         <va-progress-bar :model-value="this.diaryContentDetail.emotions.neutral*100" color="success" />
         <br />
-        <div class="my-1 text--bold muted">행복</div>
+        <div class="my-1 text--bold muted">happy</div>
         <va-progress-bar :model-value="this.diaryContentDetail.emotions.happy*100" color="#BE81F7"/>
         <br />
-        <div class="my-1 text--bold muted">슬픔</div>
+        <div class="my-1 text--bold muted">sad</div>
         <va-progress-bar :model-value="this.diaryContentDetail.emotions.sad*100" color="warning"/>
         <br />
-        <div class="my-1 text--bold muted">화남</div>
+        <div class="my-1 text--bold muted">angry</div>
         <va-progress-bar :model-value="this.diaryContentDetail.emotions.angry*100" color="#1f00ff" />
         <br />
-        <div class="my-1 text--bold muted">두려움</div>
+        <div class="my-1 text--bold muted">suprised</div>
         <va-progress-bar :model-value="this.diaryContentDetail.emotions.fearful*100" color="danger"/>
         <br />
-        <div class="my-1 text--bold muted">혐오</div>
+        <div class="my-1 text--bold muted">disgusted</div>
         <va-progress-bar :model-value="this.diaryContentDetail.emotions.disgusted*100" color="#000058" />
         <br />
-        <div class="my-1 text--bold muted">놀람</div>
+        <div class="my-1 text--bold muted">surprised</div>
         <va-progress-bar :model-value="this.diaryContentDetail.emotions.surprised*100" color="#000058" />
       </div>
 

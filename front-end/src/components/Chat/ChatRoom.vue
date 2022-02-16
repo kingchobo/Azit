@@ -1,6 +1,7 @@
 <template>
     <div class="chat-container">
         <div class="chat-body">
+                {{this.msg}}
             <div v-if="this.datas">
                 <!-- <ChatList :msgs="msgDatas" class="msg-list"/> -->
                 <div

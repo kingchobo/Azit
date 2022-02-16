@@ -383,7 +383,7 @@ export default {
             this.OV = undefined;
 
             window.removeEventListener("beforeunload", this.leaveSession);
-            // this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
+            this.moveDiaryDetail = true;
         },
         async recordingStart() {
             // console.log("녹화 시작");

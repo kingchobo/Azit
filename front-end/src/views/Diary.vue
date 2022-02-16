@@ -64,7 +64,7 @@ export default {
 .diaryBox{
     border: 1px solid #6565CA;
     min-height:500px;
-    border-radius: 3rem;
+    border-radius: 1rem;
     margin: 1%;
 }
 .diaryBox2{
