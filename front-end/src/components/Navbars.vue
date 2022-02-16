@@ -3,7 +3,10 @@
     <template #left>     
       <div class="btnbox">  
         <va-navbar-item>
-          <router-link to="/" style="font-size:25px" :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}">AZit</router-link>
+          <router-link to="/" style="font-size:25px" :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}">
+          <img v-if="$store.state.isColor_w" :src="require(`@/assets/azit2.png`)" style="width 12px; height:35px">
+          <img v-else-if="$store.state.isColor_b" :src="require(`@/assets/azit.png`)" style="width 12px; height:35px">
+          </router-link>
         </va-navbar-item>
        </div>
     </template>
