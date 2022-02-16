@@ -12,7 +12,7 @@
                     class="modal-btn"
                     color="#6565ca"
                     icon="clear"
-                    @click="closeRecording"
+                    @click="clickRefresh"
                 ></va-button>
             </div>
 
@@ -155,6 +155,13 @@ export default {
         };
     },
     created() {},
+    methods: {
+        clickRefresh() {
+            this.$router.go();
+            console.log(window.location.pathname);
+            console.log("새로고침");
+        },
+    },
     setup(props, { emit }) {
         const store = useStore();
 
@@ -212,20 +219,6 @@ export default {
 
             emit("setUserListStr");
 
-            // 녹화가 시작됨을 모든 구성원에게 알림
-            props.session
-                .signal({
-                    data: "recordingStarted", // Any string (optional)
-                    to: [], // 모든 구성원에게 보내기
-                    type: "recordStatus", // The type of message (optional)
-                })
-                .then(() => {
-                    console.log("Message successfully sent");
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-
             // TODO
             await axios
                 .post("/api/diaryGroup", {})
@@ -247,6 +240,20 @@ export default {
                         .catch((error) => {
                             console.error(error);
                         });
+                });
+
+            // 녹화가 시작됨을 모든 구성원에게 알림
+            props.session
+                .signal({
+                    data: "recordingStarted", // Any string (optional)
+                    to: [], // 모든 구성원에게 보내기
+                    type: "recordStatus", // The type of message (optional)
+                })
+                .then(() => {
+                    console.log("Message successfully sent");
+                })
+                .catch((error) => {
+                    console.error(error);
                 });
 
             console.log(props.diaryGroupId);
@@ -341,7 +348,7 @@ export default {
                         console.log(statusPercent);
                     });
                 }
-            }, 1000);
+            }, 250);
         };
 
         const voiceTextStart = function () {

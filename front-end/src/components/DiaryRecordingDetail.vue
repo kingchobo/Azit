@@ -1,54 +1,57 @@
 <template>
-  <va-modal
-    v-model="state.detailVisible"
-    no-outside-dismiss
-    hide-default-actions
-    max-height="100%"
-    max-width="100%"
-  >
-    <div class="modal">
-      <div class="modal-header">
-        <va-button
-          class="modal-btn"
-          color="#6565ca"
-          icon="clear"
-          @click="closeDetail"
-        ></va-button>
-      </div>
+    <va-modal
+        v-model="state.detailVisible"
+        no-outside-dismiss
+        hide-default-actions
+        max-height="100%"
+        max-width="100%"
+    >
+        <div class="modal">
+            <div class="modal-header">
+                <va-button
+                    class="modal-btn"
+                    color="#6565ca"
+                    icon="clear"
+                    @click="closeDetail, clickRefresh"
+                ></va-button>
+            </div>
 
-      <div class="modal-content">
-        <video
-          class="mx-3 my-5 recorded-video"
-          :src="this.recordingUrl"
-          controls
-        ></video>
-        <!-- <section class="mx-3 my-5 video" @click="moveRecordingVideo"></section> -->
-        <section class="mx-3 my-5 contain">
-          <va-tabs v-model="state.value" color="#5959be">
-            <template #tabs>
-              <va-tab v-for="tab in ['Contents', 'Emotions']" :key="tab">
-                {{ tab }}
-              </va-tab>
-              <div>{{ state.value }}</div>
-            </template>
-          </va-tabs>
-          <div v-if="state.value === 1">
-            <DiaryDetailText
-              :diaryContentDetail="state.diaryContentDetail"
-              class="front"
-              @moveContent="moveContent"
-            />
-          </div>
-          <div v-else-if="state.value === 2">
-            <DiaryDetailEmotion
-              class="back"
-              :diaryContentDetail="state.diaryContentDetail"
-            />
-          </div>
-        </section>
-      </div>
-    </div>
-  </va-modal>
+            <div class="modal-content">
+                <video
+                    class="mx-3 my-5 recorded-video"
+                    :src="this.recordingUrl"
+                    controls
+                ></video>
+                <!-- <section class="mx-3 my-5 video" @click="moveRecordingVideo"></section> -->
+                <section class="mx-3 my-5 contain">
+                    <va-tabs v-model="state.value" color="#5959be">
+                        <template #tabs>
+                            <va-tab
+                                v-for="tab in ['Contents', 'Emotions']"
+                                :key="tab"
+                            >
+                                {{ tab }}
+                            </va-tab>
+                            <div>{{ state.value }}</div>
+                        </template>
+                    </va-tabs>
+                    <div v-if="state.value === 1">
+                        <DiaryDetailText
+                            :diaryContentDetail="state.diaryContentDetail"
+                            class="front"
+                            @moveContent="moveContent"
+                        />
+                    </div>
+                    <div v-else-if="state.value === 2">
+                        <DiaryDetailEmotion
+                            class="back"
+                            :diaryContentDetail="state.diaryContentDetail"
+                        />
+                    </div>
+                </section>
+            </div>
+        </div>
+    </va-modal>
 </template>
 
 <script>
@@ -57,90 +60,103 @@ import DiaryDetailText from "@/components/DiaryDetailText.vue";
 import DiaryDetailEmotion from "@/components/DiaryDetailEmotion.vue";
 
 export default {
-  name: "DiaryRecordingDetail",
+    name: "DiaryRecordingDetail",
 
-  props: {
-    move: {
-      type: Boolean,
-      default: false,
-      tab: true,
+    props: {
+        move: {
+            type: Boolean,
+            default: false,
+            tab: true,
+        },
+        diaryContent: {
+            type: Object,
+        },
+        recordingUrl: {
+            type: String,
+        },
     },
-    diaryContent: {
-      type: Object,
+    components: {
+        DiaryDetailText,
+        DiaryDetailEmotion,
     },
-    recordingUrl: {
-      type: String,
+    methods: {
+        clickRefresh() {
+            this.$router.go();
+            console.log(window.location.pathname);
+            console.log("새로고침");
+        },
     },
-  },
-  components: {
-    DiaryDetailText,
-    DiaryDetailEmotion,
-  },
-  setup(props, { emit }) {
-    const state = reactive({
-      detailVisible: computed(() => props.move),
-      contentVisible: false,
-      value: 1,
-      diaryContentDetail: computed(() => props.diaryContent),
-    });
+    setup(props, { emit }) {
+        const state = reactive({
+            detailVisible: computed(() => props.move),
+            contentVisible: false,
+            value: 1,
+            diaryContentDetail: computed(() => props.diaryContent),
+        });
 
-    const closeDetail = function () {
-      state.value = 1;
-      emit("closeDetail");
-    };
+        const closeDetail = function () {
+            state.value = 1;
+            emit("closeDetail");
+        };
 
-    const moveContent = function () {
-      state.contentVisible = !state.contentVisible;
-    };
+        const moveContent = function () {
+            state.contentVisible = !state.contentVisible;
+        };
 
-    const moveRecordingVideo = function () {
-      console.log(this.recordingUrl);
-      window.open(this.recordingUrl, "_blank");
-    };
+        const moveRecordingVideo = function () {
+            console.log(this.recordingUrl);
+            window.open(this.recordingUrl, "_blank");
+        };
 
-    const moveEmotion = function () {
-      let card = document.querySelector(".detail-container");
-      if (card.style.transform == "rotateY(180deg)") {
-        card.style.transform = "rotateY(0deg)";
-      } else {
-        card.style.transform = "rotateY(180deg)";
-      }
-    };
-    return { state, closeDetail, moveContent, moveEmotion, moveRecordingVideo };
-  },
+        const moveEmotion = function () {
+            let card = document.querySelector(".detail-container");
+            if (card.style.transform == "rotateY(180deg)") {
+                card.style.transform = "rotateY(0deg)";
+            } else {
+                card.style.transform = "rotateY(180deg)";
+            }
+        };
+        return {
+            state,
+            closeDetail,
+            moveContent,
+            moveEmotion,
+            moveRecordingVideo,
+        };
+    },
 };
 </script>
 
 <style scoped>
 .modal {
-  width: 90vw;
-  height: 85vh;
+    width: 90vw;
+    height: 85vh;
 }
 
 .modal-header {
-  display: flex;
+    display: flex;
 }
 
 .modal-btn {
-  margin-left: auto;
+    margin-left: auto;
 }
 
 .modal-content {
-  display: flex;
-  justify-content: center;
-  margin-top: 1vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 1vw;
 }
 
 .recorded-video {
-  display: block;
-  width: 45vw;
-  height: 55vh;
+    display: block;
+    width: 45vw;
+    height: 55vh;
 }
 .contain {
-  display: block;
-  width: 30vw;
-  height: 55vh;
-  /* background: rgb(228, 228, 228); */
+    display: block;
+    width: 30vw;
+    height: 55vh;
+    /* background: rgb(228, 228, 228); */
 }
 
 /* .card{    */
@@ -177,24 +193,24 @@ export default {
 } */
 
 .detail-container {
-  perspective: 100rem;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-  cursor: pointer;
-  background: #ffffff;
+    perspective: 100rem;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    background: #ffffff;
 }
 
 .front {
-  position: absolute;
-  transform: rotateY(0deg);
+    position: absolute;
+    transform: rotateY(0deg);
 }
 
 .back {
-  transform: rotateY(0deg);
+    transform: rotateY(0deg);
 }
 
 .detail-btns {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 </style>

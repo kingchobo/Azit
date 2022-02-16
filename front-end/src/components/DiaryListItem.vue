@@ -20,7 +20,7 @@
     <DiaryDetail
         :move="openDetail"
         :diaryContent="diary"
-        @closeDetail="this.openDetail = !this.openDetail"
+        @closeDetail="this.openDetail = false"
     />
 </template>
 
@@ -41,12 +41,12 @@ export default {
         return {
             openDetail: false,
             diaryContent: [],
-            diaryDate: this.diary.createDate.slice(0,10)
+            diaryDate: this.diary.createDate.slice(0, 10),
         };
     },
     methods: {
         onOpenDetail() {
-            this.openDetail = !this.openDetail;
+            this.openDetail = true;
             console.log(this.diary);
             // axios.get('https://045d5080-b0f3-4dd5-9240-aee771955f6d.mock.pstmn.io/diarydetail')
             // axios

@@ -172,6 +172,10 @@ export default {
             ],
         };
     },
+    created() {
+        console.log("window객체 상태", window);
+        window.addEventListener("beforeunload", this.leaveSession);
+    },
     methods: {
         isMyOrderSwitch() {
             this.isMyOrder = !this.isMyOrder;
@@ -365,7 +369,7 @@ export default {
                     });
             });
 
-            window.addEventListener("beforeunload", this.leaveSession);
+            // window.addEventListener("beforeunload", this.leaveSession);
         },
 
         leaveSession(diaryContent) {
@@ -382,7 +386,7 @@ export default {
 
             console.log(diaryContent);
 
-            window.removeEventListener("beforeunload", this.leaveSession);
+            // window.removeEventListener("beforeunload", this.leaveSession);
             this.diaryContent = diaryContent;
             this.moveDiaryDetail = true;
         },

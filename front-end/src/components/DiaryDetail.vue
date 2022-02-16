@@ -12,7 +12,7 @@
                     class="modal-btn"
                     color="#6565ca"
                     icon="clear"
-                    @click="closeDetail"
+                    @click="clickRefresh"
                 ></va-button>
             </div>
 
@@ -91,6 +91,13 @@ export default {
         Buttons,
         DiaryDetailText,
         DiaryDetailEmotion,
+    },
+    methods: {
+        clickRefresh() {
+            this.$router.go();
+            console.log(window.location.pathname);
+            console.log("새로고침");
+        },
     },
     setup(props, { emit }) {
         const state = reactive({
