@@ -105,7 +105,7 @@ export default {
                 passwordValue: "",
                 passwordConfirmValue: "",
                 selectValue: "",
-                nameValue: '',
+                nameValue: "",
                 validation: null,
             }),
             // signup = function () {
@@ -135,18 +135,14 @@ export default {
     },
     methods: {
         async signup() {
-            this.user = await this.api(
-                '/api/user',
-                'post',
-                {
-                    userId: this.state.idValue,
-                    name: this.state.nameValue,
-                    email: this.state.emailValue,
-                    password: this.state.passwordValue,
-                }
-            );
+            this.user = await this.api("/api/user", "post", {
+                userId: this.state.idValue,
+                name: this.state.nameValue,
+                email: this.state.emailValue,
+                password: this.state.passwordValue,
+            });
             if (this.user) {
-                this.$store.commit("logInId", this.user.userId);
+                this.$store.commit("logInId", this.user);
                 this.closeSignup();
             } else {
                 alert("아이디와 비밀번호를 확인해주세요");
