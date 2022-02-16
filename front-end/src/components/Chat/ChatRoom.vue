@@ -7,14 +7,14 @@
                     v-for="(msg, index) in chattingObjArray"
                     v-bind:key="index"
                 >
-                    <!-- <div v-if="this.$store.state.userId == msg.user" class="mymsg-box ">
+                    <div v-if="this.$store.state.userId == msg.user" class="mymsg-box ">
 
                         <div class="chat-mymsg">
                         {{ msg.message }}
                         </div>
-                    </div> -->
-                    <!-- <div v-else > -->
-                    <div>
+                    </div>
+                    <div v-else >
+                    <!-- <div> -->
                     <div>&nbsp;{{ msg.user }}</div>
                     <div class="chat-other-box">
 
