@@ -3,7 +3,7 @@
     <div class="layer" >  
       <div class="parent2" style="margin-top: 20%">
         <div class="child2">
-         <span style="color:#CCFFFF; font-size:60px;  font-family: 'Times New Roman', Times, serif;"></span>Zoom
+         Zoom
         </div>
         <br>
       </div>

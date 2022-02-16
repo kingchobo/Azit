@@ -11,14 +11,14 @@
             />
         </div>
 
-        <div class="right-btns">
+        <!-- <div class="right-btns"> -->
             <!-- Search -->
-            <div class="search">
+            <!-- <div class="search">
                 <div @click="searchDiary" class="material-icons">search</div>
-            </div>
+            </div> -->
             <!-- Right Buttons -->
             <!-- <Buttons class="search-filter" btn-text="필터" /> -->
-        </div>
+        <!-- </div> -->
 
         <!-- 일기 작성 modal -->
         <Recording
@@ -92,12 +92,12 @@
         <va-modal v-model="showSearchModal" hide-default-actions>
             <b>방에 참여 하시겠습니까?</b>
             <div class="search">
-                <input
+                <va-input
                     v-model="roomCode"
                     type="text"
-                    placeholder="내용을 입력해주세요."
+                    placeholder="아이디를 입력하세요"
                 />
-                <div class="material-icons">search</div>
+                <div class="material-icons" @click="joinGroup">search</div>
             </div>
             <div class="group-btns">
                 <WhiteButtons
@@ -218,6 +218,7 @@ export default {
             console.log(this.searchData);
         },
         joinGroup() {
+            this.showSearchModal =! this.showSearchModal
             this.openRecording = !this.openRecording;
             this.joinSession(this.roomCode);
         },

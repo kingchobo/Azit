@@ -14,7 +14,7 @@
       /> -->
             <!-- <va-card-title>{{diary.title}}</va-card-title> -->
             <va-card-content>제목 : {{ diary.title }}</va-card-content>
-            <va-card-content>작성일 : {{ diary.createDate }}</va-card-content>
+            <va-card-content>작성일 : {{ this.diaryDate }}</va-card-content>
         </va-card>
     </div>
     <DiaryDetail
@@ -41,6 +41,7 @@ export default {
         return {
             openDetail: false,
             diaryContent: [],
+            diaryDate: this.diary.createDate.slice(0,10)
         };
     },
     methods: {

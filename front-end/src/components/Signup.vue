@@ -28,6 +28,15 @@
                         (value) => value.length > 0 || '필수 입력 항목입니다',
                     ]"
                 />
+                <p class="my-1">이름</p>
+                <va-input
+                    class="mb-4"
+                    v-model="state.nameValue"
+                    outline
+                    :rules="[
+                        (value) => value.length > 0 || '필수 입력 항목입니다',
+                    ]"
+                />
                 <p class="mb-1">이메일</p>
                 <va-input
                     class="mb-4"
@@ -96,6 +105,7 @@ export default {
                 passwordValue: "",
                 passwordConfirmValue: "",
                 selectValue: "",
+                nameValue: '',
                 validation: null,
             }),
             // signup = function () {
@@ -130,6 +140,7 @@ export default {
                 'post',
                 {
                     userId: this.state.idValue,
+                    name: this.state.nameValue,
                     email: this.state.emailValue,
                     password: this.state.passwordValue,
                 }

@@ -18,7 +18,7 @@ export default {
 
 <style>
 .video_board {
-	/* margin : 0.005rem;  */
+	padding : 0.4rem; 
 	/* border: thick double #32a1ce; */
 	border-radius: 1rem;
 }
