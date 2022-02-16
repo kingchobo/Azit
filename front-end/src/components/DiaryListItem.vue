@@ -26,7 +26,6 @@
 
 <script>
 import DiaryDetail from "@/components/DiaryDetail.vue";
-import axios from "axios";
 
 export default {
     name: "DiaryListItem",

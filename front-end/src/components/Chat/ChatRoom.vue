@@ -3,14 +3,21 @@
         <div class="chat-body">
             <div v-if="this.datas">
                 <!-- <ChatList :msgs="msgDatas" class="msg-list"/> -->
-                <div class="chat-message">
-                    <div
-                        v-for="(msg, index) in chattingObjArray"
-                        v-bind:key="index"
-                    >
-                        아이디 : {{ msg.user }} , 메시지 : {{ msg.message }}
+                <div
+                    v-for="(msg, index) in chattingObjArray"
+                    v-bind:key="index"
+                >
+                    <div v-if="this.$store.state.userId == msg.user" class="mymsg-box ">
+
+                        <div class="chat-mymsg">
+                        {{ msg.message }}
+                        </div>
                     </div>
-                    <!-- {{ this.datas.name }} : {{ this.datas.msg }} -->
+                    <div v-else >
+                    <!-- <div> -->
+                    <span>{{ msg.user }}</span>
+                    <span class="chat-other-msg">{{ msg.message }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -19,16 +26,13 @@
 </template>
 
 <script>
-// import ChatList from '@/components/Chat/ChatList.vue';
 import ChatForm from "@/components/Chat/ChatForm.vue";
-// import { useStore } from "vuex";
-// const store = useStore();
 
 export default {
     name: "ChatRoom",
     data() {
         return {
-            datas: [],
+            datas: []
         };
     },
     props: {
@@ -40,7 +44,6 @@ export default {
         },
     },
     components: {
-        // ChatList,
         ChatForm,
     },
     methods: {
@@ -60,35 +63,57 @@ export default {
                 });
         },
     },
+
 };
 </script>
 
 <style>
-.chat-message {
-    margin: 0.4rem 0 0 1rem;
-    border-radius: 10px 10px 10px 10px;
-    max-width: 180px;
+.mymsg-box {
+    display: flex;
+    justify-content: right;
+}
+
+.chat-mymsg {
+    margin: 0.4rem 0 0 0;
+    border-radius: 20px 20px 0px 20px;
     background-color: #6565ca;
+    color: white;
+    padding: 0.8rem;
+    font-size: 14px;
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+    line-break: anywhere;
+}
+
+.chat-other-msg {
+    margin: 0.4rem 0 0 1rem;
+    border-radius: 20px 20px 20px 0px;
+    background-color: #eeeeee;
     color: black;
     padding: 0.8rem;
     font-size: 14px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-.chat-container {
-    display: flex-column;
-    justify-content: center;
-    height: 40%;
-}
-.chat-body {
-    padding: 2rem;
-    overflow: scroll;
-    scroll-behavior: smooth;
-    background: #dfdfe4;
-    margin-bottom: 1rem;
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+    line-break: anywhere;
 }
 
-.chat__body::-webkit-scrollbar {
+.chat-container {
+    display: flex-column;
+    /* justify-content: center; */
+}
+.chat-body {
+    overflow-y: scroll;
+    display:flex;
+    flex-direction: column-reverse;
+    padding: 2rem;
+    scroll-behavior: smooth;
+    background: #d2d2d8;
+    margin-bottom: 1rem;
+    height: 60vh;
+    border-radius: 1rem;
+}
+
+.chat-body::-webkit-scrollbar {
     display: none;
 }
 </style>

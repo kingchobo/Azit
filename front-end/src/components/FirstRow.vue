@@ -159,7 +159,7 @@ export default {
             subscribers: [],
             // sessionId: 'SessionA',
             roomCode: "", // roomCode는 방을 만든 사람의 userId값
-            // myName: "testUser" + Math.random() * 100,
+            myName: "testUser" + Math.random() * 100,
 
             recordingStatus: "beforeStarted",
             // currentUserId: "",
@@ -221,9 +221,9 @@ export default {
          * 함께쓰기 방 생성 함수
          */
         createRoom() {
-            this.roomCode = this.$store.state.userId;
-            this.joinSession(this.$store.state.userId);
-            // this.joinSession("testUser"); // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
+            // this.roomCode = this.$store.state.userId;
+            // this.joinSession(this.$store.state.userId);
+            this.joinSession("testUser"); // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
         },
         /* Openvidu API 시작 */
         joinSession(roomCode) {
@@ -366,8 +366,8 @@ export default {
                 .post(
                     `${OPENVIDU_SERVER_URL}/openvidu/api/recordings/start`,
                     {
-                        session: this.roomCode,
-                        // session: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
+                        // session: this.roomCode,
+                        session: "testUser", // toss 테스트용 ID (주의! DB에 해당 유저 존재해야 함)
                     },
                     {
                         auth: {
