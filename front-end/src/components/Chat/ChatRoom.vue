@@ -13,8 +13,8 @@
                         {{ msg.message }}
                         </div>
                     </div>
-                    <!-- <div v-else > -->
-                    <div>
+                    <div v-else >
+                    <!-- <div> -->
                     <span>{{ msg.user }}</span>
                     <span class="chat-other-msg">{{ msg.message }}</span>
                     </div>
@@ -102,6 +102,7 @@ export default {
     /* justify-content: center; */
 }
 .chat-body {
+    overflow-y: scroll;
     display:flex;
     flex-direction: column-reverse;
     padding: 2rem;
