@@ -37,7 +37,7 @@ router.beforeEach(function (to, from, next) {
   // to: 이동할 url에 해당하는 라우팅 객체
   if (to.fullPath == '/diary' && store.state.userId =='') {
     // 이동할 페이지에 인증 정보가 필요하면 경고 창을 띄우고 페이지 전환은 하지 않음
-    alert('Login Please!');
+    alert('로그인이 필요합니다');
     next("/")
   } else {
     next(); // 페이지 전환

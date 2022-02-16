@@ -41,6 +41,7 @@
                 <va-input
                     class="mb-4"
                     v-model="state.passwordValue"
+                    type="password"
                     outline
                     :rules="[
                         (value) =>
@@ -52,6 +53,7 @@
                     class="mb-4"
                     v-model="state.passwordConfirmValue"
                     outline
+                    type="password"
                     :rules="[
                         (value) =>
                             value == state.passwordValue ||

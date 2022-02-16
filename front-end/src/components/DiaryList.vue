@@ -29,15 +29,19 @@
         :erase-on-complete="false"
         caret-animation="blink"
     ></vue-typer>
-
-    <div class="row">
-        <diary-list-item
-            class="result"
-            v-for="diary in diarys"
-            :key="diary.diaryId"
-            :diary="diary"
-        />
-        <InfiniteLoading :diarys="diarys" @infinite="load" />
+    <div v-if="diarys.length">
+        <div class="row">
+            <diary-list-item
+                class="result"
+                v-for="diary in diarys"
+                :key="diary.diaryId"
+                :diary="diary"
+            />
+            <InfiniteLoading :diarys="diarys" @infinite="load" />
+        </div>
+    </div>
+    <div v-else>
+        <h1 style="margin : 20%">아직 작성된 일기가 없습니다.</h1>
     </div>
 
     <!-- <div class="flex md4 lg3" v-if="diarys.length"> 

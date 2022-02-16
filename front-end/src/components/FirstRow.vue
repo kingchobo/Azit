@@ -65,7 +65,6 @@
             :isFinalUser="isFinalUser"
             :videoLink="videoLink"
             :diaryGroupId="diaryGroupId"
-            :chattingObjArray="chattingObjArray"
             @closeRecording="leaveSession"
             @recordingStart="recordingStart"
             @recordingStop="recordingStop"
@@ -110,7 +109,6 @@
         </va-modal>
     </div>
     <hr />
-    <h1>일기 목록</h1>
 </template>
 
 <script>
@@ -169,10 +167,6 @@ export default {
             tossArray: [],
             userListStr: "",
             isFinalUser: false,
-
-            chattingObjArray: [
-                { user: "system", message: "채팅을 시작합니다." },
-            ],
         };
     },
     methods: {
@@ -211,7 +205,8 @@ export default {
         },
         async searchDiary() {
             this.searchData = await this.api(
-                "/api/diary/" + this.searchTitle,
+                "https://15f8ee3f-349a-4cf2-86ef-1f8c61ec2767.mock.pstmn.io/api/diary/" +
+                    this.searchTitle,
                 "get",
                 {}
             ); //url
@@ -254,17 +249,9 @@ export default {
                 }
             });
 
-            // Connection 생성시 설정
+            // Toss할 유저를 선택할 connection 객체 설정
             this.session.on("connectionCreated", ({ connection }) => {
                 this.tossArray.push(connection);
-            });
-
-            // Connection 삭제 설정
-            this.session.on("connectionDestroyed", ({ connection }) => {
-                const index = this.tossArray.indexOf(connection, 0);
-                if (index >= 0) {
-                    this.tossArray.splice(index, 1);
-                }
             });
 
             // On every asynchronous exception...
@@ -291,7 +278,7 @@ export default {
                 this.recordingStatus = message;
                 if (message === "recordingStopped") {
                     // console.log("녹화 종료 감지");
-                    this.$refs.groupRecordingRef.switchTitleModal();
+                    this.$refs.groupRecordingRef.saveDiary();
                 }
             });
 
@@ -315,18 +302,6 @@ export default {
                 // console.log(recordingId);
                 console.log(recordingId);
                 this.recordingId = recordingId;
-            });
-
-            // 채팅 메시지를 받기 위함
-            this.session.on("signal:group-chat", ({ data: chat }) => {
-                console.log(chat);
-                let chatTmp = chat.split(",");
-
-                const chatObj = {
-                    user: chatTmp[0],
-                    message: chatTmp[1],
-                };
-                this.chattingObjArray.push(chatObj);
             });
 
             // --- Connect to the session with a valid user token ---
@@ -371,19 +346,18 @@ export default {
         },
 
         leaveSession() {
+            // this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
             // --- Leave the session by calling 'disconnect' method over the Session object ---
             if (this.session) this.session.disconnect();
 
-            this.session = undefined;
-
             this.openRecording = !this.openRecording;
+            this.session = undefined;
             this.mainStreamManager = undefined;
             this.publisher = undefined;
             this.subscribers = [];
             this.OV = undefined;
 
             window.removeEventListener("beforeunload", this.leaveSession);
-            // this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
         },
         async recordingStart() {
             // console.log("녹화 시작");

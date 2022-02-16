@@ -4,14 +4,15 @@
 
   <!-- <DiaryNavbars/> -->
 <!-- </div><br><br><br> -->
-<div style="height: 80px;">
+<div style="height: 2rem;">
 </div>
-  <div id="diary">
+  <div id="diary" class='diaryBox2' >
     <div class="diary-container">
       <div>
         <FirstRow />
       </div>
-      <div> 
+      <h1 style="margin:2rem">일기 목록</h1>
+      <div  class='diaryBox'> 
         <DiaryList />
       </div>
     </div>
@@ -59,5 +60,16 @@ export default {
   margin: 3rem;
   /* border: 2px solid; */
 }
-
+.diaryBox{
+    border: 1px solid #6565CA;
+    min-height:500px;
+    border-radius: 3rem;
+    margin: 1%;
+}
+.diaryBox2{
+    border: 1px solid #6565CA;
+    min-height:500px;
+    border-radius: 3rem;
+    margin: 3%;
+}
 </style>

@@ -29,6 +29,7 @@
                 class="mb-4"
                 v-model="state.passwordValue"
                 outline
+                type="password"
                 :rules="[value => value.length > 8 || '최소 9글자를 입력해야 합니다']"
             />
         
@@ -85,7 +86,7 @@ export default {
       
     },
     async loginApi(id,password){
-      this.user = await this.api('/api/user/login','post',{
+      this.user = await this.api('http://localhost:8080/api/user/login','post',{
           "userId" : id,
           "password" : password
           })
