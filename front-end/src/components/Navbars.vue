@@ -34,7 +34,7 @@
     <template #right>
      <div v-if="$store.state.userId" class="row align-content--center">
         <va-navbar-item style="margin: 0.5rem 0">
-          <div :class="{tcb : $store.state.isColor_b, tcw :$store.state.isColor_w}">로그인 계정 : {{ $store.state.userId }}</div>
+          <div :class="{tcb : $store.state.isColor_b, tcw :$store.state.isColor_w}">{{ $store.state.userId }}</div>
         </va-navbar-item>
         <va-navbar-item style="margin: 0 1rem">
           <router-link @click="logout" flat :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to=""
@@ -70,7 +70,8 @@
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  
+  font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -79,16 +80,16 @@
 .btnbox{
   margin-left: 50px;
   font-weight: 700;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 .tcw{
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   color: rgb(255, 255, 255);
   margin: 20px 0;
 
 }
 .tcb{
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   color: rgb(0, 0, 0);
   margin: 20px 0;
 
@@ -97,7 +98,7 @@
   width: 120px;
   padding: 10px;
   /* border-radius: 20px; */
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
   font-size: 15px;
   text-align: center;
@@ -112,7 +113,7 @@
   width: 120px;
   padding: 10px;
   /* border-radius: 20px; */
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
   font-size: 15px;
   text-align: center;
@@ -164,7 +165,7 @@ color: #ffffff;
 }
 .navbar {
 
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

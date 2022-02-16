@@ -2,8 +2,8 @@
 <div class="layer">
   <div class="wrap">
    <div class="parent4" style="margin-top: 10%">
-        <div class="child4" style=" font-family: Wide">
-          <span style="color:#993123; font-size:60px;"></span>Together
+        <div class="child4">
+          Together
         </div>
         <br>
       </div>

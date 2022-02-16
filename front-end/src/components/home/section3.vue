@@ -2,8 +2,8 @@
 <div class="layer">
   <div class="wrap">
    <div class="parent3" style="margin-top: 23%">
-        <div class="child3" style=" font-family: Wide">
-          <span style="color:#9999FF; font-size:60px;"></span>Impress 
+        <div class="child3">
+          Impress
         </div>
         <br>
       </div>

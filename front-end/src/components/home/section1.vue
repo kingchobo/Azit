@@ -1,14 +1,14 @@
 <template>
-<div class="layer">
+<div class="layer" style="font-family: 'Noto Sans KR', sans-serif;">
 
       <div class="parent" style="margin-top: 6%">
-        <div class="child" style=" font-family: Wide">
-          <span style="color:brown; font-size:60px; font-family: Wide"></span>Another World
+        <div class="child"  style="font-family: 'Noto Sans KR', sans-serif;">
+          Another World
         </div>
         <br>
       </div>
       <div class="parent" >
-        <div class="child">
+        <div class="child"  style="font-family: 'Noto Sans KR', sans-serif;">
            우리들만의 또다른 세상
         </div>
         <br>

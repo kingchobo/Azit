@@ -62,6 +62,7 @@ background-position: fixed;
 background-color: (#000000);
 background-repeat: no-repeat;
 background-size: 100% 100%;
+font-family: 'Noto Sans KR', sans-serif;
 }
 #sectionB{
 background:url("https://cdn.pixabay.com/photo/2019/11/11/16/49/skater-4618922_960_720.jpg") center top no-repeat; 
@@ -69,20 +70,23 @@ background-position: fixed;
 background-color: #000000;
 background-repeat: no-repeat;
 background-size: 100% 100%;
+font-family: 'Noto Sans KR', sans-serif;
 }
 #sectionC{
-background:url("https://cdn.pixabay.com/photo/2015/05/01/14/46/new-york-748595_960_720.jpg") center top no-repeat; 
+background:url("https://cdn.pixabay.com/photo/2017/06/20/22/14/man-2425121_960_720.jpg") center top no-repeat; 
 background-position: fixed;
 background-color: #000000;
 background-repeat: no-repeat;
 background-size: 100% 100%;
+font-family: 'Noto Sans KR', sans-serif;
 }
 #sectionD{
-background:url("https://cdn.pixabay.com/photo/2017/03/17/10/29/coffee-2151200_960_720.jpg") center top no-repeat; 
+background:url("https://cdn.pixabay.com/photo/2018/09/21/15/06/notepad-3693309_960_720.jpg") center top no-repeat; 
 background-position: fixed;
 background-color: #000000;
 background-repeat: no-repeat;
 background-size: 100% 100%;
+font-family: 'Noto Sans KR', sans-serif;
 }
 .layer {
  
