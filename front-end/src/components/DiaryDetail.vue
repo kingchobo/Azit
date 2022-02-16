@@ -38,10 +38,14 @@
                     <div v-if="state.value === 1">
                         <div class="text-container">
                             <div>
+                                <!-- 
+                                        @moveContent="moveContent"
+                                    " -->
                                 <DiaryDetailText
-                                    :diaryContentDetail="state.diaryContentDetail"
                                     class="front"
-                                    @moveContent="moveContent"
+                                    :diaryContentDetail="
+                                        state.diaryContentDetail
+                                    "
                                 />
                             </div>
                             <!-- <div>
@@ -87,10 +91,6 @@ export default {
         Buttons,
         DiaryDetailText,
         DiaryDetailEmotion,
-    },
-    created() {
-        console.log(this.recordingUrl);
-        console.log(this.diaryContent);
     },
     setup(props, { emit }) {
         const state = reactive({

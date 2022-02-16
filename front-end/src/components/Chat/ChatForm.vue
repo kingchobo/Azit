@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: "ChatForm",
     data() {
@@ -21,11 +23,14 @@ export default {
     },
     props: {},
     methods: {
-        sendMessage() {
-            console.log("ChatForm.vue의 sendMessage");
-            let message = `${this.$store.state.userId},${this.msg}`;
-            this.msg = ""
-            this.$parent.sendMessage(message);
+        async sendMessage() {
+            await axios
+                .get(`/api/user/${this.$store.state.userId}`)
+                .then(({ data: userObj }) => {
+                    let message = `${userObj.name},${this.msg}`;
+                    this.msg = "";
+                    this.$parent.sendMessage(message);
+                });
         },
     },
 };

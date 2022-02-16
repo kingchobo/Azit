@@ -1,57 +1,23 @@
 <template>
     <div class="video-content">
+        gdfgdf
         <div class="main-container">
-            <div>
-                <div class="text-container">
-                    <span class="text-title">{{
-                        this.diaryContentDetail.title
-                    }}</span>
-                    <va-popover
-                        v-if="state.EditAvaliable"
-                        placement="top"
-                        message="Edit"
-                        color="#6565ca"
-                    >
-                        <va-button
-                            icon="edit"
-                            outline
-                            round
-                            color="#6565ca"
-                            @click="editDiary"
-                        >
-                        </va-button>
-                    </va-popover>
-                    <va-popover
-                        v-else
-                        placement="top"
-                        message="수정 완료"
-                        color="#6565ca"
-                    >
-                        <va-button
-                            icon="save"
-                            outline
-                            round
-                            color="#6565ca"
-                            @click="saveDiary"
-                        />
-                    </va-popover>
-                </div>
-                <!-- <div class="text-content">{{ this.diaryContentDetail.content }}</div> -->
-                <va-input
-                    v-if="state.EditAvaliable"
-                    class="mt-4"
-                    v-model="state.diaryGroupText"
-                    type="textarea"
-                    disabled
-                    :max-rows="11"
-                />
-                <va-input
-                    v-else
-                    class="mt-4"
-                    v-model="state.diaryMyText"
-                    type="textarea"
-                    :max-rows="11"
-                />
+            sdafasdgf
+            <div class="text-block">
+                <p class="display-3">
+                    {{ this.diaryContentDetail.title }}
+                </p>
+            </div>
+            <!-- v-show="state.editVisible" -->
+            <div class="text-block group-text-area">
+                sadgsfagdfgdf
+                <!-- <p v-html="state.diaryGroupText"></p> -->
+            </div>
+            <div class="row justify--center">
+                <!-- v-show="state.editVisible" -->
+                <Buttons class="mx-2" btn-text="내용 수정" @click="editDiary" />
+                <!-- v-show="state.updateVisible" -->
+                <Buttons class="mx-2" btn-text="내용 저장" @click="saveDiary" />
             </div>
         </div>
     </div>
@@ -60,9 +26,13 @@
 <script>
 import { reactive } from "vue";
 import axios from "axios";
+import Buttons from "./Buttons.vue";
 
 export default {
     name: "DiaryDetailText",
+    components: {
+        Buttons,
+    },
     props: {
         diaryContentDetail: {
             type: Object,
@@ -71,19 +41,11 @@ export default {
     // data: {
     //     thisTest: "this 테스트용 데이터",
     // },
-    setup(props) {
-        axios
-            .get(`/api/diary/group/${props.diaryContentDetail.diaryId}`)
-            .then(({ data: diaryList }) => {
-                diaryList.forEach((diaryObject) => {
-                    console.log(diaryObject); // 일기 객체
-
-                    state.diaryGroupText += diaryObject.content;
-                });
-            });
-
+    async setup(props) {
         const state = reactive({
-            EditAvaliable: true,
+            // EditAvaliable: true,
+            editVisible: true,
+            updateVisible: false,
             diaryGroupText: "",
             diaryMyText: props.diaryContentDetail.content,
             diaryTitle: props.diaryContentDetail.title,
@@ -100,16 +62,33 @@ export default {
         //   }
         // };
 
+        axios
+            .get(`/api/diary/group/${props.diaryContentDetail.diaryId}`)
+            .then(({ data: diaryList }) => {
+                diaryList.forEach(async (diaryObject) => {
+                    console.log(diaryObject); // 일기 객체
+                    await axios
+                        .get(`/api/user/${diaryObject.user.userId}`)
+                        .then(({ data: userObj }) => {
+                            console.log(props.diaryContentDetail);
+                            console.log(userObj.name);
+                            state.diaryGroupText += `${userObj.name}`;
+                        });
+                    state.diaryGroupText += `${diaryObject.content}`;
+                    console.log(state.diaryGroupText);
+                });
+            });
+
         const editDiary = function () {
-            state.EditAvaliable = !state.EditAvaliable;
+            state.editVisible = false;
+            state.updateVisible = true;
         };
 
         const saveDiary = function () {
-            state.EditAvaliable = !state.EditAvaliable;
-            const newDiary = {
-                title: state.diaryTitle,
-                content: state.diaryMyText,
-            };
+            const newDiary = props.diaryContentDetail;
+
+            newDiary.content = state.diaryMyText;
+
             axios
                 .put(
                     `api/diary?diaryid=${props.diaryContentDetail.diaryId}`,
@@ -118,6 +97,8 @@ export default {
                 .then((response) => {
                     console.log(response);
                 });
+            state.editVisible = true;
+            state.updateVisible = false;
         };
         return { state, editDiary, saveDiary };
     },
@@ -136,9 +117,9 @@ export default {
     font-size: 10px;
 }
 .main-container {
-    border: 1px solid #6565ca;
+    /* border: 1px solid #6565ca; */
     /* min-height:500px; */
-    border-radius: 3rem;
+    /* border-radius: 3rem; */
     margin: 3%;
 
     display: block;
@@ -160,4 +141,14 @@ export default {
     display: flex;
     justify-content: space-between;
 }
+
+.background-none {
+    /* background-color: transparent; */
+}
+
+/* .group-text-area {
+    height: 50%;
+    overflow-y: scroll;
+    font-size: 1.2em;
+} */
 </style>
