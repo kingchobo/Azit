@@ -1,7 +1,7 @@
 <template>
     <div class="chat-form">
         <input
-            v-if="myName !== ''"
+            v-if="this.$store.state.userName"
             class="chat-input"
             v-model="msg"
             label="chat"
@@ -13,29 +13,29 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
     name: "ChatForm",
     data() {
         return {
             msg: "",
-            myName: "",
         };
     },
-    created() {
-        axios
-            .get(`/api/user/${this.$store.state.userId}`)
-            .then(({ data: userObj }) => {
-                this.myName = `${userObj.name},${this.msg}`;
-            });
-    },
+    // created() {
+    //     axios
+    //         .get(`/api/user/${this.$store.state.userId}`)
+    //         .then(({ data: userObj }) => {
+    //             this.myName = `${userObj.name}`;
+    //         });
+    // },
     props: {},
     methods: {
         sendMessage() {
-            let message = `${this.myName},${this.msg}`;
+            if (this.msg.trim()) {
+                let message = `${this.$store.state.userName},${this.msg}`;
+                this.$parent.sendMessage(message);
+            }
             this.msg = "";
-            this.$parent.sendMessage(message);
+
             // await axios
             //     .get(`/api/user/${this.$store.state.userId}`)
             //     .then(({ data: userObj }) => {

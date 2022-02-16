@@ -8,19 +8,20 @@
                     v-for="(msg, index) in chattingObjArray"
                     v-bind:key="index"
                 >
-                    <div v-if="this.$store.state.userId == msg.user" class="mymsg-box ">
-
+                    <div
+                        v-if="this.$store.state.userName == msg.user"
+                        class="mymsg-box"
+                    >
                         <div class="chat-mymsg">
-                        {{ msg.message }}
+                            {{ msg.message }}
                         </div>
                     </div>
-                    <div v-else >
-                    <!-- <div> -->
-                    <div>&nbsp;{{ msg.user }}</div>
-                    <div class="chat-other-box">
-
-                        <div class="chat-other-msg">{{ msg.message }}</div>
-                    </div>
+                    <div v-else>
+                        <!-- <div> -->
+                        <div>&nbsp;{{ msg.user }}</div>
+                        <div class="chat-other-box">
+                            <div class="chat-other-msg">{{ msg.message }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@ export default {
     name: "ChatRoom",
     data() {
         return {
-            datas: []
+            datas: [],
         };
     },
     props: {
@@ -67,7 +68,6 @@ export default {
                 });
         },
     },
-
 };
 </script>
 
@@ -112,7 +112,7 @@ export default {
 }
 .chat-body {
     overflow-y: scroll;
-    display:flex;
+    display: flex;
     flex-direction: column-reverse;
     padding: 2rem;
     scroll-behavior: smooth;
@@ -125,5 +125,4 @@ export default {
 .chat-body::-webkit-scrollbar {
     display: none;
 }
-
 </style>
