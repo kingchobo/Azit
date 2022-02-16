@@ -184,8 +184,8 @@ export default {
             },
         };
 
-        const closeRecording = function () {
-            emit("closeRecording");
+        const closeRecording = (diaryContent) => {
+            emit("closeRecording", diaryContent);
         };
         let cnt = 0;
 
@@ -443,13 +443,20 @@ export default {
             // console.log(myDiary);
             // console.log("-------------------------------");
 
-            await axios.post(`/api/diary`, myDiary).then((response) => {
-                console.log("일기 저장 완료");
-                console.log(response);
-            });
+            let diaryParam;
+
+            await axios
+                .post(`/api/diary`, myDiary)
+                .then(({ data: diaryObj }) => {
+                    console.log("일기 저장 완료");
+                    console.log(diaryObj);
+
+                    diaryParam = diaryObj;
+                });
             // emit("recordingStop");
             switchTitleModal();
-            closeRecording();
+            console.log(diaryParam);
+            closeRecording(diaryParam);
         };
 
         Promise.all([

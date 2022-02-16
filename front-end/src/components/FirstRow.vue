@@ -12,12 +12,12 @@
         </div>
 
         <!-- <div class="right-btns"> -->
-            <!-- Search -->
-            <!-- <div class="search">
+        <!-- Search -->
+        <!-- <div class="search">
                 <div @click="searchDiary" class="material-icons">search</div>
             </div> -->
-            <!-- Right Buttons -->
-            <!-- <Buttons class="search-filter" btn-text="필터" /> -->
+        <!-- Right Buttons -->
+        <!-- <Buttons class="search-filter" btn-text="필터" /> -->
         <!-- </div> -->
 
         <!-- 일기 작성 modal -->
@@ -79,14 +79,12 @@
       @closeDetail="this.moveDiaryDetail = !this.moveDiaryDetail"
     /> -->
 
-        <!-- 화면 녹화 디테일 Modal -->
-        <DiaryRecordingDetail
-            :move="moveDiaryRecordingDetail"
+        <!-- 일기 상세정보 Modal -->
+        <DiaryDetail
+            :move="moveDiaryDetail"
             :recordingUrl="recordingUrl"
             :diaryContent="diaryContent"
-            @closeDetail="
-                this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail
-            "
+            @closeDetail="this.moveDiaryDetail = false"
         />
         <!-- 방 검색 modal -->
         <va-modal v-model="showSearchModal" hide-default-actions>
@@ -118,7 +116,7 @@ import WhiteButtons from "./WhiteButtons.vue";
 import { OpenVidu } from "openvidu-browser";
 import Recording from "./Recording.vue";
 import GroupRecording from "./GroupRecording.vue";
-import DiaryRecordingDetail from "./DiaryRecordingDetail.vue";
+import DiaryDetail from "./DiaryDetail.vue";
 import axios from "axios";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -132,14 +130,14 @@ export default {
         WhiteButtons,
         Recording,
         GroupRecording,
-        DiaryRecordingDetail,
+        DiaryDetail,
     },
     data() {
         return {
             openRecording: false,
             OpenPersonalRecording: false,
             moveDiaryDetail: false,
-            moveDiaryRecordingDetail: false,
+            // moveDiaryRecordingDetail: false,
             showWithModal: false,
             showSearchModal: false,
             searchTitle: "",
@@ -148,7 +146,7 @@ export default {
             // userId: "giho3", // sessionId를 userId로 대체
             recordingId: null,
             recordingUrl: null,
-            diaryContent: [],
+            diaryContent: null,
             diaryId: 1,
             videoLink: null,
             diaryGroupId: null,
@@ -218,7 +216,7 @@ export default {
             console.log(this.searchData);
         },
         joinGroup() {
-            this.showSearchModal =! this.showSearchModal
+            this.showSearchModal = !this.showSearchModal;
             this.openRecording = !this.openRecording;
             this.joinSession(this.roomCode);
         },
@@ -370,7 +368,7 @@ export default {
             window.addEventListener("beforeunload", this.leaveSession);
         },
 
-        leaveSession() {
+        leaveSession(diaryContent) {
             // --- Leave the session by calling 'disconnect' method over the Session object ---
             if (this.session) this.session.disconnect();
 
@@ -382,7 +380,10 @@ export default {
             this.subscribers = [];
             this.OV = undefined;
 
+            console.log(diaryContent);
+
             window.removeEventListener("beforeunload", this.leaveSession);
+            this.diaryContent = diaryContent;
             this.moveDiaryDetail = true;
         },
         async recordingStart() {
