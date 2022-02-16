@@ -83,8 +83,8 @@ export default {
     color: white;
     padding: 0.8rem;
     font-size: 14px;
-    margin-top: 0.7rem;
-    margin-bottom: 0.7rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     line-break: anywhere;
 }
 
@@ -100,8 +100,8 @@ export default {
     color: black;
     padding: 0.8rem;
     font-size: 14px;
-    margin-top: 0.7rem;
-    margin-bottom: 0.7rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     line-break: anywhere;
 }
 

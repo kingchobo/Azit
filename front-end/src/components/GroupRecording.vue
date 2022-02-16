@@ -19,7 +19,7 @@
             <!-- 영상 출력 -->
             <div id="session" v-if="session">
                 <div class="row justify--space-around">
-                    <div class="flex md3 lg6">
+                    <div class="flex md6 lg6">
                         <div id="video-container" class="flex md videocenter4">
                             <user-video :stream-manager="publisher" />
                             <user-video
@@ -29,7 +29,7 @@
                             />
                         </div>
                     </div>
-                    <div class="flex md4 lg1"></div>
+                    <!-- <div class="flex md2 lg1"></div> -->
                     <ChatRoom
                         :session="session"
                         :chattingObjArray="chattingObjArray"
