@@ -27,7 +27,7 @@ export default {
         axios
             .get(`/api/user/${this.$store.state.userId}`)
             .then(({ data: userObj }) => {
-                this.myName = `${userObj.name},${this.msg}`;
+                this.myName = `${userObj.name}`;
             });
     },
     props: {},
