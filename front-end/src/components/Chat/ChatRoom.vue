@@ -15,8 +15,11 @@
                     </div>
                     <div v-else >
                     <!-- <div> -->
-                    <span>{{ msg.user }}</span>
-                    <span class="chat-other-msg">{{ msg.message }}</span>
+                    <div>&nbsp;{{ msg.user }}</div>
+                    <div class="chat-other-box">
+
+                        <div class="chat-other-msg">{{ msg.message }}</div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -85,9 +88,14 @@ export default {
     line-break: anywhere;
 }
 
+.chat-other-box {
+    display: flex;
+    justify-content: left;
+}
+
 .chat-other-msg {
     margin: 0.4rem 0 0 1rem;
-    border-radius: 20px 20px 20px 0px;
+    border-radius: 0px 20px 20px 20px;
     background-color: #eeeeee;
     color: black;
     padding: 0.8rem;
@@ -116,4 +124,5 @@ export default {
 .chat-body::-webkit-scrollbar {
     display: none;
 }
+
 </style>
