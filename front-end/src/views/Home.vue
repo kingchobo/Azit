@@ -43,6 +43,8 @@ export default {
   created() {
      this.$store.state.isColor_w = true
      this.$store.state.isColor_b = false
+     this.$store.state.styleObject['background-color'] = 'rgba(255, 255, 255, 0.0)'
+
   },
  beforeUnmount() {
 
@@ -55,14 +57,14 @@ export default {
 </script>
 <style scoped>
 #sectionA{
-background:url("https://cdn.pixabay.com/photo/2017/12/27/14/02/friends-3042751_960_720.jpg") center top no-repeat; 
+background:url("https://cdn.pixabay.com/photo/2021/09/07/11/53/car-6603726_960_720.jpg") center top no-repeat; 
 background-position: fixed;
 background-color: (#000000);
 background-repeat: no-repeat;
 background-size: 100% 100%;
 }
 #sectionB{
-background:url("https://cdn.pixabay.com/photo/2018/04/21/07/03/people-3337797_960_720.jpg") center top no-repeat; 
+background:url("https://cdn.pixabay.com/photo/2019/11/11/16/49/skater-4618922_960_720.jpg") center top no-repeat; 
 background-position: fixed;
 background-color: #000000;
 background-repeat: no-repeat;

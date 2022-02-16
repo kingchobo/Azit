@@ -1,6 +1,5 @@
 <template>
-  <va-navbar class="navbar" style="background-color:rgba(0, 0, 0, 0.0); position:fixed;" >
-    
+  <va-navbar class="navbar" v-bind:style="this.$store.state.styleObject" >   
     <template #left>     
       <div class="btnbox">  
         <va-navbar-item>
@@ -35,7 +34,7 @@
     <template #right>
      <div v-if="$store.state.userId" class="row align-content--center">
         <va-navbar-item style="margin: 0.5rem 0">
-          <div :class="{tcb : $store.state.isColor_b, tcw :$store.state.isColor_w}">{{ $store.state.userId }}</div>
+          <div :class="{tcb : $store.state.isColor_b, tcw :$store.state.isColor_w}">로그인 계정 : {{ $store.state.userId }}</div>
         </va-navbar-item>
         <va-navbar-item style="margin: 0 1rem">
           <router-link @click="logout" flat :class="{btn22 : $store.state.isColor_b, btn11 :$store.state.isColor_w}" to=""
@@ -154,6 +153,10 @@
 #azit{
 color: #ffffff; 
 }
+#navbox{
+  background-color:rgba(0, 0, 0, 0.0); 
+  position:fixed;
+}
 .nav-link {
   color : #ffffff;
   text-decoration-line: none;
@@ -199,7 +202,7 @@ export default {
     return {
       openLogin: false,
       openSignup: false,
-      text_color : "#000000"
+      text_color : "#000000",
     }
   },
   methods : {
