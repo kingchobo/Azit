@@ -12,7 +12,7 @@
                     class="modal-btn"
                     color="#6565ca"
                     icon="clear"
-                    @click="closeDetail"
+                    @click="clickRefresh"
                 ></va-button>
             </div>
 
@@ -38,10 +38,14 @@
                     <div v-if="state.value === 1">
                         <div class="text-container">
                             <div>
+                                <!-- 
+                                        @moveContent="moveContent"
+                                    " -->
                                 <DiaryDetailText
-                                    :diaryContentDetail="state.diaryContentDetail"
                                     class="front"
-                                    @moveContent="moveContent"
+                                    :diaryContentDetail="
+                                        state.diaryContentDetail
+                                    "
                                 />
                             </div>
                             <!-- <div>
@@ -88,9 +92,12 @@ export default {
         DiaryDetailText,
         DiaryDetailEmotion,
     },
-    created() {
-        console.log(this.recordingUrl);
-        console.log(this.diaryContent);
+    methods: {
+        clickRefresh() {
+            this.$router.go();
+            console.log(window.location.pathname);
+            console.log("새로고침");
+        },
     },
     setup(props, { emit }) {
         const state = reactive({

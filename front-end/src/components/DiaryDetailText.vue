@@ -173,7 +173,11 @@ export default {
 }
 
 .group-text-area {
+<<<<<<< HEAD
     height: 50%;
+=======
+    height: 70%;
+>>>>>>> ce2fac44a4c667fa153d7d330cba946e2f2d1e6f
     overflow-y: scroll;
     font-size: 1.2em;
 }

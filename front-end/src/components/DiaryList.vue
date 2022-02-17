@@ -14,11 +14,6 @@
   <div> -->
     <vue-typer
         class="display-3"
-        :text="[
-            '안녕하세요.',
-            '김정훈의 포트폴리오입니다!!!',
-            '방문 감사합니다!!!',
-        ]"
         :repeat="Infinity"
         initial-action="typing"
         :pre-type-delay="100"
@@ -30,15 +25,15 @@
         caret-animation="blink"
     ></vue-typer>
     <!-- <div v-if="diarys.length"> -->
-        <div class="row">
-            <diary-list-item
-                class="result"
-                v-for="diary in diarys"
-                :key="diary.diaryId"
-                :diary="diary"
-            />
-            <InfiniteLoading :diarys="diarys" @infinite="load" />
-        </div>
+    <div class="row">
+        <diary-list-item
+            class="result"
+            v-for="diary in diarys"
+            :key="diary.diaryId"
+            :diary="diary"
+        />
+        <InfiniteLoading :diarys="diarys" @infinite="load" />
+    </div>
     <!-- </div>
     <div v-else>
         <h1 style="margin : 20%">아직 작성된 일기가 없습니다.</h1>
@@ -112,7 +107,7 @@ const load = async ($state) => {
 
 <style>
 #app {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;

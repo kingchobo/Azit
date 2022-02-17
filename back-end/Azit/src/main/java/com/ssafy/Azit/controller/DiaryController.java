@@ -43,12 +43,12 @@ public class DiaryController {
 
     // 일기 작성
     @PostMapping()
-    public ResponseEntity<String> createDiary(@RequestBody Diary diary) {
+    public ResponseEntity<Diary> createDiary(@RequestBody Diary diary) {
         Diary createdDiary = diaryService.createDiary(diary);
 
         if(!ObjectUtils.isEmpty(createdDiary))
-            return ResponseEntity.ok().body(SUCCESS);
-        return ResponseEntity.ok().body(FAIL);
+            return ResponseEntity.ok().body(createdDiary);
+        return ResponseEntity.ok().body(null);
     }
 
     // 일기 전체 목록 조회 (로그인 한 아이디의 일기 목록)

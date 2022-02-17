@@ -12,7 +12,7 @@
                     class="modal-btn"
                     color="#6565ca"
                     icon="clear"
-                    @click="closeRecording"
+                    @click="clickRefresh"
                 ></va-button>
             </div>
 
@@ -155,6 +155,13 @@ export default {
         };
     },
     created() {},
+    methods: {
+        clickRefresh() {
+            this.$router.go();
+            console.log(window.location.pathname);
+            console.log("새로고침");
+        },
+    },
     setup(props, { emit }) {
         const store = useStore();
 
@@ -184,8 +191,8 @@ export default {
             },
         };
 
-        const closeRecording = function () {
-            emit("closeRecording");
+        const closeRecording = (diaryContent) => {
+            emit("closeRecording", diaryContent);
         };
         let cnt = 0;
 
@@ -212,20 +219,6 @@ export default {
 
             emit("setUserListStr");
 
-            // 녹화가 시작됨을 모든 구성원에게 알림
-            props.session
-                .signal({
-                    data: "recordingStarted", // Any string (optional)
-                    to: [], // 모든 구성원에게 보내기
-                    type: "recordStatus", // The type of message (optional)
-                })
-                .then(() => {
-                    console.log("Message successfully sent");
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-
             // TODO
             await axios
                 .post("/api/diaryGroup", {})
@@ -247,6 +240,20 @@ export default {
                         .catch((error) => {
                             console.error(error);
                         });
+                });
+
+            // 녹화가 시작됨을 모든 구성원에게 알림
+            props.session
+                .signal({
+                    data: "recordingStarted", // Any string (optional)
+                    to: [], // 모든 구성원에게 보내기
+                    type: "recordStatus", // The type of message (optional)
+                })
+                .then(() => {
+                    console.log("Message successfully sent");
+                })
+                .catch((error) => {
+                    console.error(error);
                 });
 
             console.log(props.diaryGroupId);
@@ -341,7 +348,7 @@ export default {
                         console.log(statusPercent);
                     });
                 }
-            }, 1000);
+            }, 250);
         };
 
         const voiceTextStart = function () {
@@ -443,13 +450,20 @@ export default {
             // console.log(myDiary);
             // console.log("-------------------------------");
 
-            await axios.post(`/api/diary`, myDiary).then((response) => {
-                console.log("일기 저장 완료");
-                console.log(response);
-            });
+            let diaryParam;
+
+            await axios
+                .post(`/api/diary`, myDiary)
+                .then(({ data: diaryObj }) => {
+                    console.log("일기 저장 완료");
+                    console.log(diaryObj);
+
+                    diaryParam = diaryObj;
+                });
             // emit("recordingStop");
             switchTitleModal();
-            closeRecording();
+            console.log(diaryParam);
+            closeRecording(diaryParam);
         };
 
         Promise.all([

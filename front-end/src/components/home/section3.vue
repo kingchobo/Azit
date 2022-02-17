@@ -1,9 +1,9 @@
 <template>
 <div class="layer">
   <div class="wrap">
-   <div class="parent3" style="margin-top: 23%">
-        <div class="child3">
-          Impress
+   <div class="parent3" style="margin-top: 20%; ">
+        <div class="child3 " style="font-weight: 700;">
+          IMPRESS
         </div>
         <br>
       </div>
@@ -32,23 +32,23 @@ export default {
 
 <style>
 .parent3 {
-    height: 6em; /* 애니메이션 높이 */
+    height: 4em; /* 애니메이션 높이 */
     overflow-y: hidden;
     display: block;
-    
+    font-weight: bold;
     
 }
 
 .parent3 .child3 {
     color: aliceblue;
     font-size: 50px;/* 애니메이션 높이 */
-    font-weight: bold;
+    font-weight: 400;
     line-height: 1;
     animation-delay: 3.5s;
     animation-name: grow;
     animation-duration: 1.5s;/* 애니메이션 시간 */
     float : left;
-    margin-left: 50%;
+    margin-left: 15%;
     
 }
 /* 키프레임 애니메이션 */

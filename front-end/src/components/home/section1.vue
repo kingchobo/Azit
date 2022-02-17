@@ -1,14 +1,14 @@
 <template>
 <div class="layer" style="font-family: 'Noto Sans KR', sans-serif;">
 
-      <div class="parent" style="margin-top: 6%">
-        <div class="child"  style="font-family: 'Noto Sans KR', sans-serif;">
-          Another World
+      <div class="parent" style="margin-top: 20%">
+        <div class="child" style="font-weight: 700;">
+          ANOTHER WORLD
         </div>
         <br>
       </div>
       <div class="parent" >
-        <div class="child"  style="font-family: 'Noto Sans KR', sans-serif;">
+        <div class="child">
            우리들만의 또다른 세상
         </div>
         <br>
@@ -77,7 +77,7 @@ export default {
 }
 
  .parent {
-    height: 5em; /* 애니메이션 높이 */
+    height: 4em; /* 애니메이션 높이 */
     overflow-y: hidden;
     display: block;
     
@@ -88,7 +88,7 @@ export default {
  .parent .child {
     color: aliceblue;
     font-size: 50px;/* 애니메이션 높이 */
-    font-weight: bold;
+    font-weight: 400;
     
     line-height: 1;
     

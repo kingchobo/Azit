@@ -3,25 +3,25 @@
         <div class="left-btns">
             <!-- Left Buttons -->
             <!-- router 임의 설정, 나중에 바꿔서 해당 router로 push -->
-            <Buttons btn-text="일기작성" @click="onOpenPersonalRecording" />
+            <!-- <Buttons btn-text="일기작성" @click="OpenPersonalRecording" /> -->
             <Buttons
                 class="write-with-diary"
-                btn-text="함께쓰기"
+                btn-text="일기작성"
                 @click="showWithModal = !showWithModal"
             />
         </div>
 
         <!-- <div class="right-btns"> -->
-            <!-- Search -->
-            <!-- <div class="search">
+        <!-- Search -->
+        <!-- <div class="search">
                 <div @click="searchDiary" class="material-icons">search</div>
             </div> -->
-            <!-- Right Buttons -->
-            <!-- <Buttons class="search-filter" btn-text="필터" /> -->
+        <!-- Right Buttons -->
+        <!-- <Buttons class="search-filter" btn-text="필터" /> -->
         <!-- </div> -->
 
         <!-- 일기 작성 modal -->
-        <Recording
+        <!-- <Recording
             :open="OpenPersonalRecording"
             :session="session"
             :publisher="publisher"
@@ -30,7 +30,8 @@
             @closeRecording="leaveSession"
             @recordingStart="recordingStart"
             @recordingStop="recordingStop"
-        />
+        /> -->
+        <!-- <Recording :open="OpenPersonalRecording" /> -->
 
         <!-- 함께 쓰기 modal -->
         <va-modal v-model="showWithModal" hide-default-actions>
@@ -79,14 +80,12 @@
       @closeDetail="this.moveDiaryDetail = !this.moveDiaryDetail"
     /> -->
 
-        <!-- 화면 녹화 디테일 Modal -->
-        <DiaryRecordingDetail
-            :move="moveDiaryRecordingDetail"
+        <!-- 일기 상세정보 Modal -->
+        <DiaryDetail
+            :move="moveDiaryDetail"
             :recordingUrl="recordingUrl"
             :diaryContent="diaryContent"
-            @closeDetail="
-                this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail
-            "
+            @closeDetail="this.moveDiaryDetail = false"
         />
         <!-- 방 검색 modal -->
         <va-modal v-model="showSearchModal" hide-default-actions>
@@ -118,7 +117,7 @@ import WhiteButtons from "./WhiteButtons.vue";
 import { OpenVidu } from "openvidu-browser";
 import Recording from "./Recording.vue";
 import GroupRecording from "./GroupRecording.vue";
-import DiaryRecordingDetail from "./DiaryRecordingDetail.vue";
+import DiaryDetail from "./DiaryDetail.vue";
 import axios from "axios";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -132,14 +131,14 @@ export default {
         WhiteButtons,
         Recording,
         GroupRecording,
-        DiaryRecordingDetail,
+        DiaryDetail,
     },
     data() {
         return {
             openRecording: false,
             OpenPersonalRecording: false,
             moveDiaryDetail: false,
-            moveDiaryRecordingDetail: false,
+            // moveDiaryRecordingDetail: false,
             showWithModal: false,
             showSearchModal: false,
             searchTitle: "",
@@ -148,7 +147,7 @@ export default {
             // userId: "giho3", // sessionId를 userId로 대체
             recordingId: null,
             recordingUrl: null,
-            diaryContent: [],
+            diaryContent: null,
             diaryId: 1,
             videoLink: null,
             diaryGroupId: null,
@@ -174,6 +173,18 @@ export default {
             ],
         };
     },
+    created() {
+        console.log("window객체 상태", window);
+        window.addEventListener("beforeunload", () => {
+            if (this.session) this.session.disconnect();
+
+            this.session = undefined;
+            this.mainStreamManager = undefined;
+            this.publisher = undefined;
+            this.subscribers = [];
+            this.OV = undefined;
+        });
+    },
     methods: {
         isMyOrderSwitch() {
             this.isMyOrder = !this.isMyOrder;
@@ -192,8 +203,8 @@ export default {
          * 함께쓰기 시 모달 창을 열고 Openvidu 세션을 생성하는 함수
          */
         onOpenPersonalRecording() {
-            this.OpenPersonalRecording = !this.OpenPersonalRecording;
-            this.createRoom();
+            this.OpenPersonalRecording = true;
+            // this.createRoom();
         },
 
         onOpenRecording() {
@@ -218,7 +229,7 @@ export default {
             console.log(this.searchData);
         },
         joinGroup() {
-            this.showSearchModal =! this.showSearchModal
+            this.showSearchModal = !this.showSearchModal;
             this.openRecording = !this.openRecording;
             this.joinSession(this.roomCode);
         },
@@ -367,10 +378,10 @@ export default {
                     });
             });
 
-            window.addEventListener("beforeunload", this.leaveSession);
+            // window.addEventListener("beforeunload", this.leaveSession);
         },
 
-        leaveSession() {
+        leaveSession(diaryContent) {
             // --- Leave the session by calling 'disconnect' method over the Session object ---
             if (this.session) this.session.disconnect();
 
@@ -382,8 +393,11 @@ export default {
             this.subscribers = [];
             this.OV = undefined;
 
-            window.removeEventListener("beforeunload", this.leaveSession);
-            // this.moveDiaryRecordingDetail = !this.moveDiaryRecordingDetail;
+            console.log(diaryContent);
+
+            // window.removeEventListener("beforeunload", this.leaveSession);
+            this.diaryContent = diaryContent;
+            this.moveDiaryDetail = true;
         },
         async recordingStart() {
             // console.log("녹화 시작");
