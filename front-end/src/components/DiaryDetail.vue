@@ -55,10 +55,23 @@
                         </div>
                     </div>
                     <div v-else-if="state.value === 2">
+                        <va-tabs
+                            v-model="emotionvalue"
+                            vertical
+                        >
+                            <template #tabs>
+                            <va-tab
+                                v-for="title in ['One', 'Two', 'Three']"
+                                :name="title"
+                                :key="title"
+                            >
+                                {{ title }}
+                            </va-tab>
+                            </template>
+                        </va-tabs>
                         <DiaryDetailEmotion
-                            class="back"
-                            :diaryContentDetail="state.diaryContentDetail"
-                        />
+                        class="back"
+                        :diaryContentDetail="state.diaryContentDetail"/>
                     </div>
                 </section>
             </div>
@@ -105,7 +118,10 @@ export default {
             detailVisible: computed(() => props.move),
             contentVisible: false,
             value: 1,
+            groupList : ['장성태', '김민현0'],
             diaryContentDetail: computed(() => props.diaryContent),
+            emotionvalue: 'One',
+
         });
 
         const closeDetail = function () {
