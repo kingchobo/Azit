@@ -115,6 +115,14 @@ const load = async ($state) => {
     /* margin-top: 60px; */
 }
 
+.add-box {
+    height: 100%;
+    width: 100%;
+    border: dashed 1px #2c3e50;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .result {
     display: flex;
     flex-direction: column;

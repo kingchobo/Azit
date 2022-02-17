@@ -20,6 +20,7 @@
                 <video
                     class="mx-3 my-5 recorded-video"
                     :src="diaryContent.videoLink"
+                    :poster="diaryContent.videoLink.replace('mp4', 'jpg')"
                     controls
                 ></video>
                 <!-- <section class="mx-3 my-5 video" @click="moveRecordingVideo"></section> -->
@@ -87,7 +88,6 @@ export default {
             type: String,
         },
     },
-    data() {},
     components: {
         Buttons,
         DiaryDetailText,
