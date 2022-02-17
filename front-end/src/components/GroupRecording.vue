@@ -450,16 +450,23 @@ export default {
             // console.log(myDiary);
             // console.log("-------------------------------");
 
-            let diaryParam;
+            let diaryQuery;
 
             await axios
                 .post(`/api/diary`, myDiary)
                 .then(({ data: diaryObj }) => {
                     console.log("일기 저장 완료");
                     console.log(diaryObj);
+                    diaryQuery = diaryObj.diaryId;
+                });
 
+            let diaryParam;
+            await axios
+                .get(`/api/diary/${diaryQuery}`)
+                .then(({ data: diaryObj }) => {
                     diaryParam = diaryObj;
                 });
+
             // emit("recordingStop");
             switchTitleModal();
             console.log(diaryParam);
