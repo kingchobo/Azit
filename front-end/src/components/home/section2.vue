@@ -2,8 +2,8 @@
 
     <div class="layer" >  
       <div class="parent2" style="margin-top: 20%">
-        <div class="child2">
-         Zoom
+        <div class="child2" style="font-weight: 700;">
+         ZOOM
         </div>
         <br>
       </div>
@@ -43,7 +43,7 @@ export default {
   z-index: -1;
 }
 .parent2 {
-    height: 5em; /* 애니메이션 높이 */
+    height: 4em; /* 애니메이션 높이 */
     overflow-y: hidden;
     display: block;
     
@@ -53,7 +53,7 @@ export default {
 .parent2 .child2 {
     color: aliceblue;
     font-size: 50px;/* 애니메이션 높이 */
-    font-weight: bold;
+    font-weight: 400;
     line-height: 1;
     animation-delay: 2s;
     animation-name: grow; 

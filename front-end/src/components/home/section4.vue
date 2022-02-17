@@ -1,9 +1,9 @@
 <template>
 <div class="layer">
   <div class="wrap">
-   <div class="parent4" style="margin-top: 10%">
-        <div class="child4">
-          Together
+   <div class="parent4" style="margin-top: 20%">
+        <div class="child4" style="font-weight: 700;">
+          TOGETHER
         </div>
         <br>
       </div>
@@ -32,7 +32,7 @@ export default {
 
 <style>
 .parent4 {
-    height: 6em; /* 애니메이션 높이 */
+    height:4em; /* 애니메이션 높이 */
     overflow-y: hidden;
     display: block;
     
@@ -42,7 +42,7 @@ export default {
 .parent4 .child4 {
     color: aliceblue;
     font-size: 50px;/* 애니메이션 높이 */
-    font-weight: bold;
+    font-weight: 400;
     line-height: 1;
     animation-delay: 3.5s;
     animation-name: grow;
