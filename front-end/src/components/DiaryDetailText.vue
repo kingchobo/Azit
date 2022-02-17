@@ -15,12 +15,13 @@
                 <p v-html="state.diaryGroupText"></p>
             </div>
 
-            <va-input autosize
+            <va-input 
                 v-show="state.updateVisible"
                 class="mt-4"
                 v-model="state.diaryMyText"
                 type="textarea"
                 :max-rows="11"
+                autosize
             />
 
             <div class="row justify--center">

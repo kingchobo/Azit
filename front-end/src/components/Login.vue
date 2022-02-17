@@ -43,14 +43,17 @@
                     ]"
                 />
 
-                <va-button
+                <!-- <va-button
                     type="submit"
                     class="mt-2"
                     :rounded="false"
                     @click="$refs.form.validate()"
                 >
                     로그인
-                </va-button>
+                </va-button> -->
+                <div class="login-btn">
+                <Buttons btn-text="로그인" @click="$refs.form.validate()"/>
+                </div>
             </va-form>
         </div>
     </va-modal>
@@ -59,6 +62,7 @@
 <script>
 import { computed, reactive } from "vue";
 import axios from "axios";
+import Buttons from "./Buttons.vue"
 
 export default {
     props: {
@@ -66,6 +70,9 @@ export default {
             type: Boolean,
             default: false,
         },
+    },
+    components: {
+        Buttons
     },
     setup(props, { emit }) {
         const state = reactive({
@@ -126,26 +133,13 @@ export default {
 
 <style>
 .login-btn {
-    /* width: 100px; */
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid #5959be;
-    color: #3b3ba0;
-    font-weight: 700;
-    font-size: 15px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.4s;
-    margin: 20px 0;
-    background-color: #6565ca;
-    color: #fff;
-    display: block;
-    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
 }
-.login-btn:hover {
+/* .login-btn:hover {
     background-color: #fff;
     color: #37379c;
-}
+} */
 
 .login-body-modal {
     display: flex;
