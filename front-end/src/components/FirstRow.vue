@@ -1,14 +1,15 @@
 <template>
     <div class="go-diary-container">
-        <div class="left-btns">
-            <!-- Left Buttons -->
-            <!-- router 임의 설정, 나중에 바꿔서 해당 router로 push -->
-            <!-- <Buttons btn-text="일기작성" @click="OpenPersonalRecording" /> -->
-            <Buttons
+        <Buttons
                 class="write-with-diary"
                 btn-text="일기작성"
                 @click="showWithModal = !showWithModal"
             />
+        <div class="left-btns">
+            <!-- Left Buttons -->
+            <!-- router 임의 설정, 나중에 바꿔서 해당 router로 push -->
+            <!-- <Buttons btn-text="일기작성" @click="OpenPersonalRecording" /> -->
+            
         </div>
 
         <!-- <div class="right-btns"> -->
@@ -582,7 +583,7 @@ export default {
 }
 
 .write-with-diary {
-    margin-left: 20px;
+    margin-left: 91%;
 }
 
 .right-btns {

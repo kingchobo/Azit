@@ -13,7 +13,7 @@ const store = createStore({
             styleObject: {
                 'box-shadow': '0 1px 3px 0 rgba(0,0,0,0.5)',
                 'border-bottom': '1px solid #eee',
-                'background-color': 'rgba(255, 255, 255, 0.0)',
+                'background-color': '',
                 'position': 'fixed'
             },
             //   count: 0,
