@@ -95,7 +95,7 @@ export default {
                             .then(({ data: userObj }) => {
                                 console.log(props.diaryContentDetail);
                                 console.log(userObj.name);
-                                state.diaryGroupText += `<p style=" font-size: 1.5em; ">${userObj.name}<p> `;
+                                state.diaryGroupText += `<p style=" font-size: 1.5em; ">${userObj.name}<p><br> `;
                             });
                         state.diaryGroupText += `${diaryObject.content} <br /> <br /><br> `;
                         console.log(state.diaryGroupText);
