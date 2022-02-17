@@ -2,9 +2,10 @@
     <div class="video-content">
         <div class="main-container">
             <div class="text-container background-none">
-                <p class="display-3">
+                <p class="display-5">
                     {{ this.diaryContentDetail.title }}
                 </p>
+                
             </div>
             <!--  -->
             <div
@@ -14,7 +15,7 @@
                 <p v-html="state.diaryGroupText"></p>
             </div>
 
-            <va-input
+            <va-input autosize
                 v-show="state.updateVisible"
                 class="mt-4"
                 v-model="state.diaryMyText"
@@ -93,9 +94,9 @@ export default {
                             .then(({ data: userObj }) => {
                                 console.log(props.diaryContentDetail);
                                 console.log(userObj.name);
-                                state.diaryGroupText += `<p style="padding:5px; font-size: 1.5em;">${userObj.name}<p>`;
+                                state.diaryGroupText += `<p style=" font-size: 1.5em; ">${userObj.name}<p> `;
                             });
-                        state.diaryGroupText += `${diaryObject.content} <br /> <br />`;
+                        state.diaryGroupText += `${diaryObject.content} <br /> <br /><br> `;
                         console.log(state.diaryGroupText);
                     });
                 });
