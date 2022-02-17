@@ -44,6 +44,8 @@ export default {
      this.$store.state.isColor_w = true
      this.$store.state.isColor_b = false
      this.$store.state.styleObject['background-color'] = 'rgba(255, 255, 255, 0.0)'
+     this.$store.state.styleObject['box-shadow'] = ''
+     this.$store.state.styleObject['border-bottom'] = ''
 
   },
  beforeUnmount() {

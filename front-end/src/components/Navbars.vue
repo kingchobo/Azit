@@ -1,7 +1,7 @@
 <template>
-    <va-navbar class="navbar" v-bind:style="this.$store.state.styleObject">
+    <va-navbar class="navbar" v-bind:style="this.$store.state.styleObject" >
         <template #left>
-            <div class="btnbox">
+            <div class="btnbox" >
                 <va-navbar-item>
                     <router-link
                         to="/"
@@ -10,7 +10,7 @@
                             btn22: $store.state.isColor_b,
                             btn11: $store.state.isColor_w,
                         }"
-                    >
+                        >
                         <img
                             v-if="$store.state.isColor_w"
                             :src="require(`@/assets/azit2.png`)"
@@ -19,7 +19,7 @@
                         <img
                             v-else-if="$store.state.isColor_b"
                             :src="require(`@/assets/azit.png`)"
-                            style="width 12px; height:35px"
+                            style="width 12px; height:35px;"
                         />
                     </router-link>
                 </va-navbar-item>
@@ -116,6 +116,7 @@
             </div>
         </template>
     </va-navbar>
+
     <Login :open="openLogin" @closeLogin="closeLogin" />
     <Signup
         :open="openSignup"
