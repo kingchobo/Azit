@@ -5,6 +5,7 @@ import com.ssafy.Azit.model.DiaryGroup;
 import com.ssafy.Azit.model.User;
 import com.ssafy.Azit.repository.DiaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,10 +51,12 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<Diary> listDiary(String userId, int page) {
 
+        Sort sort = Sort.by(Sort.Direction.DESC, "diaryId");
+
         User user = new User();
         user.setUserId(userId);
 
-        List<Diary> diaries = diaryRepository.findAll();
+        List<Diary> diaries = diaryRepository.findAll(sort);
         List<Diary> diaryList = new ArrayList<>();
 
         for (Diary diary : diaries) {
