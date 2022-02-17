@@ -13,13 +13,14 @@
             >
                 <p v-html="state.diaryGroupText"></p>
             </div>
-
+            <!-- 수정 input -->
             <va-input
                 v-show="state.updateVisible"
                 class="mt-4"
                 v-model="state.diaryMyText"
                 type="textarea"
                 :max-rows="11"
+                autosize
             />
 
             <div class="row justify--center">
@@ -173,11 +174,7 @@ export default {
 }
 
 .group-text-area {
-<<<<<<< HEAD
-    height: 50%;
-=======
     height: 70%;
->>>>>>> ce2fac44a4c667fa153d7d330cba946e2f2d1e6f
     overflow-y: scroll;
     font-size: 1.2em;
 }

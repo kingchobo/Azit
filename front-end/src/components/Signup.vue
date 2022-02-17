@@ -71,14 +71,7 @@
                 />
             </va-form>
             <div>
-                <va-button
-                    id="signup-btn"
-                    class="signup-btn"
-                    :rounded="false"
-                    @click="signup"
-                >
-                    가입하기
-                </va-button>
+                <Buttons btn-text="가입하기" @click="signup"/>
             </div>
         </div>
     </va-modal>
@@ -86,6 +79,7 @@
 
 <script>
 import { computed, reactive, ref } from "vue";
+import Buttons from "./Buttons.vue";
 import axios from "axios";
 
 export default {
@@ -94,6 +88,9 @@ export default {
             type: Boolean,
             default: false,
         },
+    },
+    components: {
+        Buttons
     },
     setup(props, { emit }) {
         const form = ref(null);
