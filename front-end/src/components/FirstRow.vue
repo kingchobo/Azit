@@ -3,10 +3,10 @@
         <div class="left-btns">
             <!-- Left Buttons -->
             <!-- router 임의 설정, 나중에 바꿔서 해당 router로 push -->
-            <Buttons btn-text="일기작성" @click="onOpenPersonalRecording" />
+            <!-- <Buttons btn-text="일기작성" @click="OpenPersonalRecording" /> -->
             <Buttons
                 class="write-with-diary"
-                btn-text="함께쓰기"
+                btn-text="일기작성"
                 @click="showWithModal = !showWithModal"
             />
         </div>
@@ -31,10 +31,7 @@
             @recordingStart="recordingStart"
             @recordingStop="recordingStop"
         /> -->
-        <Recording
-            :open="OpenPersonalRecording"
-            @closePersonalRecording="closeRecording"
-        />
+        <!-- <Recording :open="OpenPersonalRecording" /> -->
 
         <!-- 함께 쓰기 modal -->
         <va-modal v-model="showWithModal" hide-default-actions>
@@ -206,8 +203,8 @@ export default {
          * 함께쓰기 시 모달 창을 열고 Openvidu 세션을 생성하는 함수
          */
         onOpenPersonalRecording() {
-            this.OpenPersonalRecording = !this.OpenPersonalRecording;
-            this.createRoom();
+            this.OpenPersonalRecording = true;
+            // this.createRoom();
         },
 
         onOpenRecording() {

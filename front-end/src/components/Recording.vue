@@ -29,16 +29,16 @@
 
             <div class="row justify--center" v-if="session">
                 <Buttons
-                    v-show="true"
+                    v-if="recordingStatus === 'beforeStarted'"
                     class="mx-2"
                     btn-text="녹화 시작"
                     @click="recordingStart"
                 />
                 <Buttons
-                    v-show="isFinalUser"
+                    v-if="recordingStatus === 'started'"
                     class="mx-2"
                     btn-text="녹화 중지"
-                    @click="recordingStop()"
+                    @click="recordingStop"
                 />
             </div>
         </div>
@@ -71,7 +71,6 @@ import UserVideo from "./UserVideo.vue";
 import Buttons from "./Buttons.vue";
 import axios from "axios";
 import * as faceapi from "face-api.js";
-import ChatRoom from "./Chat/ChatRoom.vue";
 import { useStore } from "vuex";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -85,51 +84,11 @@ export default {
         Buttons,
     },
     name: "GroupRecording",
-    props: {
-        open: {
-            type: Boolean,
-            default: false,
-        },
-        session: {
-            type: Object,
-        },
-        mainStreamManager: {
-            type: Object,
-        },
-        publisher: {
-            type: Object,
-        },
-        subscribers: {
-            type: Array,
-        },
-        recordingStatus: {
-            type: String,
-        },
-        isMyOrder: {
-            type: Boolean,
-        },
-        tossArray: {
-            type: Array,
-        },
-        userListStr: {
-            type: String,
-        },
-        isFinalUser: {
-            type: Boolean,
-        },
-        diaryGroupId: {
-            type: Number,
-        },
-        videoLink: {
-            type: String,
-        },
-        chattingObjArray: {
-            type: Array,
-        },
-    },
+    props: {},
     data() {
         return {
             interval: null,
+            recordingStatus: "beforeStarted",
         };
     },
     created() {},
