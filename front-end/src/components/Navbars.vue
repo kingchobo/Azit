@@ -73,7 +73,7 @@
               tcw: $store.state.isColor_w,
             }"
           >
-            {{ $store.state.userId }}
+            {{ $store.state.userName }}
           </div>
         </va-navbar-item>
         <va-navbar-item style="margin: 0 1rem">
@@ -272,7 +272,7 @@ export default {
       this.openLogin = !this.openLogin;
     },
     logout() {
-      this.$store.commit("logInId", "");
+      this.$store.commit("logOut");
       this.$router.go();
     },
   },

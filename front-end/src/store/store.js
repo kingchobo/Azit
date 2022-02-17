@@ -31,8 +31,13 @@ const store = createStore({
             state.count++
         },
         logInId(state, user) {
-            this.state.userId = user.userId;
-            this.state.userName = user.name;
+            state.userId = user.userId;
+            state.userName = user.name;
+
+        },
+        logOut(state) {
+            state.userId = '';
+            state.userName = '';
 
         }
     },
