@@ -54,35 +54,35 @@ build 산출물은 [build](./build) 디렉토리에 정리
 
 Front-end :
 
-[https://img.shields.io/badge/HTML5-339933?style=for-the-badge&logo=HTML5&logoColor=white](https://img.shields.io/badge/HTML5-339933?style=for-the-badge&logo=HTML5&logoColor=white)
+![https://img.shields.io/badge/HTML5-339933?style=for-the-badge&logo=HTML5&logoColor=white](https://img.shields.io/badge/HTML5-339933?style=for-the-badge&logo=HTML5&logoColor=white)
 
-[https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white](https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
+![https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white](https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
 
-[https://img.shields.io/badge/javascript-FFFF33?style=for-the-badge&logo=javascript&logoColor=white](https://img.shields.io/badge/javascript-FFFF33?style=for-the-badge&logo=javascript&logoColor=white)
+![https://img.shields.io/badge/javascript-FFFF33?style=for-the-badge&logo=javascript&logoColor=white](https://img.shields.io/badge/javascript-FFFF33?style=for-the-badge&logo=javascript&logoColor=white)
 
-[https://img.shields.io/badge/css-3333ff?style=for-the-badge&logo=CSS3&logoColor=white](https://img.shields.io/badge/css-3333ff?style=for-the-badge&logo=CSS3&logoColor=white)
+![https://img.shields.io/badge/css-3333ff?style=for-the-badge&logo=CSS3&logoColor=white](https://img.shields.io/badge/css-3333ff?style=for-the-badge&logo=CSS3&logoColor=white)
 
 Back-end :
 
-[https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white)
+![https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white)
 
-[https://img.shields.io/badge/mysql-9999FF?style=for-the-badge&logo=mysql&logoColor=white](https://img.shields.io/badge/mysql-9999FF?style=for-the-badge&logo=mysql&logoColor=white)
+![https://img.shields.io/badge/mysql-9999FF?style=for-the-badge&logo=mysql&logoColor=white](https://img.shields.io/badge/mysql-9999FF?style=for-the-badge&logo=mysql&logoColor=white)
 
-[https://img.shields.io/badge/JPA-6DB33F?style=for-the-badge&logo=JPA&logoColor=white](https://img.shields.io/badge/JPA-6DB33F?style=for-the-badge&logo=JPA&logoColor=white)
+![https://img.shields.io/badge/JPA-6DB33F?style=for-the-badge&logo=JPA&logoColor=white](https://img.shields.io/badge/JPA-6DB33F?style=for-the-badge&logo=JPA&logoColor=white)
 
-[https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white](https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white)
+![https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white](https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white)
 
 Tool :
 
-[https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white](https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white)
+![https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white](https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white)
 
-[https://img.shields.io/badge/nginx-000066?style=for-the-badge&logo=nginx&logoColor=white](https://img.shields.io/badge/nginx-000066?style=for-the-badge&logo=nginx&logoColor=white)
+![https://img.shields.io/badge/nginx-000066?style=for-the-badge&logo=nginx&logoColor=white](https://img.shields.io/badge/nginx-000066?style=for-the-badge&logo=nginx&logoColor=white)
 
-[https://img.shields.io/badge/github-FF0066?style=for-the-badge&logo=github&logoColor=white](https://img.shields.io/badge/github-FF0066?style=for-the-badge&logo=github&logoColor=white)
+![https://img.shields.io/badge/github-FF0066?style=for-the-badge&logo=github&logoColor=white](https://img.shields.io/badge/github-FF0066?style=for-the-badge&logo=github&logoColor=white)
 
-[https://img.shields.io/badge/Docker-6699FF?style=for-the-badge&logo=Docker&logoColor=white](https://img.shields.io/badge/Docker-6699FF?style=for-the-badge&logo=Docker&logoColor=white)
+![https://img.shields.io/badge/Docker-6699FF?style=for-the-badge&logo=Docker&logoColor=white](https://img.shields.io/badge/Docker-6699FF?style=for-the-badge&logo=Docker&logoColor=white)
 
-[https://img.shields.io/badge/jira-3333FF?style=for-the-badge&logo=jira&logoColor=white](https://img.shields.io/badge/jira-3333FF?style=for-the-badge&logo=jira&logoColor=white)
+![https://img.shields.io/badge/jira-3333FF?style=for-the-badge&logo=jira&logoColor=white](https://img.shields.io/badge/jira-3333FF?style=for-the-badge&logo=jira&logoColor=white)
 
 ##
 
@@ -106,51 +106,51 @@ FaceApi를 이용한 사용자 별 감정분석
 
 1. 메인 화면
     
-    ![메인 화면](./images/Azit_메인 화면.gif)
+    ![메인 화면](./README.assets/Azit_메인 화면.gif)
     
 
 2. 회원가입 및 로그인 모달
     
     
-    ![Azit - Chrome 2022-02-17 22-02-01 (1).gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/Azit_-_Chrome_2022-02-17_22-02-01_(1).gif)
+    ![회원가입 및 로그인 모달](./README.assets/Azit_회원가입 및 로그인 모달.gif)
     
 
 3. 일기장 목록 및 내용,감정
     
-    ![Azit - Chrome 2022-02-17 22-05-10.gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/Azit_-_Chrome_2022-02-17_22-05-10.gif)
+    ![일기장 목록 및 내용, 감정](./README.assets/Azit_일기장 목록 및 내용, 감정.gif)
     
 
 4. 방검색 및 새로운 일기쓰기
     
-    ![Azit - Chrome 2022-02-17 22-08-15.gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/Azit_-_Chrome_2022-02-17_22-08-15.gif)
+    ![방검색 및 새로운 일기 작성](./README.assets/Azit_방검색 및 새로운 일기 작성.gif)
     
 
 5.  방 참여
 
-![KakaoTalk_20220217_225355460.gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/KakaoTalk_20220217_225355460.gif)
+![그룹일기 참여](./README.assets/Azit_그룹일기 참여.gif)
 
 1. 일기작성 참여(4인 참여 녹화시작 버튼 활성화) 및 채팅가능
     
-    ![Azit - Chrome 2022-02-17 22-47-54.gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/Azit_-_Chrome_2022-02-17_22-47-54.gif)
+    ![그룹일기 녹화 및 채팅 화면](./README.assets/Azit_그룹일기 녹화 및 채팅 화면.gif)
     
 
-1. 자신의 차례에 toss버튼 활성화(다음 사람 녹음) 
+2. 자신의 차례에 toss버튼 활성화(다음 사람 녹음) 
     
-    ![Azit - Chrome 2022-02-17 22-48-19.gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/Azit_-_Chrome_2022-02-17_22-48-19.gif)
-    
-
-1. 마지막 사람 녹화종료 버튼 활성화
-    
-    ![KakaoTalk_20220217_224917002.gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/KakaoTalk_20220217_224917002.gif)
+    ![toss 버튼을 이용한 다음 사람 녹음](./README.assets/Azit_toss 버튼을 이용한 다음 사람 녹음.gif)
     
 
-1. 저장된 일기 확인창
+3. 마지막 사람 녹화종료 버튼 활성화
+    
+    ![마지막 사람이 녹화 종료](./README.assets/Azit_마지막 사람이 녹화 종료.gif)
+    
 
-![Azit - Chrome 2022-02-17 22-19-26.gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/Azit_-_Chrome_2022-02-17_22-19-26.gif)
+4. 저장된 일기 확인창
 
-10. 내용 수정 가능
+![저장된 일기 확인](./README.assets/Azit_저장된 일기 확인.gif)
 
-![Azit - Chrome 2022-02-17 22-12-27.gif](%E1%84%8E%E1%85%AC%E1%84%8C%E1%85%A9%E1%86%BC%20read%20ce340/Azit_-_Chrome_2022-02-17_22-12-27.gif)
+1.  내용 수정 가능
+
+![저장된 일기 내용 수정](./README.assets/Azit_저장된 일기 내용 수정.gif)
 
 ## **🍤5. 실행 방법**
 
