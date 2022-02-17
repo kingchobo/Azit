@@ -51,7 +51,7 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<Diary> listDiary(String userId, int page) {
 
-        Sort sort = Sort.by(Sort.Direction.DESC, "diaryId");
+        Sort sort = Sort.by(Sort.Direction.DESC, "createDate");
 
         User user = new User();
         user.setUserId(userId);
