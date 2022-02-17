@@ -87,6 +87,7 @@ export default {
             type: String,
         },
     },
+    data() {},
     components: {
         Buttons,
         DiaryDetailText,
