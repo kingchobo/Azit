@@ -9,8 +9,8 @@
         src="https://picsum.photos/400/200"
         style="height: 200px;"
       /> -->
-            <va-card-title>{{ diary.title }}</va-card-title>
-            <!-- <va-card-content>제목 : </va-card-content> -->
+            <!-- <va-card-title>{{ diary.title }}</va-card-title> -->
+            <va-card-content>{{ diary.title }} </va-card-content>
             <va-card-content>{{ this.diaryDate }}</va-card-content>
         </va-card>
     </div>
