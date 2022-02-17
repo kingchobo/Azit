@@ -21,7 +21,7 @@
         <!-- </div> -->
 
         <!-- 일기 작성 modal -->
-        <Recording
+        <!-- <Recording
             :open="OpenPersonalRecording"
             :session="session"
             :publisher="publisher"
@@ -30,6 +30,10 @@
             @closeRecording="leaveSession"
             @recordingStart="recordingStart"
             @recordingStop="recordingStop"
+        /> -->
+        <Recording
+            :open="OpenPersonalRecording"
+            @closePersonalRecording="closeRecording"
         />
 
         <!-- 함께 쓰기 modal -->
@@ -174,7 +178,15 @@ export default {
     },
     created() {
         console.log("window객체 상태", window);
-        window.addEventListener("beforeunload", this.leaveSession);
+        window.addEventListener("beforeunload", () => {
+            if (this.session) this.session.disconnect();
+
+            this.session = undefined;
+            this.mainStreamManager = undefined;
+            this.publisher = undefined;
+            this.subscribers = [];
+            this.OV = undefined;
+        });
     },
     methods: {
         isMyOrderSwitch() {
