@@ -1,6 +1,6 @@
 # **📸AZit - 감정분석 단체 영상일기 서비스**
 
-# 1****. 서비스 소개****
+# 1. 서비스 소개
 
 ------
 
@@ -77,7 +77,7 @@ openvidu의 `signal`과 `on` 을 이용하여 실시간 채팅과 차례대로 �
 
 [openvidu vue 튜토리얼](https://docs.openvidu.io/en/stable/tutorials/openvidu-insecure-vue/)과 [openvidu REST API 문서](https://docs.openvidu.io/en/stable/reference-docs/REST-API/)를 참조하였습니다.
 
-![image-20220218034008138](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034008138.png)
+![image-20220218102703667](readme.assets/image-20220218102703667.png)
 
 [openvidu vue 튜토리얼](https://docs.openvidu.io/en/stable/tutorials/openvidu-insecure-vue/) 의 openvidu 작동 방식 image
 
@@ -85,7 +85,7 @@ openvidu의 `signal`과 `on` 을 이용하여 실시간 채팅과 차례대로 �
 
 [관련링크](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
 
-![image-20220218034022276](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034022276.png)
+![image-20220218102724298](readme.assets/image-20220218102724298.png)
 
 `Azit` 에서는 face-api의 다양한 기능중 **`Face Expression Recognition`** 기능을 사용합니다.
 
@@ -137,7 +137,7 @@ Web Speech API는 크롬 브라우저에서 사용 가능한 api로 높은 인�
 
 매일 `Story`와 `task` 진행 사항을 확인 하면서 매주 Sprint를 진행하였습니다.
 
-![image-20220218034041139](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034041139.png)
+![image-20220218102737928](readme.assets/image-20220218102737928.png)
 
 ------
 
@@ -147,7 +147,7 @@ Web Speech API는 크롬 브라우저에서 사용 가능한 api로 높은 인�
 
 ### 1) 메인 화면(fullpage.js)
 
-![image-20220218034201378](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034201378.png)
+![image-20220218102750056](readme.assets/image-20220218102750056.png)
 
 fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인 화면입니다.
 
@@ -155,13 +155,13 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 2) 회원가입 및 로그인 모달
 
-![image-20220218034209327](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034209327.png)
+![image-20220218102758114](readme.assets/image-20220218102758114.png)
 
 기본적인 모달창을 이용해 회원가입과 로그인 창을 구현 하였습니다.
 
 ### 3) 일기장 목록 및 내용,감정
 
-![image-20220218034218998](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034218998.png)
+![image-20220218102822250](readme.assets/image-20220218102822250.png)
 
 이전에 작성한 일기장을 클릭하여 일기장 내용, 저장된 동영상, 감정 분석 결과등을 확인 할 수 있습니다.
 
@@ -169,19 +169,19 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 4) 방 생성
 
-![image-20220218034229062](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034229062.png)
+![image-20220218102843416](readme.assets/image-20220218102843416.png)
 
 방을 새로 만들고 싶을 경우 `일기작성` - `방생성` 버튼을 눌러 방을 만들 수 있습니다.
 
 ### 5) 방 참여
 
-![image-20220218034239400](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034239400.png)
+![image-20220218102857029](readme.assets/image-20220218102857029.png)
 
 방에 참가하고 싶을 경우 `일기작성` - `방검색` 버튼을 눌러 상대방의 아이디를 검색해 방에 참가 할 수 있습니다.
 
 ### 6) 일기작성 참여(4인 참여 녹화시작 버튼 활성화) 및 채팅가능
 
-![image-20220218034247365](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034247365.png)
+![image-20220218102925379](readme.assets/image-20220218102925379.png)
 
 방에 들어오게 되면 채팅기능이 활성화됩니다.
 
@@ -191,7 +191,7 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 7) 자신의 차례에 toss버튼 활성화(다음 사람 녹음)
 
-![image-20220218034255952](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034255952.png)
+![image-20220218102939412](readme.assets/image-20220218102939412.png)
 
 이전 사람이 `Toss`버튼을 눌르면 다음 사람 `Toss` 버튼이 활성화 됩니다.
 
@@ -199,7 +199,7 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 8) 저장된 일기 확인창
 
-![image-20220218034305916](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034305916.png)
+![image-20220218102953284](readme.assets/image-20220218102953284.png)
 
 일기를 저장하면 일기 상세 내용을 확인 할 수 있습니다.
 
@@ -207,11 +207,11 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 9) 내용 수정 가능
 
-![image-20220218034314119](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034314119.png)
+![image-20220218103006348](readme.assets/image-20220218103006348.png)
 
 음성 인식을 통해 텍스트로 변환된 내용 중 오탈자를 수정하여 다시 저장 할 수 있습니다.
 
-# 5. ***\*프로젝트 진행\****
+# 5. 프로젝트 진행
 
 ------
 
@@ -247,20 +247,22 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
   - Figma를 사용하여 와이어 프레임을 설계 하였습니다.
 
-  ![image-20220218034332150](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034332150.png)
+  ![image-20220218103044369](readme.assets/image-20220218103044369.png)
 
-![image-20220218034340174](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034340174.png)
+![image-20220218103055886](readme.assets/image-20220218103055886.png)
 
-![image-20220218034351497](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034351497.png)![image-20220218034400670](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034400670.png)
+![image-20220218034400670](readme.assets/image-20220218103118349.png)
 
-![image-20220218034409726](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034409726.png)
+![image-20220218103128804](readme.assets/image-20220218103128804.png)
+
+![image-20220218103144903](readme.assets/image-20220218103144903.png)
 
 - [ERD 설계](https://www.erdcloud.com/d/XCzc4FJJhKMQe68i2)
   - `Erdcloud` 를 사용하여 실시간으로 공유하며 데이터베이스를 설계 하였습니다.
 
-![image-20220218034443414](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034443414.png)
+![image-20220218103154540](readme.assets/image-20220218103154540.png)
 
-![image-20220218034521161](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20220218034521161.png)
+![image-20220218103206119](readme.assets/image-20220218103206119.png)
 
 # 6**. 실행 방법**
 
