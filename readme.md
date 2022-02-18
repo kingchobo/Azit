@@ -77,7 +77,7 @@ openvidu의 `signal`과 `on` 을 이용하여 실시간 채팅과 차례대로 �
 
 [openvidu vue 튜토리얼](https://docs.openvidu.io/en/stable/tutorials/openvidu-insecure-vue/)과 [openvidu REST API 문서](https://docs.openvidu.io/en/stable/reference-docs/REST-API/)를 참조하였습니다.
 
-![image-20220218102703667](readme.assets/image-20220218102703667.png)
+![image-20220218102703667](./README.assets/image-20220218102703667.png)
 
 [openvidu vue 튜토리얼](https://docs.openvidu.io/en/stable/tutorials/openvidu-insecure-vue/) 의 openvidu 작동 방식 image
 
@@ -85,7 +85,7 @@ openvidu의 `signal`과 `on` 을 이용하여 실시간 채팅과 차례대로 �
 
 [관련링크](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
 
-![image-20220218102724298](readme.assets/image-20220218102724298.png)
+![image-20220218102724298](./README.assets/image-20220218102724298.png)
 
 `Azit` 에서는 face-api의 다양한 기능중 **`Face Expression Recognition`** 기능을 사용합니다.
 
@@ -137,7 +137,7 @@ Web Speech API는 크롬 브라우저에서 사용 가능한 api로 높은 인�
 
 매일 `Story`와 `task` 진행 사항을 확인 하면서 매주 Sprint를 진행하였습니다.
 
-![image-20220218102737928](readme.assets/image-20220218102737928.png)
+![image-20220218102737928](./README.assets/image-20220218102737928.png)
 
 ------
 
@@ -247,22 +247,22 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
   - Figma를 사용하여 와이어 프레임을 설계 하였습니다.
 
-  ![image-20220218103044369](readme.assets/image-20220218103044369.png)
+  ![image-20220218103044369](./README.assets/image-20220218103044369.png)
 
-![image-20220218103055886](readme.assets/image-20220218103055886.png)
+![image-20220218103055886](./README.assets/image-20220218103055886.png)
 
-![image-20220218034400670](readme.assets/image-20220218103118349.png)
+![image-20220218034400670](./README.assets/image-20220218103118349.png)
 
-![image-20220218103128804](readme.assets/image-20220218103128804.png)
+![image-20220218103128804](./README.assets/image-20220218103128804.png)
 
-![image-20220218103144903](readme.assets/image-20220218103144903.png)
+![image-20220218103144903](./README.assets/image-20220218103144903.png)
 
 - [ERD 설계](https://www.erdcloud.com/d/XCzc4FJJhKMQe68i2)
   - `Erdcloud` 를 사용하여 실시간으로 공유하며 데이터베이스를 설계 하였습니다.
 
-![image-20220218103154540](readme.assets/image-20220218103154540.png)
+![image-20220218103154540](./README.assets/image-20220218103154540.png)
 
-![image-20220218103206119](readme.assets/image-20220218103206119.png)
+![image-20220218103206119](./README.assets/image-20220218103206119.png)
 
 # 6**. 실행 방법**
 
