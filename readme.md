@@ -191,7 +191,7 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 7) 자신의 차례에 toss버튼 활성화(다음 사람 녹음)
 
-![toss 버튼을 이용한 다음 사람 녹음](./README.assets/Azit_toss 버튼을 이용한 다음 사람 녹음.gif)
+![Azit_toss 버튼을 이용한 다음 사람 녹음](https://user-images.githubusercontent.com/38642032/155908884-71bb730e-872f-494e-a89f-3fabe53ec0d6.gif)
 
 이전 사람이 `Toss`버튼을 눌르면 다음 사람 `Toss` 버튼이 활성화 됩니다.
 
