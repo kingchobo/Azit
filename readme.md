@@ -147,7 +147,7 @@ Web Speech API는 크롬 브라우저에서 사용 가능한 api로 높은 인�
 
 ### 1) 메인 화면(fullpage.js)
 
-![메인 화면](./README.assets/Azit_메인 화면.gif)
+![Azit_메인 화면](https://user-images.githubusercontent.com/38642032/155909091-e4d90bec-d682-4909-8a57-9842b8bc8eba.gif)
 
 fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인 화면입니다.
 
@@ -155,13 +155,13 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 2) 회원가입 및 로그인 모달
 
-![회원가입 및 로그인 모달](./README.assets/Azit_회원가입 및 로그인 모달.gif)
+![Azit_회원가입 및 로그인 모달](https://user-images.githubusercontent.com/38642032/155909099-f8f63e53-b848-4a08-a1fe-0a8e5468c637.gif)
 
 기본적인 모달창을 이용해 회원가입과 로그인 창을 구현 하였습니다.
 
 ### 3) 일기장 목록 및 내용,감정
 
-![일기장 목록 및 내용, 감정](./README.assets/Azit_일기장 목록 및 내용, 감정.gif)
+![Azit_일기장 목록 및 내용, 감정](https://user-images.githubusercontent.com/38642032/155909094-8cac87dc-ef72-4593-a27e-3a11c06e7d94.gif)
 
 이전에 작성한 일기장을 클릭하여 일기장 내용, 저장된 동영상, 감정 분석 결과등을 확인 할 수 있습니다.
 
@@ -169,19 +169,19 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 4) 방 생성
 
-![방검색 및 새로운 일기 작성](./README.assets/Azit_방검색 및 새로운 일기 작성.gif)
+![Azit_방검색 및 새로운 일기 작성](https://user-images.githubusercontent.com/38642032/155909092-c993d354-f07f-47d0-906f-401f75fe5a98.gif)
 
 방을 새로 만들고 싶을 경우 `일기작성` - `방생성` 버튼을 눌러 방을 만들 수 있습니다.
 
 ### 5) 방 참여
 
-![그룹일기 참여](./README.assets/Azit_그룹일기 참여.gif)
+![Azit_그룹일기 참여](https://user-images.githubusercontent.com/38642032/155909086-54aad1fa-f540-4c01-969c-474aa498553c.gif)
 
 방에 참가하고 싶을 경우 `일기작성` - `방검색` 버튼을 눌러 상대방의 아이디를 검색해 방에 참가 할 수 있습니다.
 
 ### 6) 일기작성 참여(4인 참여 녹화시작 버튼 활성화) 및 채팅가능
 
-![그룹일기 녹화 및 채팅 화면](./README.assets/Azit_그룹일기 녹화 및 채팅 화면.gif)
+![Azit_그룹일기 녹화 및 채팅 화면](https://user-images.githubusercontent.com/38642032/155909074-3d64e66c-b4d8-4c01-b5e8-2f6a10918885.gif)
 
 방에 들어오게 되면 채팅기능이 활성화됩니다.
 
@@ -199,7 +199,7 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 8) 저장된 일기 확인창
 
-![저장된 일기 확인](./README.assets/Azit_저장된 일기 확인.gif)
+![Azit_저장된 일기 확인](https://user-images.githubusercontent.com/38642032/155909098-3e9749b4-880d-4113-b342-dfddbf1c44b3.gif)
 
 일기를 저장하면 일기 상세 내용을 확인 할 수 있습니다.
 
@@ -207,7 +207,7 @@ fullpage.js를 사용하여 원스크롤 페이지 방식으로 제작한 메인
 
 ### 9) 내용 수정 가능
 
-![저장된 일기 내용 수정](./README.assets/Azit_저장된 일기 내용 수정.gif)
+![Azit_저장된 일기 내용 수정](https://user-images.githubusercontent.com/38642032/155909097-c75123c8-aef6-493d-8ccb-a878862c55ea.gif)
 
 음성 인식을 통해 텍스트로 변환된 내용 중 오탈자를 수정하여 다시 저장 할 수 있습니다.
 
